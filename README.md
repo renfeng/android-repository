@@ -7,7 +7,7 @@ Works on Linux Mint Maya/13 (Ubuntu 10.04.x)
 ## Prerequisites
 
 ```
-sudo aptitude install libsaxon-java
+sudo aptitude install libsaxon-java default-jre
 ```
 
 ```
