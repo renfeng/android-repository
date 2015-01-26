@@ -34,16 +34,16 @@ wget -N https://dl-ssl.google.com/android/repository/sys-img/google_apis/sys-img
 wget -N https://dl-ssl.google.com/android/repository/sys-img/android/sys-img.xml -P sys-img/android
 
 # http://stackoverflow.com/questions/8535947/xslt-2-0-transformation-via-linux-shell
-java -jar /usr/share/java/saxon.jar extras/intel/addon.xml addon.xsl | wget -N -i -
+java -jar /usr/share/java/saxon.jar extras/intel/addon.xml extras/intel/addon.xsl | wget -N -P extras/intel -i -
 java -jar /usr/share/java/saxon.jar addon-6.xml addon-6.xsl | wget -N -i -
-java -jar /usr/share/java/saxon.jar sys-img/android-tv/sys-img.xml sys-img.xsl | wget -N -i -
+java -jar /usr/share/java/saxon.jar sys-img/android-tv/sys-img.xml sys-img/android-tv/sys-img.xsl | wget -N -P sys-img/android-tv -i -
 # requires 4GB
 java -jar /usr/share/java/saxon.jar repository-10.xml repository-10.xsl | wget -N -i -
-java -jar /usr/share/java/saxon.jar sys-img/android-wear/sys-img.xml sys-img.xsl | wget -N -i -
+java -jar /usr/share/java/saxon.jar sys-img/android-wear/sys-img.xml sys-img/android-wear/sys-img.xsl | wget -N -P sys-img/android-wear -i -
 java -jar /usr/share/java/saxon.jar addon.xml addon.xsl | wget -N -i -
-java -jar /usr/share/java/saxon.jar sys-img/x86/addon-x86.xml addon.xsl | wget -N -i -
-java -jar /usr/share/java/saxon.jar sys-img/google_apis/sys-img.xml sys-img.xsl | wget -N -i -
-java -jar /usr/share/java/saxon.jar sys-img/android/sys-img.xml sys-img.xsl | wget -N -i -
+java -jar /usr/share/java/saxon.jar sys-img/x86/addon-x86.xml sys-img/x86/addon.xsl | wget -N -P sys-img/x86 -i -
+java -jar /usr/share/java/saxon.jar sys-img/google_apis/sys-img.xml sys-img/google_apis/sys-img.xsl | wget -N -P sys-img/google_apis -i -
+java -jar /usr/share/java/saxon.jar sys-img/android/sys-img.xml sys-img/android/sys-img.xsl | wget -N -P sys-img/android -i -
 
 # make urls relative and local
 cp extras/intel/addon.xml extras/intel/addon.xml.orig
