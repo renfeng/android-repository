@@ -4,6 +4,8 @@ This is a set of scripts for creating a mirror of Android Repository, http://dl-
 
 Works on Linux Mint Maya/13 (Ubuntu 10.04.x)
 
+You'll need at least 4GB free storage on your disk.
+
 ## Prerequisites
 
 ```
