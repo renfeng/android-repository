@@ -1,3 +1,5 @@
+# http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
+# http://www.gnu.org/software/wget/manual/wget.html
 wget -N https://dl-ssl.google.com/android/repository/repository-10.xml
 
 # http://stackoverflow.com/questions/8535947/xslt-2-0-transformation-via-linux-shell
