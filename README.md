@@ -1,6 +1,6 @@
 # android-repository
 
-This is a set of scripts for creating a mirror of Android Repository, http://dl-ssl.google.com/android/repository/*
+This is a set of scripts for creating a mirror of Android Repository, http://dl-ssl.google.com/android/repository/repository-10.xml
 
 Works on Linux Mint Maya/13 (Ubuntu 10.04.x)
 
