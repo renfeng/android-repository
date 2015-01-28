@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (C) 2012 The Android Open Source Project
+ *
+ * Licensed under the Apache License, version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<sdk:sdk-addons-list
+    xmlns:sdk="http://schemas.android.com/sdk/android/addons-list/2">
+
+    <sdk:addon-site>
+        <sdk:url>addon.xml</sdk:url>
+        <sdk:name>Google Inc.</sdk:name>
+    </sdk:addon-site>
+
+    <sdk:addon-site>
+        <sdk:url>addon-6.xml</sdk:url>
+        <sdk:name>Google Inc.</sdk:name>
+    </sdk:addon-site>
+
+    <sdk:addon-site>
+      <sdk:url>https://dl-ssl.google.com/glass/gdk/addon.xml</sdk:url>
+        <sdk:name>Glass Development Kit, Google Inc.</sdk:name>
+    </sdk:addon-site>
+
+    <sdk:addon-site>
+        <sdk:url>extras/intel/addon.xml</sdk:url>
+        <sdk:name>Intel HAXM</sdk:name>
+    </sdk:addon-site>
+
+    <sdk:sys-img-site>
+        <sdk:url>sys-img/android/sys-img.xml</sdk:url>
+        <sdk:name>Android System Images</sdk:name>
+    </sdk:sys-img-site>
+
+    <sdk:sys-img-site>
+        <sdk:url>sys-img/android-wear/sys-img.xml</sdk:url>
+        <sdk:name>Android Wear System Images</sdk:name>
+    </sdk:sys-img-site>
+
+    <sdk:sys-img-site>
+        <sdk:url>sys-img/android-tv/sys-img.xml</sdk:url>
+        <sdk:name>Android TV System Images</sdk:name>
+    </sdk:sys-img-site>
+
+    <sdk:sys-img-site>
+        <sdk:url>sys-img/google_apis/sys-img.xml</sdk:url>
+        <sdk:name>Google API add-on System Images</sdk:name>
+    </sdk:sys-img-site>
+
+    <sdk:addon-site>
+        <sdk:url>sys-img/x86/addon-x86.xml</sdk:url>
+        <sdk:name>Google Inc. (x86 System Images)</sdk:name>
+    </sdk:addon-site>
+</sdk:sdk-addons-list>
