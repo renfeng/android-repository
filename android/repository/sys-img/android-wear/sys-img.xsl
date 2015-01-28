@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:sdk="http://schemas.android.com/sdk/android/addon/7">
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:sdk="http://schemas.android.com/sdk/android/sys-img/3">
 
 	<!-- https://dl-ssl.google.com/android/repository/addon.xml -->
 
@@ -14,8 +14,8 @@
 
 			<xsl:choose>
 				<xsl:when
-					test="not(starts-with($url, 'https://dl-ssl.google.com/android/repository/'))">
-					<xsl:text>https://dl-ssl.google.com/android/repository/</xsl:text>
+					test="not(starts-with($url, 'https://dl-ssl.google.com/android/repository/sys-img/android-wear/'))">
+					<xsl:text>https://dl-ssl.google.com/android/repository/sys-img/android-wear/</xsl:text>
 				</xsl:when>
 			</xsl:choose>
 
