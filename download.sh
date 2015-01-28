@@ -74,4 +74,4 @@ cp sys-img/android/sys-img.xml sys-img/android/sys-img.xml.orig
 sed -i 's/https:\/\/dl-ssl.google.com\/android\/repository\///g' sys-img/android/sys-img.xml
 
 # verify
-grep -Prn '<sdk:url>' * --exclude=*.orig | grep http
+grep -Prn '<sdk:url>' * --include=*.xml --exclude=*.orig | grep http
