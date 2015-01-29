@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
 
 # http://www.gnu.org/savannah-checkouts/gnu/grep/manual/grep.html
