@@ -30,6 +30,7 @@ mkdir -p gaformobileapps
 
 # http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
 # http://www.gnu.org/software/wget/manual/wget.html
+wget -N https://dl-ssl.google.com/android/repository/addons_list-2.xml -P android/repository
 wget -N https://dl-ssl.google.com/android/repository/extras/intel/addon.xml -P android/repository/extras/intel
 wget -N https://dl-ssl.google.com/android/repository/addon-6.xml -P android/repository
 wget -N https://dl-ssl.google.com/android/repository/sys-img/android-tv/sys-img.xml -P android/repository/sys-img/android-tv
@@ -57,6 +58,9 @@ java -jar /usr/share/java/saxon.jar android/repository/sys-img/android/sys-img.x
 java -jar /usr/share/java/saxon.jar glass/gdk/addon.xml $BASEDIR/glass/gdk/addon.xe22.xsl | wget -N -P glass/xe22 -i -
 
 # make urls relative and local
+cp android/repository/addons_list-2.xml android/repository/addons_list-2.xml.orig
+sed -i 's/https:\/\/dl-ssl.google.com//g' android/repository/addons_list-2.xml
+
 cp android/repository/extras/intel/addon.xml android/repository/extras/intel/addon.xml.orig
 sed -i 's/https:\/\/dl-ssl.google.com//g' android/repository/extras/intel/addon.xml
 
