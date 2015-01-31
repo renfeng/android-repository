@@ -1,10 +1,34 @@
 # android-repository
 
-This is a set of scripts for creating a mirror of Android Repository, http://dl-ssl.google.com/android/repository/repository-10.xml
+This is a set of scripts for creating a mirror of Android Repository, http://dl-ssl.google.com/android/repository/addons_list-2.xml
 
 Works on Linux Mint Maya/13 (Ubuntu 10.04.x)
 
-You'll need at least 4GB free storage on your disk.
+You'll need at least 11GB free storage on your disk.
+
+## How to setup your mirror/server?
+
+assume $script is a directory you want to save the project
+
+git clone https://github.com/renfeng/android-repository $script
+
+this will sync all sdk packages into your current directory
+
+$script/download.sh
+
+Setup a static content server, e.g. Apache HTTPd, lighttp, nginx, ..., to host the content of your current directory, and make it accessible through http
+
+## How to setup your client, i.e. Android SDK Manager
+
+Edit $script/client/repositories.cfg, and change studyjams.dushu.hu to your mirror
+
+this will make Android SDK Manager to download packages from your mirror
+
+$script/client/setup.sh
+
+this will restore Android SDK Manager to download packages from the official repository
+
+script/client/clean.sh
 
 ## Why should you need this?
 
@@ -39,3 +63,7 @@ Description: Saxon XSLT Processor
  process straightforward.
 Homepage: http://saxon.sourceforge.net/
 ```
+
+## TODO
+
+Support of Windows and Mac is in planning... Don't forget this is git - you can do whatever you want to make it better!
