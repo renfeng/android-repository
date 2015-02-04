@@ -38,7 +38,9 @@ After downloading [Android Studio and SDK Tools](http://developer.android.com/sd
 
 It'll help you to distribute Android SDK packages in a classroom. Ideally, for [Android Fundamentals Study Jams](http://www.googledevelopersstudyjams.com/)
 
-## Prerequisites
+## Where does saxon.jar come from?
+
+It was copied from /usr/share/java/saxon.jar, which was installed on a Linux Mint Maya (13)
 
 ```
 sudo aptitude install libsaxon-java default-jre
@@ -64,6 +66,14 @@ Description: Saxon XSLT Processor
 Homepage: http://saxon.sourceforge.net/
 ```
 
-## TODO
+## For Windows Users
 
-Support of Windows and Mac is in planning... Don't forget this is git - you can do whatever you want to make it better!
+Tested with latest cygwin 64bit on Windows 7
+
+## For Mac Users
+
+TODO test
+
+## This is GIT
+
+Don't forget this is git - you can do whatever you want to make it better!
