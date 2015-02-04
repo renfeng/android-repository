@@ -89,7 +89,7 @@ cp android/repository/addon-6.xml android/repository/addon-6.xml.orig
 sed -i 's/https:\/\/dl-ssl.google.com//g' android/repository/addon-6.xml
 
 cp android/repository/sys-img/android-tv/sys-img.xml android/repository/sys-img/android-tv/sys-img.xml.orig
-sed-i 's/https:\/\/dl-ssl.google.com//g' android/repository/sys-img/android-tv/sys-img.xml
+sed -i 's/https:\/\/dl-ssl.google.com//g' android/repository/sys-img/android-tv/sys-img.xml
 
 cp android/repository/repository-10.xml android/repository/repository-10.xml.orig
 sed -i 's/https:\/\/dl-ssl.google.com//g' android/repository/repository-10.xml
