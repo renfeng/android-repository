@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO help needed to automate the update of studio version, i.e. 1.0.1 at the moment
+
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
 
