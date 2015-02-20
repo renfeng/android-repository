@@ -6,6 +6,12 @@ Works on Linux Mint Maya/13 (Ubuntu 10.04.x)
 
 You'll need at least 11GB free storage on your disk.
 
+## Who's using it
+
+http://studyjams.dushu.hu, and also on their LAN
+
+(Please, insert your mirror url)
+
 ## How to setup your mirror/server?
 
 assume $script is a directory you want to save the project
