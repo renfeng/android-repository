@@ -14,12 +14,26 @@
 
 			<xsl:choose>
 				<xsl:when
-					test="not(starts-with($url, 'https://dl-ssl.google.com/android/repository/sys-img/android/'))">
-					<xsl:text>https://dl-ssl.google.com/android/repository/sys-img/android/</xsl:text>
+					test="starts-with($url, 'https://dl-ssl.google.com/android/repository/sys-img/android/')">
+					<xsl:value-of select="$url" />
 				</xsl:when>
+				<xsl:when
+					test="starts-with($url, 'https://')">
+					<!-- ignores -->
+				</xsl:when>
+				<xsl:when
+					test="starts-with($url, 'http://')">
+					<!-- ignores -->
+				</xsl:when>
+				<xsl:when
+					test="starts-with($url, '/')">
+					<!-- ignores -->
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>https://dl-ssl.google.com/android/repository/sys-img/android/</xsl:text>
+					<xsl:value-of select="$url" />
+				</xsl:otherwise>
 			</xsl:choose>
-
-			<xsl:value-of select="$url" />
 
 			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->
 			<xsl:text>&#xa;</xsl:text>

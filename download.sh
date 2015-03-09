@@ -2,6 +2,9 @@
 
 # TODO help needed to automate the update of studio version, i.e. 1.0.1 at the moment
 
+# XXX no need to mirror gradle, https://services.gradle.org/distributions/gradle-2.1-bin.zip
+# it doesn't download when internet is unavailable, and android studio works just fine
+
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
 
@@ -26,6 +29,7 @@ grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cf
 #mkdir -p android/repository/sys-img/x86
 #mkdir -p android/repository/sys-img/google_apis
 #mkdir -p android/repository/sys-img/android
+#mkdir -p glass/gdk
 #mkdir -p glass/xe22
 #mkdir -p googleadmobadssdk
 #mkdir -p gaformobileapps
@@ -35,68 +39,80 @@ grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cf
 
 # http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
 # http://www.gnu.org/software/wget/manual/wget.html
-wget -N https://dl-ssl.google.com/android/repository/addons_list-2.xml \
-                          -P orig/android/repository
-wget -N https://dl-ssl.google.com/android/repository/extras/intel/addon.xml \
-                          -P orig/android/repository/extras/intel
-wget -N https://dl-ssl.google.com/android/repository/addon-6.xml \
-                          -P orig/android/repository
-wget -N https://dl-ssl.google.com/android/repository/sys-img/android-tv/sys-img.xml \
-                          -P orig/android/repository/sys-img/android-tv
-wget -N https://dl-ssl.google.com/android/repository/repository-10.xml \
-                          -P orig/android/repository
-wget -N https://dl-ssl.google.com/android/repository/sys-img/android-wear/sys-img.xml \
-                          -P orig/android/repository/sys-img/android-wear
-wget -N https://dl-ssl.google.com/android/repository/addon.xml \
-                          -P orig/android/repository
-wget -N https://dl-ssl.google.com/android/repository/sys-img/x86/addon-x86.xml \
-                          -P orig/android/repository/sys-img/x86
-wget -N https://dl-ssl.google.com/android/repository/sys-img/google_apis/sys-img.xml \
-                          -P orig/android/repository/sys-img/google_apis
-wget -N https://dl-ssl.google.com/android/repository/sys-img/android/sys-img.xml \
-                          -P orig/android/repository/sys-img/android
-wget -N https://dl-ssl.google.com/glass/gdk/addon.xml \
-                          -P orig/glass/gdk
-wget -N https://developer.android.com/sdk/index.html \
-                              -P orig/sdk
+wget -N http://dl-ssl.google.com/android/repository/addons_list-2.xml \
+                         -P orig/android/repository
+wget -N http://dl-ssl.google.com/android/repository/extras/intel/addon.xml \
+                         -P orig/android/repository/extras/intel
+wget -N http://dl-ssl.google.com/android/repository/addon-6.xml \
+                         -P orig/android/repository
+wget -N http://dl-ssl.google.com/android/repository/sys-img/android-tv/sys-img.xml \
+                         -P orig/android/repository/sys-img/android-tv
+wget -N http://dl-ssl.google.com/android/repository/repository-10.xml \
+                         -P orig/android/repository
+wget -N http://dl-ssl.google.com/android/repository/sys-img/android-wear/sys-img.xml \
+                         -P orig/android/repository/sys-img/android-wear
+wget -N http://dl-ssl.google.com/android/repository/addon.xml \
+                         -P orig/android/repository
+wget -N http://dl-ssl.google.com/android/repository/sys-img/x86/addon-x86.xml \
+                         -P orig/android/repository/sys-img/x86
+wget -N http://dl-ssl.google.com/android/repository/sys-img/google_apis/sys-img.xml \
+                         -P orig/android/repository/sys-img/google_apis
+wget -N http://dl-ssl.google.com/android/repository/sys-img/android/sys-img.xml \
+                         -P orig/android/repository/sys-img/android
+wget -N http://dl-ssl.google.com/glass/gdk/addon.xml \
+                         -P orig/glass/gdk
+wget -N http://developer.android.com/sdk/index.html \
+                             -P orig/sdk
 
 # http://stackoverflow.com/questions/8535947/xslt-2-0-transformation-via-linux-shell
 java -jar $BASEDIR/saxon.jar orig/android/repository/extras/intel/addon.xml \
                          $BASEDIR/android/repository/extras/intel/addon.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository/extras/intel -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/addon-6.xml \
                          $BASEDIR/android/repository/addon-6.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-tv/sys-img.xml \
                          $BASEDIR/android/repository/sys-img/android-tv/sys-img.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository/sys-img/android-tv -c -i -
 # requires 4GB
 java -jar $BASEDIR/saxon.jar orig/android/repository/repository-10.xml \
                          $BASEDIR/android/repository/repository-10.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-wear/sys-img.xml \
                          $BASEDIR/android/repository/sys-img/android-wear/sys-img.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository/sys-img/android-wear -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/addon.xml \
                          $BASEDIR/android/repository/addon.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/addon.xml \
                          $BASEDIR/android/repository/addon.admob.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P googleadmobadssdk -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/addon.xml \
                          $BASEDIR/android/repository/addon.analytics.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P gaformobileapps -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/x86/addon-x86.xml \
                          $BASEDIR/android/repository/sys-img/x86/addon.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository/sys-img/x86 -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/google_apis/sys-img.xml \
                          $BASEDIR/android/repository/sys-img/google_apis/sys-img.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository/sys-img/google_apis -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android/sys-img.xml \
                          $BASEDIR/android/repository/sys-img/android/sys-img.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P android/repository/sys-img/android -c -i -
 java -jar $BASEDIR/saxon.jar orig/glass/gdk/addon.xml \
                          $BASEDIR/glass/gdk/addon.xe22.xsl | \
+                       sed 's/https:/http:/g' | \
                        wget -N -P glass/xe22 -c -i -
 
 # sed remove lines until
@@ -110,7 +126,7 @@ sed '/end pax/q' -i orig/sdk/index.html
 #grep -Po 'https://dl.google.com/dl/android/studio/ide-zips/1.0.1/[^"]*' orig/sdk/index.html | wget -N -P dl/android/studio/ide-zips/1.0.1 -c -i -
 grep -Po 'https://dl.google.com/dl/android/studio/[^"]*' orig/sdk/index.html > \
                                 dl/android/studio/download.sh
-sed -i -r 's/https:\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+/wget -N -P \1 -c \0/g' \
+sed -i -r 's/https:(\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+)/wget -N -P \2 -c http:\1/g' \
                                 dl/android/studio/download.sh
 dl/android/studio/download.sh
 grep -Po 'http://dl.google.com/android/[^"]*' orig/sdk/index.html | \
