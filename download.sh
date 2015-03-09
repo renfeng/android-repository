@@ -29,8 +29,8 @@ mkdir -p android/repository/sys-img/android
 mkdir -p glass/xe22
 mkdir -p googleadmobadssdk
 mkdir -p gaformobileapps
-mkdir -p dl/android/studio/ide-zips/1.0.1
-mkdir -p dl/android/studio/install/1.0.1
+#mkdir -p dl/android/studio/ide-zips/1.0.1
+#mkdir -p dl/android/studio/install/1.0.1
 mkdir -p sdk
 
 # http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
@@ -70,8 +70,11 @@ java -jar $BASEDIR/saxon.jar glass/gdk/addon.xml.orig $BASEDIR/glass/gdk/addon.x
 sed -n '/pax/,$p' -i sdk/index.html.orig
 sed '/end pax/q' -i sdk/index.html.orig
 
-grep -Po 'https://dl.google.com/dl/android/studio/install/1.0.1/[^"]*' sdk/index.html.orig | wget -N -P dl/android/studio/install/1.0.1 -c -i -
-grep -Po 'https://dl.google.com/dl/android/studio/ide-zips/1.0.1/[^"]*' sdk/index.html.orig | wget -N -P dl/android/studio/ide-zips/1.0.1 -c -i -
+#grep -Po 'https://dl.google.com/dl/android/studio/install/1.0.1/[^"]*' sdk/index.html.orig | wget -N -P dl/android/studio/install/1.0.1 -c -i -
+#grep -Po 'https://dl.google.com/dl/android/studio/ide-zips/1.0.1/[^"]*' sdk/index.html.orig | wget -N -P dl/android/studio/ide-zips/1.0.1 -c -i -
+grep -Po 'https://dl.google.com/dl/android/studio/[^"]*' sdk/index.html.orig > dl/android/studio/download.sh
+sed -i -r 's/https:\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+/wget -N -P \1 -c -i \0/g' dl/android/studio/download.sh
+dl/android/studio/download.sh
 grep -Po 'http://dl.google.com/android/[^"]*' sdk/index.html.orig | wget -N -P android -c -i -
 
 sed '/<!-- insert -->/q' sdk/template.html > sdk/index.html.tmp
