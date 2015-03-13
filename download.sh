@@ -61,7 +61,9 @@ wget -N http://dl-ssl.google.com/android/repository/sys-img/android/sys-img.xml 
                          -P orig/android/repository/sys-img/android
 wget -N http://dl-ssl.google.com/glass/gdk/addon.xml \
                          -P orig/glass/gdk
-wget -N http://developer.android.com/sdk/index.html \
+
+rm -f orig/sdk/index.html
+wget http://developer.android.com/sdk/index.html \
                              -P orig/sdk
 
 # http://stackoverflow.com/questions/8535947/xslt-2-0-transformation-via-linux-shell
