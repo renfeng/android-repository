@@ -130,7 +130,7 @@ grep -Po 'https://dl.google.com/dl/android/studio/[^"]*' orig/sdk/index.html > \
                                 dl/android/studio/download.sh
 sed -i -r 's/https:(\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+)/wget -N -P \2 -c http:\1/g' \
                                 dl/android/studio/download.sh
-dl/android/studio/download.sh
+sh dl/android/studio/download.sh
 grep -Po 'http://dl.google.com/android/[^"]*' orig/sdk/index.html | \
                     wget -N -P android -c -i -
 
