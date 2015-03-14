@@ -17,6 +17,22 @@
 					test="starts-with($url, 'https://dl.google.com/gaformobileapps/')">
 					<xsl:value-of select="$url" />
 				</xsl:when>
+				<xsl:when
+					test="starts-with($url, 'https://')">
+					<!-- ignores -->
+				</xsl:when>
+				<xsl:when
+					test="starts-with($url, 'http://')">
+					<!-- ignores -->
+				</xsl:when>
+				<xsl:when
+					test="starts-with($url, '/gaformobileapps/')">
+					<xsl:text>https://dl-ssl.google.com</xsl:text>
+					<xsl:value-of select="$url" />
+				</xsl:when>
+				<xsl:otherwise>
+					<!-- ignores -->
+				</xsl:otherwise>
 			</xsl:choose>
 
 			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->

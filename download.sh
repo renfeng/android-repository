@@ -29,12 +29,13 @@ grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cf
 #mkdir -p android/repository/sys-img/x86
 #mkdir -p android/repository/sys-img/google_apis
 #mkdir -p android/repository/sys-img/android
-#mkdir -p glass/gdk
+mkdir -p glass/gdk
 #mkdir -p glass/xe22
 #mkdir -p googleadmobadssdk
 #mkdir -p gaformobileapps
 #mkdir -p dl/android/studio/ide-zips/1.0.1
 #mkdir -p dl/android/studio/install/1.0.1
+mkdir -p dl/android/studio
 #mkdir -p sdk
 
 # http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
@@ -101,7 +102,7 @@ java -jar $BASEDIR/saxon.jar orig/android/repository/addon.xml \
                        sed 's/https:/http:/g' | \
                        wget -N -P gaformobileapps -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/x86/addon-x86.xml \
-                         $BASEDIR/android/repository/sys-img/x86/addon.xsl | \
+                         $BASEDIR/android/repository/sys-img/x86/addon-x86.xsl | \
                        sed 's/https:/http:/g' | \
                        wget -N -P android/repository/sys-img/x86 -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/google_apis/sys-img.xml \
