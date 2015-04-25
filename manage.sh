@@ -3,6 +3,8 @@
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
 
+$BASEDIR/sync-index.sh
+
 echo "name,version,api-level,revision,description,obsolete,windowsSize,windowsSHA1,windowsURL,macosxSize,macosxSHA1,macosxURL,linuxSize,linuxSHA1,linuxURL" \
 	> packages.csv.tmp
 
