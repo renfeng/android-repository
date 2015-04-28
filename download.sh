@@ -101,15 +101,15 @@ sed 's/https:\/\/dl-ssl.google.com//g' \
 sed 's/https:\/\/dl-ssl.google.com//g' \
     orig/android/repository/sys-img/android-tv/sys-img.xml > \
          android/repository/sys-img/android-tv/sys-img.xml
-sed 's/https:\/\/dl-ssl.google.com//g' \
+sed 's/https:\/\/dl-ssl.google.com/http:\/\/studyjams.dushu.hu/g' \
     orig/android/repository/repository-10.xml > \
          android/repository/repository-10.xml
 sed 's/https:\/\/dl-ssl.google.com//g' \
     orig/android/repository/sys-img/android-wear/sys-img.xml > \
          android/repository/sys-img/android-wear/sys-img.xml
 cat orig/android/repository/addon.xml | \
-    sed 's/https:\/\/dl-ssl.google.com//g' | \
-    sed 's/https:\/\/dl.google.com//g' > \
+    sed 's/https:\/\/dl-ssl.google.com/http:\/\/studyjams.dushu.hu/g' | \
+    sed 's/https:\/\/dl.google.com/http:\/\/studyjams.dushu.hu/g' > \
          android/repository/addon.xml
 sed 's/https:\/\/dl-ssl.google.com//g' \
     orig/android/repository/sys-img/x86/addon-x86.xml > \
@@ -117,10 +117,10 @@ sed 's/https:\/\/dl-ssl.google.com//g' \
 sed 's/https:\/\/dl-ssl.google.com//g' \
     orig/android/repository/sys-img/google_apis/sys-img.xml > \
          android/repository/sys-img/google_apis/sys-img.xml
-sed 's/https:\/\/dl-ssl.google.com//g' \
+sed 's/https:\/\/dl-ssl.google.com/http:\/\/studyjams.dushu.hu/g' \
     orig/android/repository/sys-img/android/sys-img.xml > \
          android/repository/sys-img/android/sys-img.xml
-sed 's/https:\/\/dl.google.com//g' \
+sed 's/https:\/\/dl.google.com/http:\/\/studyjams.dushu.hu/g' \
     orig/glass/gdk/addon.xml > \
          glass/gdk/addon.xml
 
