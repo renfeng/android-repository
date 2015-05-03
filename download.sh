@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # automate the update of studio version, i.e. 1.0.1 at the moment
-# TODO clear obsolete sdk manager and studio
+# TODO clean obsolete sdk manager and studio
 
 # XXX no need to mirror gradle, https://services.gradle.org/distributions/gradle-2.1-bin.zip
 # it doesn't download when internet is unavailable, and android studio works just fine
@@ -37,10 +37,18 @@ sed -n '/<!-- insert -->/,$p' sdk/template.html >> \
          sdk/index.html.tmp
 mv sdk/index.html.tmp sdk/index.html
 
+# requires 25GB
+
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
 
 $BASEDIR/sync-index.sh
+
+$BASEDIR/manage.sh
+
+# TODO clean obsolete
+grep true packages.csv | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+' packages.obsolete.csv | sed -r 's/^(.*)$/rm -f \1/g' > clean-obsolete.sh
+sh clean-obsolete.sh
 
 # http://stackoverflow.com/questions/8535947/xslt-2-0-transformation-via-linux-shell
 java -jar $BASEDIR/saxon.jar orig/android/repository/extras/intel/addon.xml \
@@ -55,7 +63,6 @@ java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-tv/sys-img.
                          $BASEDIR/android/repository/sys-img/android-tv/sys-img.xsl | \
                        sed 's/https:/http:/g' | \
                        wget -N -P android/repository/sys-img/android-tv -c -i -
-# requires 4GB
 java -jar $BASEDIR/saxon.jar orig/android/repository/repository-10.xml \
                          $BASEDIR/android/repository/repository-10.xsl | \
                        sed 's/https:/http:/g' | \

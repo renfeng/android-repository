@@ -7,8 +7,8 @@
 	<xsl:strip-space elements="*" />
 	<xsl:output indent="yes" method="text" />
 
-	<xsl:template match="/sdk:*">
-		<xsl:for-each select="sdk:*/sdk:archives/sdk:archive/sdk:url">
+	<xsl:template match="/sdk:sdk-repository">
+		<xsl:for-each select="sdk:*[not(sdk:obsolete)]/sdk:archives/sdk:archive/sdk:url">
 
 			<xsl:variable name="url" select="text()"></xsl:variable>
 
