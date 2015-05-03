@@ -2,7 +2,7 @@
 
 # http://www.gnu.org/savannah-checkouts/gnu/grep/manual/grep.html
 #grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cfg | sed 's/\\//g' | wget -N -c -i -
-grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cfg | sed 's/\\//g'
+#grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cfg | sed 's/\\//g'
 
 # https://dl-ssl.google.com/android/repository/extras/intel/addon.xml
 # https://dl-ssl.google.com/android/repository/addon-6.xml
@@ -54,7 +54,3 @@ wget -N http://dl-ssl.google.com/android/repository/sys-img/android/sys-img.xml 
                          -P orig/android/repository/sys-img/android
 wget -N http://dl-ssl.google.com/glass/gdk/addon.xml \
                          -P orig/glass/gdk
-
-rm -f orig/sdk/index.html
-wget http://developer.android.com/sdk/index.html \
-                             -P orig/sdk
