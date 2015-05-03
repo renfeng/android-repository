@@ -46,8 +46,8 @@ $BASEDIR/sync-index.sh
 
 $BASEDIR/manage.sh
 
-# TODO clean obsolete
-grep true packages.csv | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+' packages.obsolete.csv | sed -r 's/^(.*)$/rm -f \1/g' > clean-obsolete.sh
+# clean obsolete sdk packages
+grep true packages.csv | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+' | sed -r 's/^(.*)$/rm -f \1/g' > clean-obsolete.sh
 sh clean-obsolete.sh
 
 # http://stackoverflow.com/questions/8535947/xslt-2-0-transformation-via-linux-shell
