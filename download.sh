@@ -101,7 +101,7 @@ java -jar $BASEDIR/saxon.jar orig/glass/gdk/addon.xml \
                        wget -N -P glass/xe22 -c -i -
 
 # make urls relative and local
-sed 's/https:\/\/dl-ssl.google.com//g' \
+sed 's/https:\/\/dl-ssl.google.com/http:\/\/studyjams.dushu.hu/g' \
     orig/android/repository/addons_list-2.xml > \
          android/repository/addons_list-2.xml
 sed 's/https:\/\/dl-ssl.google.com//g' \
