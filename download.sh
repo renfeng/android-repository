@@ -103,9 +103,9 @@ java -jar $BASEDIR/saxon.jar orig/glass/gdk/addon.xml \
 # make urls relative and local
 
 # glass should be treated as a root path
-#sed 's/https:\/\/dl-ssl.google.com//g' \
-#    orig/android/repository/addons_list-2.xml > \
-#         android/repository/addons_list-2.xml
+sed 's/https:\/\/dl-ssl.google.com/http:\/\/studyjams.dushu.hu/g' \
+    orig/android/repository/addons_list-2.xml > \
+         android/repository/addons_list-2.xml
 
 sed 's/https:\/\/dl-ssl.google.com//g' \
     orig/android/repository/extras/intel/addon.xml > \

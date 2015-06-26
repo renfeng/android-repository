@@ -1,48 +1,26 @@
 # android-repository
 
-This is a set of scripts for creating a mirror of Android Repository, http://dl-ssl.google.com/android/repository/addons_list-2.xml
+This is a set of scripts for creating a mirror of Android Repository where SDK Manager downloads SDK packages.
 
-Works on Linux Mint Maya/13 (Ubuntu 10.04.x)
+Tested on Linux Mint Maya(13, Ubuntu 10.04)/Rebecca(17.1, Ubuntu 14.04), and Cygwin on Windows 7 64bit
 
-You'll need at least 20GB free storage on your disk.
+You'll need at least 27GB free storage on your disk.
 
 ## Who's using it
 
-http://studyjams.dushu.hu, and also on their LAN
+http://studyjams.dushu.hu, and also on LAN at events hosted by [GDG Suzhou](https://plus.google.com/100160462017014431473/)
 
-(Please, insert your mirror url)
-
-## How to setup your mirror/server?
-
-assume $script is a directory you want to save the project
-
-git clone https://github.com/renfeng/android-repository $script
-
-this will sync all sdk packages into your current directory
-
-$script/download.sh
-
-Setup a static content server, e.g. Apache HTTPd, lighttp, nginx, ..., to host the content of your current directory, and make it accessible through http
-
-## How to setup your client, i.e. Android SDK Manager
-
-Edit $script/client/repositories.cfg, and change studyjams.dushu.hu to your mirror
-
-this will make Android SDK Manager to download packages from your mirror
-
-$script/client/setup.sh
-
-this will restore Android SDK Manager to download packages from the official repository
-
-script/client/clean.sh
+(You can add your mirror created with the scripts, here)
 
 ## Why should you need this?
 
-This is not for you, if you have no difficulty in downloading Android SDK packages from the official Android repository, but for people without proper internet connection.
-
-After downloading [Android Studio and SDK Tools](http://developer.android.com/sdk/), you'll need to add [SDK Packages](http://developer.android.com/sdk/installing/adding-packages.html). This project allows you to make a clone of the official Android repository, and later, host it with Apache HTTPd, nginx, lighttp, or any other static http content server, on your LAN.
-
 It'll help you to distribute Android SDK packages in a classroom. Ideally, for [Android Fundamentals Study Jams](http://www.googledevelopersstudyjams.com/)
+
+For more information, please follow the link in the next section.
+
+## How to setup your mirror/server, and client, i.e. Android SDK Manager
+
+https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/edit
 
 ## Where does saxon.jar come from?
 
@@ -71,14 +49,6 @@ Description: Saxon XSLT Processor
  process straightforward.
 Homepage: http://saxon.sourceforge.net/
 ```
-
-## For Windows Users
-
-Tested with latest cygwin 64bit on Windows 7
-
-## For Mac Users
-
-TODO test
 
 ## This is GIT
 
