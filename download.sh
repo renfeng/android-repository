@@ -101,9 +101,12 @@ java -jar $BASEDIR/saxon.jar orig/glass/gdk/addon.xml \
                        wget -N -P glass/xe22 -c -i -
 
 # make urls relative and local
-sed 's/https:\/\/dl-ssl.google.com//g' \
-    orig/android/repository/addons_list-2.xml > \
-         android/repository/addons_list-2.xml
+
+# glass should be treated as a root path
+#sed 's/https:\/\/dl-ssl.google.com//g' \
+#    orig/android/repository/addons_list-2.xml > \
+#         android/repository/addons_list-2.xml
+
 sed 's/https:\/\/dl-ssl.google.com//g' \
     orig/android/repository/extras/intel/addon.xml > \
          android/repository/extras/intel/addon.xml
