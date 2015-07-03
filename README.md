@@ -20,7 +20,7 @@ For more information, please follow the link in the next section.
 
 ## How to setup your mirror/server, and client, i.e. Android SDK Manager
 
-https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/edit
+https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
 
 ## Where does saxon.jar come from?
 
