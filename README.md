@@ -17,8 +17,8 @@ It's recommended to use homebrew to install wget.
 * http://brew.sh/ referred by
 * http://www.merenbach.com/software/wget/ referred by
 * http://wget.addictivecode.org/FrequentlyAskedQuestions?action=show&redirect=Faq#download referred by
-* http://www.gnu.org/software/wget/
-* referred by http://google.com#q=wget
+* http://www.gnu.org/software/wget/ referred by
+* http://google.com#q=wget
 
 You need also to download and install JDK.
 
