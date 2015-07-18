@@ -14,17 +14,15 @@ wget http://developer.android.com/sdk/index.html \
 # http://www.linuxquestions.org/questions/linux-newbie-8/how-to-use-sed-to-delete-all-lines-before-the-first-match-of-a-pattern-802069/
 # sed remove lines after
 # http://stackoverflow.com/questions/5227295/how-do-i-delete-all-lines-in-a-file-starting-from-after-a-matching-line
-sed -n '/pax/,$p' -i orig/sdk/index.html
-sed '/end pax/q' -i orig/sdk/index.html
+cat orig/sdk/index.html | sed -n '/pax/,$p' | sed '/end pax/q' | tee orig/sdk/index.html
 
 #grep -Po 'https://dl.google.com/dl/android/studio/install/1.0.1/[^"]*' orig/sdk/index.html | wget -N -P dl/android/studio/install/1.0.1 -c -i -
 #grep -Po 'https://dl.google.com/dl/android/studio/ide-zips/1.0.1/[^"]*' orig/sdk/index.html | wget -N -P dl/android/studio/ide-zips/1.0.1 -c -i -
-grep -Po 'https://dl.google.com/dl/android/studio/[^"]*' orig/sdk/index.html > \
+grep -o 'https://dl.google.com/dl/android/studio/[^"]*' orig/sdk/index.html > \
                                 dl/android/studio/download.sh
-sed -i -r 's/https:(\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+)/wget -N -P \2 -c http:\1/g' \
-                                dl/android/studio/download.sh
+cat dl/android/studio/download.sh | sed -E 's/https:(\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+)/wget -N -P \2 -c http:\1/g' | tee dl/android/studio/download.sh
 sh dl/android/studio/download.sh
-grep -Po 'http://dl.google.com/android/[^"]*' orig/sdk/index.html | \
+grep -o 'http://dl.google.com/android/[^"]*' orig/sdk/index.html | \
                     wget -N -P android -c -i -
 
 sed '/<!-- insert -->/q' sdk/template.html > sdk/index.html.tmp
@@ -140,4 +138,4 @@ sed 's/https:\/\/dl.google.com/http:\/\/studyjams.dushu.hu/g' \
          glass/gdk/addon.xml
 
 # verify
-grep -Prn '<sdk:url>' * --include=*.xml --exclude-dir=orig | grep http
+grep -rn '<sdk:url>' * --include=*.xml --exclude-dir=orig | grep http
