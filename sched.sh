@@ -1,2 +1,4 @@
 cd /var/www/hu.dushu.studyjams
-./script/download.sh
+screen -d -m -t android-repository ./script/download.sh
+screen -wipe
+

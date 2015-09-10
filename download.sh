@@ -17,10 +17,11 @@ cat orig/sdk/index.html | sed -n '/pax/,$p' | sed '/end pax/q' > orig/sdk/index.
 
 # download android studio
 grep -o 'https://dl.google.com/dl/android/studio/[^"]*' orig/sdk/index.html | \
-          grep -v [.]exe > dl/android/studio/download.sh
-cat dl/android/studio/download.sh | \
+          grep -v [.]exe > dl/android/studio/download.sh.tmp
+cat dl/android/studio/download.sh.tmp | \
     sed -E 's/https:(\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+)/wget -N -P \2 -c http:\1/g' > \
     dl/android/studio/download.sh
+rm dl/android/studio/download.sh.tmp
 sh dl/android/studio/download.sh
 
 # download sdk manager
@@ -64,7 +65,7 @@ java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-tv/sys-img.
 java -jar $BASEDIR/saxon.jar orig/android/repository/repository-10.xml \
                          $BASEDIR/android/repository/repository-10.xsl | \
                        sed 's/https:/http:/g' | \
-                       wget -N -P android/repository -c -i -
+                       wget -P android/repository -c -i -
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-wear/sys-img.xml \
                          $BASEDIR/android/repository/sys-img/android-wear/sys-img.xsl | \
                        sed 's/https:/http:/g' | \
