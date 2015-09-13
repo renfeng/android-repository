@@ -25,7 +25,7 @@ rm dl/android/studio/download.sh.tmp
 sh dl/android/studio/download.sh
 
 # download sdk manager
-grep -o 'http://dl.google.com/android/[^"]*' orig/sdk/index.html | 
+grep -o 'http://dl.google.com/android/[^"]*' orig/sdk/index.html |
     grep -v [.]exe | wget -N -P android -c -i -
 
 cat sdk/template.html | sed '/<!-- insert -->/q' > sdk/index.html
@@ -36,7 +36,7 @@ cat orig/sdk/index.html | \
          sdk/index.html
 cat sdk/template.html | sed -n '/<!-- insert -->/,$p' >> sdk/index.html
 
-# requires 25GB
+# requires 30GB
 
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
@@ -46,7 +46,8 @@ $BASEDIR/sync-index.sh
 $BASEDIR/manage.sh
 
 # clean obsolete sdk packages
-grep true packages.csv | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+' | sed -r 's/^(.*)$/rm -f \1/g' > clean-obsolete.sh
+# TODO grep -P is not supported by OS X
+grep true packages.csv | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+' | sed -E 's/^(.*)$/rm -f \1/g' > clean-obsolete.sh
 sh clean-obsolete.sh
 
 # http://stackoverflow.com/questions/8535947/xslt-2-0-transformation-via-linux-shell
