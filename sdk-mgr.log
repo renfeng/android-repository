@@ -1,0 +1,408 @@
+Fetching http://dl.google.com/android/repository/addons_list-2.xml
+Validate XML
+Parse XML
+Fetched Add-ons List successfully
+Fetching URL: http://dl.google.com/android/repository/repository-11.xml
+Validate XML: http://dl.google.com/android/repository/repository-11.xml
+Parse XML:    http://dl.google.com/android/repository/repository-11.xml
+  Found SDK Platform Android 1.1, API 2, revision 1 (Obsolete)
+  Found SDK Platform Android 1.5, API 3, revision 4 (Obsolete)
+  Found SDK Platform Android 1.6, API 4, revision 3 (Obsolete)
+  Found SDK Platform Android 2.0, API 5, revision 1 (Obsolete)
+  Found SDK Platform Android 2.0.1, API 6, revision 1 (Obsolete)
+  Found SDK Platform Android 2.1, API 7, revision 3 (Obsolete)
+  Found SDK Platform Android 2.2, API 8, revision 3
+  Found SDK Platform Android 2.3.1, API 9, revision 2 (Obsolete)
+  Found SDK Platform Android 2.3.3, API 10, revision 2
+  Found SDK Platform Android 3.0, API 11, revision 2 (Obsolete)
+  Found SDK Platform Android 3.1, API 12, revision 3 (Obsolete)
+  Found SDK Platform Android 3.2, API 13, revision 1 (Obsolete)
+  Found SDK Platform Android 4.0, API 14, revision 4 (Obsolete)
+  Found SDK Platform Android 4.0.3, API 15, revision 5
+  Found SDK Platform Android 4.1.2, API 16, revision 5
+  Found SDK Platform Android 4.2.2, API 17, revision 3
+  Found SDK Platform Android 4.3.1, API 18, revision 3
+  Found SDK Platform Android 4.4.2, API 19, revision 4
+  Found SDK Platform Android 4.4W.2, API 20, revision 2
+  Found SDK Platform Android 5.0.1, API 21, revision 2
+  Found SDK Platform Android 5.1.1, API 22, revision 2
+  Found SDK Platform Android 6.0, API 23, revision 2
+  Found Samples for SDK API 7, revision 1 (Obsolete)
+  Found Samples for SDK API 8, revision 1
+  Found Samples for SDK API 9, revision 1 (Obsolete)
+  Found Samples for SDK API 10, revision 1
+  Found Samples for SDK API 11, revision 1 (Obsolete)
+  Found Samples for SDK API 12, revision 1 (Obsolete)
+  Found Samples for SDK API 13, revision 1 (Obsolete)
+  Found Samples for SDK API 14, revision 2 (Obsolete)
+  Found Samples for SDK API 15, revision 2
+  Found Samples for SDK API 16, revision 1
+  Found Samples for SDK API 17, revision 1
+  Found Samples for SDK API 18, revision 1
+  Found Samples for SDK API 19, revision 6
+  Found Samples for SDK API 20, revision 3
+  Found Samples for SDK API 21, revision 4
+  Found Samples for SDK API 22, revision 6
+  Found Samples for SDK API 23, revision 2
+  Found Android SDK Platform-tools, revision 23.1
+  Found Android SDK Build-tools, revision 17 (Obsolete)
+  Found Android SDK Build-tools, revision 18.0.1 (Obsolete)
+  Found Android SDK Build-tools, revision 18.1 (Obsolete)
+  Found Android SDK Build-tools, revision 18.1.1 (Obsolete)
+  Found Android SDK Build-tools, revision 19 (Obsolete)
+  Found Android SDK Build-tools, revision 19.0.1 (Obsolete)
+  Found Android SDK Build-tools, revision 19.0.2 (Obsolete)
+  Found Android SDK Build-tools, revision 19.0.3 (Obsolete)
+  Found Android SDK Build-tools, revision 19.1
+  Found Android SDK Build-tools, revision 20
+  Found Android SDK Build-tools, revision 21 (Obsolete)
+  Found Android SDK Build-tools, revision 21.0.1 (Obsolete)
+  Found Android SDK Build-tools, revision 21.0.2 (Obsolete)
+  Found Android SDK Build-tools, revision 21.1 (Obsolete)
+  Found Android SDK Build-tools, revision 21.1.1 (Obsolete)
+  Found Android SDK Build-tools, revision 21.1.2
+  Found Android SDK Build-tools, revision 22 (Obsolete)
+  Found Android SDK Build-tools, revision 22.0.1
+  Found Android SDK Build-tools, revision 23 (Obsolete)
+  Found Android SDK Build-tools, revision 23.0.1
+  Found Android SDK Build-tools, revision 23.0.2
+  Found Android SDK Tools, revision 24.4.1
+  Found Android SDK Tools, revision 25.0.4 rc5
+  Found Documentation for Android SDK, API 23, revision 1
+  Found Sources for Android SDK, API 14, revision 1 (Obsolete)
+  Found Sources for Android SDK, API 15, revision 2
+  Found Sources for Android SDK, API 16, revision 2
+  Found Sources for Android SDK, API 17, revision 1
+  Found Sources for Android SDK, API 18, revision 1
+  Found Sources for Android SDK, API 19, revision 2
+  Found Sources for Android SDK, API 20, revision 1
+  Found Sources for Android SDK, API 21, revision 1
+  Found Sources for Android SDK, API 22, revision 1
+  Found Sources for Android SDK, API 23, revision 1
+Fetching URL: http://dl.google.com/android/repository/addon.xml
+Validate XML: http://dl.google.com/android/repository/addon.xml
+Parse XML:    http://dl.google.com/android/repository/addon.xml
+  Found Google APIs, Android API 3, revision 3 (Obsolete)
+  Found Google APIs, Android API 4, revision 2 (Obsolete)
+  Found Google APIs, Android API 5, revision 1 (Obsolete)
+  Found Google APIs, Android API 6, revision 1 (Obsolete)
+  Found Google APIs, Android API 7, revision 1 (Obsolete)
+  Found Google APIs, Android API 8, revision 2
+  Found Google APIs, Android API 9, revision 2 (Obsolete)
+  Found Google APIs, Android API 10, revision 2
+  Found Google APIs, Android API 11, revision 1 (Obsolete)
+  Found Google APIs, Android API 12, revision 1 (Obsolete)
+  Found Google APIs, Android API 13, revision 1 (Obsolete)
+  Found Google APIs, Android API 14, revision 2 (Obsolete)
+  Found Google APIs, Android API 15, revision 3
+  Found Google APIs, Android API 16, revision 4
+  Found Google APIs, Android API 17, revision 4
+  Found Google APIs, Android API 18, revision 4
+  Found Google APIs (ARM System Image), Android API 19, revision 18
+  Found Google APIs, Android API 21, revision 1
+  Found Google APIs, Android API 22, revision 1
+  Found Google TV Addon, Android API 12, revision 2 (Obsolete)
+  Found Google TV Addon, Android API 13, revision 1 (Obsolete)
+  Found Google APIs, Android API 23, revision 1
+  Found Android Support Library, revision 23.1.1
+  Found Android Support Repository, revision 25
+  Found GPU Debugging tools, revision 1.0.3
+  Found Google Repository, revision 24
+  Found Google Play Licensing Library, revision 2
+  Found Google Play APK Expansion Library, revision 3
+  Found Google Play services for Froyo, revision 12 (Obsolete)
+  Found Google Play services, revision 29
+  Found Google USB Driver, revision 11
+  Found Google Play Billing Library, revision 5
+  Found Google AdMob Ads SDK, revision 11 (Obsolete)
+  Found Google Analytics App Tracking SDK, revision 3 (Obsolete)
+  Found Google Web Driver, revision 2
+  Found Google Cloud Messaging for Android Library, revision 3 (Obsolete)
+  Found Android Auto API Simulators, revision 1
+  Found Android Auto Desktop Head Unit emulator, revision 1.1
+Fetching URL: http://dl.google.com/android/repository/addon-6.xml
+Validate XML: http://dl.google.com/android/repository/addon-6.xml
+Parse XML:    http://dl.google.com/android/repository/addon-6.xml
+  Found Android Support Library, revision 19.1
+Fetching URL: http://dl-ssl.google.com/glass/gdk/addon.xml
+Validate XML: http://dl-ssl.google.com/glass/gdk/addon.xml
+Parse XML:    http://dl-ssl.google.com/glass/gdk/addon.xml
+  Found Glass Development Kit Preview, Android API 19, revision 11
+Fetching URL: http://dl.google.com/android/repository/extras/intel/addon.xml
+Validate XML: http://dl.google.com/android/repository/extras/intel/addon.xml
+Parse XML:    http://dl.google.com/android/repository/extras/intel/addon.xml
+  Found Intel x86 Emulator Accelerator (HAXM installer), revision 6.0.1
+Fetching URL: http://dl.google.com/android/repository/sys-img/android/sys-img.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/android/sys-img.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/android/sys-img.xml
+  Found ARM EABI v7a System Image, Android API 14, revision 2 (Obsolete)
+  Found ARM EABI v7a System Image, Android API 15, revision 3
+  Found ARM EABI v7a System Image, Android API 16, revision 4
+  Found ARM EABI v7a System Image, Android API 17, revision 3
+  Found ARM EABI v7a System Image, Android API 18, revision 3
+  Found ARM EABI v7a System Image, Android API 19, revision 3
+  Found ARM EABI v7a System Image, Android API 21, revision 3
+  Found ARM EABI v7a System Image, Android API 22, revision 1
+  Found Intel x86 Atom System Image, Android API 10, revision 3
+  Found Intel x86 Atom System Image, Android API 15, revision 2
+  Found Intel x86 Atom System Image, Android API 16, revision 2
+  Found Intel x86 Atom System Image, Android API 17, revision 2
+  Found Intel x86 Atom System Image, Android API 18, revision 2
+  Found Intel x86 Atom System Image, Android API 19, revision 3
+  Found Intel x86 Atom System Image, Android API 21, revision 3
+  Found Intel x86 Atom_64 System Image, Android API 21, revision 3
+  Found Intel x86 Atom System Image, Android API 22, revision 4
+  Found Intel x86 Atom_64 System Image, Android API 22, revision 4
+  Found MIPS System Image, Android API 15, revision 1
+  Found MIPS System Image, Android API 16, revision 4
+  Found MIPS System Image, Android API 17, revision 1
+  Found Intel x86 Atom System Image, Android API 23, revision 8
+  Found Intel x86 Atom_64 System Image, Android API 23, revision 8
+  Found ARM EABI v7a System Image, Android API 23, revision 3
+Fetching URL: http://dl.google.com/android/repository/sys-img/android-wear/sys-img.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/android-wear/sys-img.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/android-wear/sys-img.xml
+  Found Android Wear ARM EABI v7a System Image, Android API 20, revision 4
+  Found Android Wear Intel x86 Atom System Image, Android API 20, revision 4
+  Found Android Wear ARM EABI v7a System Image, Android API 21, revision 3
+  Found Android Wear Intel x86 Atom System Image, Android API 21, revision 3
+  Found Android Wear ARM EABI v7a System Image, Android API 22, revision 7
+  Found Android Wear Intel x86 Atom System Image, Android API 22, revision 7
+  Found Android Wear ARM EABI v7a System Image, Android API 23, revision 2
+  Found Android Wear Intel x86 Atom System Image, Android API 23, revision 2
+Fetching URL: http://dl.google.com/android/repository/sys-img/android-tv/sys-img.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/android-tv/sys-img.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/android-tv/sys-img.xml
+  Found Android TV Intel x86 Atom System Image, Android API 21, revision 3
+  Found Android TV ARM EABI v7a System Image, Android API 21, revision 3
+  Found Android TV Intel x86 Atom System Image, Android API 22, revision 1
+  Found Android TV ARM EABI v7a System Image, Android API 22, revision 1
+  Found Android TV Intel x86 Atom System Image, Android API 23, revision 2
+  Found Android TV ARM EABI v7a System Image, Android API 23, revision 2
+Fetching URL: http://dl.google.com/android/repository/sys-img/google_apis/sys-img.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/google_apis/sys-img.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/google_apis/sys-img.xml
+  Found Google APIs Intel x86 Atom System Image, Google Inc. API 21, revision 10
+  Found Google APIs Intel x86 Atom_64 System Image, Google Inc. API 21, revision 10
+  Found Google APIs ARM EABI v7a System Image, Google Inc. API 21, revision 10
+  Found Google APIs Intel x86 Atom System Image, Google Inc. API 22, revision 4
+  Found Google APIs ARM EABI v7a System Image, Google Inc. API 22, revision 1
+  Found Google APIs Intel x86 Atom_64 System Image, Google Inc. API 22, revision 4
+  Found Google APIs Intel x86 Atom System Image, Google Inc. API 23, revision 12
+  Found Google APIs Intel x86 Atom_64 System Image, Google Inc. API 23, revision 12
+  Found Google APIs ARM EABI v7a System Image, Google Inc. API 23, revision 7
+Fetching URL: http://dl.google.com/android/repository/sys-img/x86/addon-x86.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/x86/addon-x86.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/x86/addon-x86.xml
+  Found Google APIs (x86 System Image), Android API 19, revision 18
+Done loading packages.
+Fetching http://dl.google.com/android/repository/addons_list-2.xml
+Validate XML
+Parse XML
+Fetched Add-ons List successfully
+Fetching URL: http://dl.google.com/android/repository/repository-11.xml
+Validate XML: http://dl.google.com/android/repository/repository-11.xml
+Parse XML:    http://dl.google.com/android/repository/repository-11.xml
+  Found SDK Platform Android 1.1, API 2, revision 1 (Obsolete)
+  Found SDK Platform Android 1.5, API 3, revision 4 (Obsolete)
+  Found SDK Platform Android 1.6, API 4, revision 3 (Obsolete)
+  Found SDK Platform Android 2.0, API 5, revision 1 (Obsolete)
+  Found SDK Platform Android 2.0.1, API 6, revision 1 (Obsolete)
+  Found SDK Platform Android 2.1, API 7, revision 3 (Obsolete)
+  Found SDK Platform Android 2.2, API 8, revision 3
+  Found SDK Platform Android 2.3.1, API 9, revision 2 (Obsolete)
+  Found SDK Platform Android 2.3.3, API 10, revision 2
+  Found SDK Platform Android 3.0, API 11, revision 2 (Obsolete)
+  Found SDK Platform Android 3.1, API 12, revision 3 (Obsolete)
+  Found SDK Platform Android 3.2, API 13, revision 1 (Obsolete)
+  Found SDK Platform Android 4.0, API 14, revision 4 (Obsolete)
+  Found SDK Platform Android 4.0.3, API 15, revision 5
+  Found SDK Platform Android 4.1.2, API 16, revision 5
+  Found SDK Platform Android 4.2.2, API 17, revision 3
+  Found SDK Platform Android 4.3.1, API 18, revision 3
+  Found SDK Platform Android 4.4.2, API 19, revision 4
+  Found SDK Platform Android 4.4W.2, API 20, revision 2
+  Found SDK Platform Android 5.0.1, API 21, revision 2
+  Found SDK Platform Android 5.1.1, API 22, revision 2
+  Found SDK Platform Android 6.0, API 23, revision 2
+  Found Samples for SDK API 7, revision 1 (Obsolete)
+  Found Samples for SDK API 8, revision 1
+  Found Samples for SDK API 9, revision 1 (Obsolete)
+  Found Samples for SDK API 10, revision 1
+  Found Samples for SDK API 11, revision 1 (Obsolete)
+  Found Samples for SDK API 12, revision 1 (Obsolete)
+  Found Samples for SDK API 13, revision 1 (Obsolete)
+  Found Samples for SDK API 14, revision 2 (Obsolete)
+  Found Samples for SDK API 15, revision 2
+  Found Samples for SDK API 16, revision 1
+  Found Samples for SDK API 17, revision 1
+  Found Samples for SDK API 18, revision 1
+  Found Samples for SDK API 19, revision 6
+  Found Samples for SDK API 20, revision 3
+  Found Samples for SDK API 21, revision 4
+  Found Samples for SDK API 22, revision 6
+  Found Samples for SDK API 23, revision 2
+  Found Android SDK Platform-tools, revision 23.1
+  Found Android SDK Build-tools, revision 17 (Obsolete)
+  Found Android SDK Build-tools, revision 18.0.1 (Obsolete)
+  Found Android SDK Build-tools, revision 18.1 (Obsolete)
+  Found Android SDK Build-tools, revision 18.1.1 (Obsolete)
+  Found Android SDK Build-tools, revision 19 (Obsolete)
+  Found Android SDK Build-tools, revision 19.0.1 (Obsolete)
+  Found Android SDK Build-tools, revision 19.0.2 (Obsolete)
+  Found Android SDK Build-tools, revision 19.0.3 (Obsolete)
+  Found Android SDK Build-tools, revision 19.1
+  Found Android SDK Build-tools, revision 20
+  Found Android SDK Build-tools, revision 21 (Obsolete)
+  Found Android SDK Build-tools, revision 21.0.1 (Obsolete)
+  Found Android SDK Build-tools, revision 21.0.2 (Obsolete)
+  Found Android SDK Build-tools, revision 21.1 (Obsolete)
+  Found Android SDK Build-tools, revision 21.1.1 (Obsolete)
+  Found Android SDK Build-tools, revision 21.1.2
+  Found Android SDK Build-tools, revision 22 (Obsolete)
+  Found Android SDK Build-tools, revision 22.0.1
+  Found Android SDK Build-tools, revision 23 (Obsolete)
+  Found Android SDK Build-tools, revision 23.0.1
+  Found Android SDK Build-tools, revision 23.0.2
+  Found Android SDK Tools, revision 24.4.1
+  Found Android SDK Tools, revision 25.0.5 rc6
+  Found Documentation for Android SDK, API 23, revision 1
+  Found Sources for Android SDK, API 14, revision 1 (Obsolete)
+  Found Sources for Android SDK, API 15, revision 2
+  Found Sources for Android SDK, API 16, revision 2
+  Found Sources for Android SDK, API 17, revision 1
+  Found Sources for Android SDK, API 18, revision 1
+  Found Sources for Android SDK, API 19, revision 2
+  Found Sources for Android SDK, API 20, revision 1
+  Found Sources for Android SDK, API 21, revision 1
+  Found Sources for Android SDK, API 22, revision 1
+  Found Sources for Android SDK, API 23, revision 1
+Fetching URL: http://dl.google.com/android/repository/addon.xml
+Validate XML: http://dl.google.com/android/repository/addon.xml
+Parse XML:    http://dl.google.com/android/repository/addon.xml
+  Found Google APIs, Android API 3, revision 3 (Obsolete)
+  Found Google APIs, Android API 4, revision 2 (Obsolete)
+  Found Google APIs, Android API 5, revision 1 (Obsolete)
+  Found Google APIs, Android API 6, revision 1 (Obsolete)
+  Found Google APIs, Android API 7, revision 1 (Obsolete)
+  Found Google APIs, Android API 8, revision 2
+  Found Google APIs, Android API 9, revision 2 (Obsolete)
+  Found Google APIs, Android API 10, revision 2
+  Found Google APIs, Android API 11, revision 1 (Obsolete)
+  Found Google APIs, Android API 12, revision 1 (Obsolete)
+  Found Google APIs, Android API 13, revision 1 (Obsolete)
+  Found Google APIs, Android API 14, revision 2 (Obsolete)
+  Found Google APIs, Android API 15, revision 3
+  Found Google APIs, Android API 16, revision 4
+  Found Google APIs, Android API 17, revision 4
+  Found Google APIs, Android API 18, revision 4
+  Found Google APIs (ARM System Image), Android API 19, revision 18
+  Found Google APIs, Android API 21, revision 1
+  Found Google APIs, Android API 22, revision 1
+  Found Google TV Addon, Android API 12, revision 2 (Obsolete)
+  Found Google TV Addon, Android API 13, revision 1 (Obsolete)
+  Found Google APIs, Android API 23, revision 1
+  Found Android Support Library, revision 23.1.1
+  Found Android Support Repository, revision 25
+  Found GPU Debugging tools, revision 1.0.3
+  Found Google Repository, revision 24
+  Found Google Play Licensing Library, revision 2
+  Found Google Play APK Expansion Library, revision 3
+  Found Google Play services for Froyo, revision 12 (Obsolete)
+  Found Google Play services, revision 29
+  Found Google USB Driver, revision 11
+  Found Google Play Billing Library, revision 5
+  Found Google AdMob Ads SDK, revision 11 (Obsolete)
+  Found Google Analytics App Tracking SDK, revision 3 (Obsolete)
+  Found Google Web Driver, revision 2
+  Found Google Cloud Messaging for Android Library, revision 3 (Obsolete)
+  Found Android Auto API Simulators, revision 1
+  Found Android Auto Desktop Head Unit emulator, revision 1.1
+Fetching URL: http://dl.google.com/android/repository/addon-6.xml
+Validate XML: http://dl.google.com/android/repository/addon-6.xml
+Parse XML:    http://dl.google.com/android/repository/addon-6.xml
+  Found Android Support Library, revision 19.1
+Fetching URL: http://dl-ssl.google.com/glass/gdk/addon.xml
+Validate XML: http://dl-ssl.google.com/glass/gdk/addon.xml
+Parse XML:    http://dl-ssl.google.com/glass/gdk/addon.xml
+  Found Glass Development Kit Preview, Android API 19, revision 11
+Fetching URL: http://dl.google.com/android/repository/extras/intel/addon.xml
+Validate XML: http://dl.google.com/android/repository/extras/intel/addon.xml
+Parse XML:    http://dl.google.com/android/repository/extras/intel/addon.xml
+  Found Intel x86 Emulator Accelerator (HAXM installer), revision 6.0.1
+Fetching URL: http://dl.google.com/android/repository/sys-img/android/sys-img.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/android/sys-img.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/android/sys-img.xml
+  Found ARM EABI v7a System Image, Android API 14, revision 2 (Obsolete)
+  Found ARM EABI v7a System Image, Android API 15, revision 3
+  Found ARM EABI v7a System Image, Android API 16, revision 4
+  Found ARM EABI v7a System Image, Android API 17, revision 3
+  Found ARM EABI v7a System Image, Android API 18, revision 3
+  Found ARM EABI v7a System Image, Android API 19, revision 3
+  Found ARM EABI v7a System Image, Android API 21, revision 3
+  Found ARM EABI v7a System Image, Android API 22, revision 1
+  Found Intel x86 Atom System Image, Android API 10, revision 3
+  Found Intel x86 Atom System Image, Android API 15, revision 2
+  Found Intel x86 Atom System Image, Android API 16, revision 2
+  Found Intel x86 Atom System Image, Android API 17, revision 2
+  Found Intel x86 Atom System Image, Android API 18, revision 2
+  Found Intel x86 Atom System Image, Android API 19, revision 3
+  Found Intel x86 Atom System Image, Android API 21, revision 3
+  Found Intel x86 Atom_64 System Image, Android API 21, revision 3
+  Found Intel x86 Atom System Image, Android API 22, revision 4
+  Found Intel x86 Atom_64 System Image, Android API 22, revision 4
+  Found MIPS System Image, Android API 15, revision 1
+  Found MIPS System Image, Android API 16, revision 4
+  Found MIPS System Image, Android API 17, revision 1
+  Found Intel x86 Atom System Image, Android API 23, revision 8
+  Found Intel x86 Atom_64 System Image, Android API 23, revision 8
+  Found ARM EABI v7a System Image, Android API 23, revision 3
+Fetching URL: http://dl.google.com/android/repository/sys-img/android-wear/sys-img.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/android-wear/sys-img.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/android-wear/sys-img.xml
+  Found Android Wear ARM EABI v7a System Image, Android API 20, revision 4
+  Found Android Wear Intel x86 Atom System Image, Android API 20, revision 4
+  Found Android Wear ARM EABI v7a System Image, Android API 21, revision 3
+  Found Android Wear Intel x86 Atom System Image, Android API 21, revision 3
+  Found Android Wear ARM EABI v7a System Image, Android API 22, revision 7
+  Found Android Wear Intel x86 Atom System Image, Android API 22, revision 7
+  Found Android Wear ARM EABI v7a System Image, Android API 23, revision 2
+  Found Android Wear Intel x86 Atom System Image, Android API 23, revision 2
+Fetching URL: http://dl.google.com/android/repository/sys-img/android-tv/sys-img.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/android-tv/sys-img.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/android-tv/sys-img.xml
+  Found Android TV Intel x86 Atom System Image, Android API 21, revision 3
+  Found Android TV ARM EABI v7a System Image, Android API 21, revision 3
+  Found Android TV Intel x86 Atom System Image, Android API 22, revision 1
+  Found Android TV ARM EABI v7a System Image, Android API 22, revision 1
+  Found Android TV Intel x86 Atom System Image, Android API 23, revision 2
+  Found Android TV ARM EABI v7a System Image, Android API 23, revision 2
+Fetching URL: http://dl.google.com/android/repository/sys-img/google_apis/sys-img.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/google_apis/sys-img.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/google_apis/sys-img.xml
+  Found Google APIs Intel x86 Atom System Image, Google Inc. API 21, revision 10
+  Found Google APIs Intel x86 Atom_64 System Image, Google Inc. API 21, revision 10
+  Found Google APIs ARM EABI v7a System Image, Google Inc. API 21, revision 10
+  Found Google APIs Intel x86 Atom System Image, Google Inc. API 22, revision 4
+  Found Google APIs ARM EABI v7a System Image, Google Inc. API 22, revision 1
+  Found Google APIs Intel x86 Atom_64 System Image, Google Inc. API 22, revision 4
+  Found Google APIs Intel x86 Atom System Image, Google Inc. API 23, revision 12
+  Found Google APIs Intel x86 Atom_64 System Image, Google Inc. API 23, revision 12
+  Found Google APIs ARM EABI v7a System Image, Google Inc. API 23, revision 7
+Fetching URL: http://dl.google.com/android/repository/sys-img/x86/addon-x86.xml
+Validate XML: http://dl.google.com/android/repository/sys-img/x86/addon-x86.xml
+Parse XML:    http://dl.google.com/android/repository/sys-img/x86/addon-x86.xml
+  Found Google APIs (x86 System Image), Android API 19, revision 18
+Done loading packages.
+Preparing to install archives
+Downloading ARM EABI v7a System Image, Android API 23, revision 3
+Installing ARM EABI v7a System Image, Android API 23, revision 3
+Installed ARM EABI v7a System Image, Android API 23, revision 3
+Downloading Android Support Library, revision 23.1.1
+Installing Android Support Library, revision 23.1.1
+Installed Android Support Library, revision 23.1.1
+Downloading Google USB Driver, revision 11
+Installing Google USB Driver, revision 11
+Installed Google USB Driver, revision 11
+Done. 3 packages installed.
+Done loading packages.

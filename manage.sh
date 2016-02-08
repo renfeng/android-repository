@@ -18,8 +18,8 @@ java -jar $BASEDIR/saxon.jar orig/android/repository/addon-6.xml \
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-tv/sys-img.xml \
                          $BASEDIR/android/repository/sys-img/android-tv/sys-img.csv.xsl \
 	>> packages.csv.tmp
-java -jar $BASEDIR/saxon.jar orig/android/repository/repository-10.xml \
-                         $BASEDIR/android/repository/repository-10.csv.xsl \
+java -jar $BASEDIR/saxon.jar orig/android/repository/repository-11.xml \
+                         $BASEDIR/android/repository/repository-11.csv.xsl \
 	>> packages.csv.tmp
 java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-wear/sys-img.xml \
                          $BASEDIR/android/repository/sys-img/android-wear/sys-img.csv.xsl \
