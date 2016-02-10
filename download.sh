@@ -27,21 +27,6 @@ cat dl/android/studio/download.sh.tmp | \
 rm dl/android/studio/download.sh.tmp
 sh dl/android/studio/download.sh
 
-# download sdk manager
-grep -o 'http://dl.google.com/android/[^"]*' orig/sdk/index.html |
-    grep -v [.]exe | wget -N -P android -c -i -
-
-mkdir -p sdk
-cat $BASEDIR/sdk/template.html | sed '/<!-- insert -->/q' > sdk/index.html
-cat orig/sdk/index.html | \
-    sed 's/https:\/\/dl.google.com//g' | \
-    sed 's/http:\/\/dl.google.com//g' | \
-    sed 's/onclick="return onDownload(this)"/target="_blank"/g' >> \
-         sdk/index.html
-cat $BASEDIR/sdk/template.html | sed -n '/<!-- insert -->/,$p' >> sdk/index.html
-mkdir -p css
-cp $BASEDIR/css/default.css css/
-
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
 
@@ -139,6 +124,21 @@ cat orig/glass/gdk/addon.xml | \
 $BASEDIR/manage.sh
 grep true packages.csv | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+' | sed -E 's/^(.*)$/rm -f \1/g' > clean-obsolete.sh
 sh clean-obsolete.sh
+
+# download sdk manager (requires packages.csv)
+grep -o 'http://dl.google.com/android/[^"]*' orig/sdk/index.html |
+    grep -v [.]exe | wget -N -P android -c -i -
+
+mkdir -p sdk
+cat $BASEDIR/sdk/template.html | sed '/<!-- insert -->/q' > sdk/index.html
+cat orig/sdk/index.html | \
+    sed 's/https:\/\/dl.google.com//g' | \
+    sed 's/http:\/\/dl.google.com//g' | \
+    sed 's/onclick="return onDownload(this)"/target="_blank"/g' >> \
+         sdk/index.html
+cat $BASEDIR/sdk/template.html | sed -n '/<!-- insert -->/,$p' >> sdk/index.html
+mkdir -p css
+cp $BASEDIR/css/default.css css/
 
 # verify
 grep -rn '<sdk:url>' * --include=*.xml --exclude-dir=orig | grep http

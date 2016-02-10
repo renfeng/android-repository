@@ -109,7 +109,7 @@
 		</xsl:choose>
 		<!-- description -->
 		<xsl:text>,</xsl:text>
-		<xsl:variable name="description" select="sdk:description/text()" />
+		<xsl:variable name="description" select="normalize-space(sdk:description/text())" />
 		<xsl:choose>
 			<xsl:when test="$description">
 				<xsl:call-template name="csvEscape">
