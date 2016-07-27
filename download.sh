@@ -15,7 +15,7 @@ wget http://developer.android.com/sdk/index.html -O orig/sdk/index.html.tmp
 # http://www.linuxquestions.org/questions/linux-newbie-8/how-to-use-sed-to-delete-all-lines-before-the-first-match-of-a-pattern-802069/
 # sed remove lines after
 # http://stackoverflow.com/questions/5227295/how-do-i-delete-all-lines-in-a-file-starting-from-after-a-matching-line
-cat orig/sdk/index.html.tmp | sed -n '/pax/,$p' | sed '/end pax/q' > orig/sdk/index.html
+cat orig/sdk/index.html.tmp | sed -n '/<section id="downloads"/,$p' | sed '/section>/q' > orig/sdk/index.html
 rm orig/sdk/index.html.tmp
 
 # download android studio
