@@ -8,18 +8,18 @@
 # XXX no need to mirror gradle, https://services.gradle.org/distributions/gradle-2.1-bin.zip
 # it doesn't download when internet is unavailable, and android studio works just fine
 
-mkdir -p orig/sdk
-wget http://developer.android.com/sdk/index.html -O orig/sdk/index.html.tmp
+mkdir -p orig/studio
+wget http://developer.android.com/studio/index.html -O orig/studio/index.html.tmp
 
 # sed remove lines until
 # http://www.linuxquestions.org/questions/linux-newbie-8/how-to-use-sed-to-delete-all-lines-before-the-first-match-of-a-pattern-802069/
 # sed remove lines after
 # http://stackoverflow.com/questions/5227295/how-do-i-delete-all-lines-in-a-file-starting-from-after-a-matching-line
-cat orig/sdk/index.html.tmp | sed -n '/<section id="downloads"/,$p' | sed '/section>/q' > orig/sdk/index.html
-rm orig/sdk/index.html.tmp
+cat orig/studio/index.html.tmp | sed -n '/<section id="downloads"/,$p' | sed '/section>/q' > orig/studio/index.html
+rm orig/studio/index.html.tmp
 
 # download android studio
-grep -o 'https://dl.google.com/dl/android/studio/[^"]*' orig/sdk/index.html | \
+grep -o 'https://dl.google.com/dl/android/studio/[^"]*' orig/studio/index.html | \
           grep -v [.]exe > dl/android/studio/download.sh.tmp
 cat dl/android/studio/download.sh.tmp | \
     sed -E 's/https:(\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+)/wget -N -P \2 -c http:\1/g' > \
@@ -126,17 +126,19 @@ grep true packages.csv | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=
 sh clean-obsolete.sh
 
 # download sdk manager (requires packages.csv)
-grep -o 'http://dl.google.com/android/[^"]*' orig/sdk/index.html |
+grep -o '//dl.google.com/android/[^"]*' orig/studio/index.html |
+    sed -E 's/(.*)/https:\/\/\1/g'
     grep -v [.]exe | wget -N -P android -c -i -
 
 mkdir -p sdk
-cat $BASEDIR/sdk/template.html | sed '/<!-- insert -->/q' > sdk/index.html
-cat orig/sdk/index.html | \
+cat $BASEDIR/studio/template.html | sed '/<!-- insert -->/q' > studio/index.html
+cat orig/studio/index.html | \
     sed 's/https:\/\/dl.google.com//g' | \
     sed 's/http:\/\/dl.google.com//g' | \
     sed 's/onclick="return onDownload(this)"/target="_blank"/g' >> \
-         sdk/index.html
-cat $BASEDIR/sdk/template.html | sed -n '/<!-- insert -->/,$p' >> sdk/index.html
+         studio/index.html
+cat $BASEDIR/studio/template.html | sed -n '/<!-- insert -->/,$p' >> studio/index.html
+sed -i 's/\/\/dl.google.com//g' studio/index.html
 mkdir -p css
 cp $BASEDIR/css/default.css css/
 
