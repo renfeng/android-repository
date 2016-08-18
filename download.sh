@@ -130,7 +130,7 @@ grep -o 'dl.google.com/android/[^"]*' orig/studio/index.html | \
     sed -E 's/(.*)/https:\/\/\1/g' | \
     grep -v [.]exe | wget -N -P android -c -i -
 
-mkdir -p sdk
+mkdir -p studio
 cat $BASEDIR/studio/template.html | sed '/<!-- insert -->/q' > studio/index.html
 cat orig/studio/index.html | \
     sed 's/https:\/\/dl.google.com//g' | \
