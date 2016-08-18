@@ -18,7 +18,7 @@
 #mkdir -p android/repository/extras/intel
 #mkdir -p android/repository/sys-img/android-tv
 #mkdir -p android/repository/sys-img/android-wear
-#mkdir -p android/repository/sys-img/x86
+mkdir -p android/repository/sys-img/x86
 #mkdir -p android/repository/sys-img/google_apis
 #mkdir -p android/repository/sys-img/android
 mkdir -p glass/gdk
