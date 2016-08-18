@@ -126,8 +126,8 @@ grep true packages.csv | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=
 sh clean-obsolete.sh
 
 # download sdk manager (requires packages.csv)
-grep -o '//dl.google.com/android/[^"]*' orig/studio/index.html |
-    sed -E 's/(.*)/https:\/\/\1/g'
+grep -o 'dl.google.com/android/[^"]*' orig/studio/index.html | \
+    sed -E 's/(.*)/https:\/\/\1/g' | \
     grep -v [.]exe | wget -N -P android -c -i -
 
 mkdir -p sdk
