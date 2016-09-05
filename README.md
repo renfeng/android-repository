@@ -38,34 +38,6 @@ For more information, please follow the link in the next section.
 
 https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
 
-## Where does saxon.jar come from?
-
-It was copied from /usr/share/java/saxon.jar, which was installed on a Linux Mint Maya (13)
-
-```
-sudo aptitude install libsaxon-java default-jre
-```
-
-```
-Package: libsaxon-java                   
-State: installed
-Automatically installed: yes
-Version: 1:6.5.5-8
-Priority: optional
-Section: libs
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Architecture: all
-Uncompressed Size: 626 k
-Suggests: libjdom1-java, libsaxon-java-doc
-Description: Saxon XSLT Processor
- The saxon package is a collection of tools for processing XML documents and implements the XSLT 1.0 recommendation, including XPath
- 1.0, in its entirety. 
- 
- Saxon is known to work well for processing DocBook XML documents with the DocBook XSL Stylesheets. Related packages make the
- process straightforward.
-Homepage: http://saxon.sourceforge.net/
-```
-
 ## This is GIT
 
-Don't forget this is git - you can do whatever you want to make it better!
+Don't forget this is git - you can do whatever to make it better!
