@@ -32,55 +32,55 @@ BASEDIR=$(dirname $0)
 
 $BASEDIR/sync-index.sh
 
-# http://stackoverflow.com/questions/8535947/xslt-2-0-transformation-via-linux-shell
-java -jar $BASEDIR/saxon.jar orig/android/repository/extras/intel/addon.xml \
-                         $BASEDIR/android/repository/extras/intel/addon.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository/extras/intel -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/addon-6.xml \
-                         $BASEDIR/android/repository/addon-6.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-tv/sys-img.xml \
-                         $BASEDIR/android/repository/sys-img/android-tv/sys-img.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository/sys-img/android-tv -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/repository-11.xml \
-                         $BASEDIR/android/repository/repository-11.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android-wear/sys-img.xml \
-                         $BASEDIR/android/repository/sys-img/android-wear/sys-img.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository/sys-img/android-wear -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/addon.xml \
-                         $BASEDIR/android/repository/addon.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/addon.xml \
-                         $BASEDIR/android/repository/addon.admob.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P googleadmobadssdk -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/addon.xml \
-                         $BASEDIR/android/repository/addon.analytics.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P gaformobileapps -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/x86/addon-x86.xml \
-                         $BASEDIR/android/repository/sys-img/x86/addon-x86.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository/sys-img/x86 -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/google_apis/sys-img.xml \
-                         $BASEDIR/android/repository/sys-img/google_apis/sys-img.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository/sys-img/google_apis -c -i -
-java -jar $BASEDIR/saxon.jar orig/android/repository/sys-img/android/sys-img.xml \
-                         $BASEDIR/android/repository/sys-img/android/sys-img.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P android/repository/sys-img/android -c -i -
-java -jar $BASEDIR/saxon.jar orig/glass/gdk/addon.xml \
-                         $BASEDIR/glass/gdk/addon.xe22.xsl | \
-                       sed 's/https:/http:/g' | \
-                       wget -N -P glass/xe22 -c -i -
+# http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
+xsltproc $BASEDIR/android/repository/extras/intel/addon.xsl \
+             orig/android/repository/extras/intel/addon.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository/extras/intel -c -i -
+xsltproc $BASEDIR/android/repository/addon-6.xsl \
+             orig/android/repository/addon-6.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository -c -i -
+xsltproc $BASEDIR/android/repository/sys-img/android-tv/sys-img.xsl \
+             orig/android/repository/sys-img/android-tv/sys-img.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository/sys-img/android-tv -c -i -
+xsltproc $BASEDIR/android/repository/repository-11.xsl \
+             orig/android/repository/repository-11.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository -c -i -
+xsltproc $BASEDIR/android/repository/sys-img/android-wear/sys-img.xsl \
+             orig/android/repository/sys-img/android-wear/sys-img.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository/sys-img/android-wear -c -i -
+xsltproc $BASEDIR/android/repository/addon.xsl \
+             orig/android/repository/addon.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository -c -i -
+xsltproc $BASEDIR/android/repository/addon.admob.xsl \
+             orig/android/repository/addon.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P googleadmobadssdk -c -i -
+xsltproc $BASEDIR/android/repository/addon.analytics.xsl \
+             orig/android/repository/addon.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P gaformobileapps -c -i -
+xsltproc $BASEDIR/android/repository/sys-img/x86/addon-x86.xsl \
+             orig/android/repository/sys-img/x86/addon-x86.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository/sys-img/x86 -c -i -
+xsltproc $BASEDIR/android/repository/sys-img/google_apis/sys-img.xsl \
+             orig/android/repository/sys-img/google_apis/sys-img.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository/sys-img/google_apis -c -i -
+xsltproc $BASEDIR/android/repository/sys-img/android/sys-img.xsl \
+             orig/android/repository/sys-img/android/sys-img.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P android/repository/sys-img/android -c -i -
+xsltproc $BASEDIR/glass/gdk/addon.xe22.xsl \
+             orig/glass/gdk/addon.xml | \
+       sed 's/https:/http:/g' | \
+       wget -N -P glass/xe22 -c -i -
 
 # make urls relative and local
 cat orig/android/repository/addons_list-2.xml | \
