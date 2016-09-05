@@ -14,13 +14,24 @@ You'll need at least 30GB free storage on your disk.
 
 It's recommended to use homebrew to install wget.
 
-* http://brew.sh/ referred by
-* http://www.merenbach.com/software/wget/ referred by
-* http://wget.addictivecode.org/FrequentlyAskedQuestions?action=show&redirect=Faq#download referred by
-* http://www.gnu.org/software/wget/ referred by
+* http://brew.sh/
+* http://www.merenbach.com/software/wget/
+* http://wget.addictivecode.org/FrequentlyAskedQuestions?action=show&redirect=Faq#download
+* http://www.gnu.org/software/wget/
 * http://google.com#q=wget
 
 You need also to download and install JDK.
+
+TODO test xsltproc on osx
+
+## Cygwin
+
+ * wget
+
+ * xslt
+
+ The two packages you must have are libxml2 and libxslt, both available under the Libs category.
+ Ref. http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
 
 ## Who's using it
 
