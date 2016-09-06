@@ -10,6 +10,12 @@ Tested on
 
 You'll need at least 30GB free storage on your disk.
 
+## Linux
+
+sudo apt-get install xsltproc
+
+(TODO test) yum install xsltproc
+
 ## OS X
 
 It's recommended to use homebrew to install wget.
