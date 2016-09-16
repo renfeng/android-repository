@@ -160,12 +160,6 @@ sed -i 's/\/\/dl.google.com//g' studio/index.html
 mkdir -p css
 cp ${BASEDIR}/css/default.css css/
 
-cp -r ${BASEDIR}/.bowerrc \
-      ${BASEDIR}/bower.json \
-      ${BASEDIR}/elements \
-      ${BASEDIR}/packages.html .
-bower i -S -F
-
 # httpd conf
 cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > and-repo.apache2.conf
 echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
