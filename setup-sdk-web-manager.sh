@@ -15,4 +15,5 @@ if [ `expr index "$PATH" "~/.npm-global/bin"` -eq 0 ]; then
     export PATH=~/.npm-global/bin:$PATH
 fi
 
+npm install -b bower
 bower i -S -F
