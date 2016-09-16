@@ -55,7 +55,7 @@ For more information, please follow the link in the next section.
 
 ## How to setup your mirror/server, and client, i.e. Android SDK Manager
 
-https://docs.google.com/presentation/d/1tEm-JweMHKUki4E14fteX9iZMXXqc-nIdrlq2Uow9lQ/pub
+https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
 
 ## This is GIT
 
