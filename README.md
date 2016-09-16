@@ -26,8 +26,6 @@ It's recommended to use homebrew to install wget.
 * http://www.gnu.org/software/wget/
 * http://google.com#q=wget
 
-You need also to download and install JDK.
-
 TODO test xsltproc on osx
 
 ## Cygwin
