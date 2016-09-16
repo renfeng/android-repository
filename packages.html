@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<title>Android SDK Web Manager</title>
+
+		<meta charset="utf-8"/>
+
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" />
+
+		<!--
+		Chrome 35 has old :host behavior before :host-context addition.
+		Since Chrome 35 does not have HTMLImports, we can use this as a decent signal
+		to force the ShadowDOM Polyfill.
+		-->
+		<script>
+			if (!('import' in document.createElement('link'))) {
+				var Platform = {flags: {shadow: true}};
+			}
+		</script>
+
+		<!-- 1. Load platform support before any code that touches the DOM. -->
+		<script src="components/webcomponentsjs/webcomponents.min.js"></script>
+
+		<!-- 2. Load the component using an HTML Import -->
+		<link rel="import" href="components/poly-compatibility/poly-compatibility.html"/>
+		<link rel="import" href="elements/android-sdk-manager.html" />
+		<link rel="import" href="components/font-roboto/roboto.html" />
+		
+		<style shim-shadowdom>
+			html,body {
+				height: 100%;
+				margin: 0;
+				background-color: #E5E5E5;
+				font-family: 'RobotoDraft', sans-serif;
+			}
+			paper-header-panel {
+				height: 100%;
+				overflow: auto;
+				-webkit-overflow-scrolling: touch;
+			}
+			paper-checkbox {
+				padding: 1em;
+			}
+		</style>
+
+	</head>
+	<body>
+
+		<poly-compatibility path-To-Test="js/modernizrtest.js" style="font-size: small; margin: auto; width: 40em; display: block; text-align: center;">
+			<table style="height: 100%;">
+				<tr>
+					<td valign="middle">
+						<p>This page works in the <i>latest two versions</i> of all major browsers: Safari 7+, IE 11+, and the evergreen Chrome, Firefox, and Edge.</p>
+						<p><a href="https://www.polymer-project.org/1.0/docs/browsers">Browser compatibility - Polymer Project</a></p>
+					</td>
+				</tr>
+			</table>
+		</poly-compatibility>
+
+		<!-- 3. Declare the element by its tag. -->
+		<android-sdk-manager></android-sdk-manager>
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+			ga('create', 'UA-549131-13', 'auto');
+			ga('send', 'pageview');
+		</script>
+
+	</body>
+</html>

@@ -8,7 +8,7 @@ Tested on
 * OS X Yosemite (10.10.4)
 * Cygwin on Windows 7 64bit
 
-You'll need at least 30GB free storage on your disk.
+You'll need at least 102GB free storage on your disk.
 
 ## Linux
 
@@ -38,6 +38,10 @@ TODO test xsltproc on osx
 
  The two packages you must have are libxml2 and libxslt, both available under the Libs category.
  Ref. http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
+
+## SDK Web Manager
+
+packages.html
 
 ## Who's using it
 

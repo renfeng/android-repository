@@ -1,3 +1,5 @@
-*.zip
-*.xml
 *.orig
+*.xml
+*.zip
+.idea
+components

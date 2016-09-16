@@ -1,0 +1,287 @@
+<link rel="import" href="../components/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="../components/iron-icons/iron-icons.html"/>
+<link rel="import" href="../components/iron-collapse/iron-collapse.html"/>
+<link rel="import" href="../components/paper-checkbox/paper-checkbox.html"/>
+<link rel="import" href="../components/paper-drawer-panel/paper-drawer-panel.html"/>
+<link rel="import" href="../components/paper-header-panel/paper-header-panel.html"/>
+<link rel="import" href="../components/paper-icon-button/paper-icon-button.html"/>
+<link rel="import" href="../components/paper-item/paper-item.html"/>
+<link rel="import" href="../components/paper-menu/paper-menu.html"/>
+<link rel="import" href="../components/paper-toolbar/paper-toolbar.html"/>
+<link rel="import" href="../components/polymer-detect-js/detect-js.html"/>
+
+<dom-module id="android-sdk-manager">
+	<style is="custom-style">
+		.fit {
+			@apply(--layout-fit);
+		}
+
+		.horizontal {
+			@apply(--layout-horizontal);
+		}
+
+		.vertical {
+			@apply(--layout-vertical);
+		}
+	</style>
+	<template>
+		<paper-drawer-panel>
+			<paper-header-panel drawer>
+				<paper-toolbar id="navheader">
+					<span>Filters</span>
+					<div relative>
+						<paper-icon-button id="sdkFilter" icon="filter-list" label="List URLs" on-tap="toggleFilterDisplay"></paper-icon-button>
+					</div>
+				</paper-toolbar>
+				<paper-menu selected="{{selectedGroup}}">
+					<template id="groups" is="dom-repeat" items="{{groups}}">
+						<paper-item>{{item.name}}</paper-item>
+					</template>
+				</paper-menu>
+				<iron-collapse id="filterContainer" style="background-color: grey; color: white;" class="fit">
+					<paper-checkbox style="padding-right: 1em;" checked="{{showObsolete}}" on-change="refresh">Obsolete</paper-checkbox>
+					<paper-checkbox style="padding-right: 1em;" checked="{{showLinux}}" on-change="refresh">Linux</paper-checkbox>
+					<paper-checkbox style="padding-right: 1em;" checked="{{showOSX}}" on-change="refresh">OS X</paper-checkbox>
+					<paper-checkbox style="padding-right: 1em;" checked="{{showWin}}" on-change="refresh">Windows</paper-checkbox>
+					<detect-js os="{{os}}"></detect-js>
+				</iron-collapse>
+			</paper-header-panel>
+			<paper-header-panel main>
+				<paper-toolbar>
+					<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+					<div main-title>Android SDK Web Manager</div>
+					<paper-icon-button icon="shopping-cart" on-tap="toggleUrlDisplay"></paper-icon-button>
+					<span>{{urlList.length}}</span>
+				</paper-toolbar>
+				<div>
+					<div style="padding: 1em;">
+						<template is="dom-repeat" items="{{packageArray}}">
+							<div>
+								<paper-checkbox checked="{{item.selected}}" on-tap="listURLs">
+									<b>{{item.name}}<template is="dom-if" if="{{obsolete(item)}}"> (Obsolete)</template></b>
+									<br/>
+									<span><template is="dom-if" if="{{item['api-level']}}">API {{item.apiLevel}}</template> Rev. {{item.revision}}</span>
+								</paper-checkbox>
+							</div>
+						</template>
+					</div>
+
+					<iron-collapse id="urlContainer" style="background-color: grey; color: white;" class="fit">
+						<ul>
+							<template is="dom-repeat" items="{{urlList}}">
+								<!-- TODO allow removing -->
+								<li><a href="{{item}}" style="color: white;">{{item}}</a></li>
+							</template>
+						</ul>
+					</iron-collapse>
+				</div>
+			</paper-header-panel>
+		</paper-drawer-panel>
+
+	</template>
+	<script src="../js/papaparse.js"></script>
+	<script>
+		Polymer({
+			is: "android-sdk-manager",
+			properties: {
+				urlList: {
+					type: Array,
+					notify: true,
+					value: function() { return []; }
+				},
+				groups: {
+					type: Array,
+					notify: true,
+					value: function() { return []; }
+				},
+				selectedGroup: {
+					type: Number,
+					value: 0
+				},
+				packageArray: {
+					type: Array,
+					value: function() { return []; }
+				},
+				showObsolete: Boolean,
+				showLinux: Boolean,
+				showOSX: Boolean,
+				showWin: Boolean,
+				os: String
+			},
+			observers: [
+				"syncPackage(groups, selectedGroup)"
+			],
+			ready: function() {
+
+				/*
+				 * javascript - What is the list of possible values for navigator.platform as of today? - Stack Overflow
+				 * http://stackoverflow.com/a/19883965
+				 */
+				/*
+				 * How to detect my browser version and operating system using JavaScript? - Stack Overflow
+				 * http://stackoverflow.com/a/11219680
+				 */
+				this.showLinux = navigator.platform.indexOf("Linux") != -1;
+				this.showOSX = navigator.platform.indexOf("Mac") != -1;
+				this.showWin = navigator.platform.indexOf("Win") != -1;
+
+				var myElement = this;
+
+				// Parse local CSV file
+				Papa.parse("packages.csv", {
+					download: true,
+					header: true,
+					/*
+					 * support csv files ending with empty last line · Issue #150 · mholt/PapaParse
+					 * https://github.com/mholt/PapaParse/issues/150
+					 */
+					skipEmptyLines: true,
+					complete: function(results) {
+						console.log("Loaded Android SDK packages:", results);
+						myElement.packages = results;
+
+						myElement.refresh();
+
+						return;
+					}
+				});
+
+				return;
+			},
+			refresh: function() {
+
+				/*
+				 * api-level and group mapping - group name = Android {SDK Platform version} (API {api-level})
+				 */
+				var groups = {};
+				for (var i in this.packages.data) {
+					var p = this.packages.data[i];
+
+					if (!this.showObsolete && p.obsolete == "true") {
+						continue;
+					}
+					if (!(this.showLinux && p.linuxURL) &&
+							!(this.showOSX && p.macosxURL) &&
+							!(this.showWin && p.windowsURL)) {
+						continue;
+					}
+
+					if (typeof p.selected == "undefined") {
+						p.selected = false;
+					}
+
+					var n;
+					if (p.name == "Android SDK Tools" || 
+							p.name == "Android SDK Platform-tools" || 
+							p.name == "Android SDK Build-tools") {
+						n = "Tools";
+					} else if (p["api-level"] == "") {
+						n = "Extras";
+					} else {
+						n = "API " + p["api-level"];
+					}
+					var g = groups[n];
+					if (!g) {
+						g = {
+							packages: []
+						};
+						if (n == "Tools" || n == "Extras") {
+							g.name = n;
+						}
+						groups[n] = g;
+					}
+					g.packages.push(p);
+					if (p.name == "SDK Platform") {
+						g.name = "Android " + p.version + " (" + n + ")";
+						g["apiLevel"] = p["api-level"];
+					}
+				}
+				console.log("1");
+				console.log(groups);
+
+				groupArray = [];
+				var maxApiLevel = 0;
+				for (var i in groups) {
+					groupArray.push(groups[i]);
+					
+					var apiLevel = parseInt(groups[i]["apiLevel"]);
+					if (maxApiLevel < apiLevel) {
+						maxApiLevel = apiLevel;
+					}
+				}
+				
+				if (groups["Tools"]) {
+					groups["Tools"]["apiLevel"] = maxApiLevel + 1;
+					groups["Tools"].packages.sort(function(a, b) {
+						return parseInt(b.revision) - parseInt(a.revision);
+					});
+				}
+				if (groups["Extras"]) {
+					groups["Extras"]["apiLevel"] = 0;
+				}
+				groupArray.sort(function(a, b) {
+					return parseInt(b["apiLevel"]) - parseInt(a["apiLevel"]);
+				});
+
+				this.groups = groupArray;
+
+				console.log("2");
+				console.log(this.groups);
+				console.log(this.groups[0].name);
+
+				this.listURLs();
+						
+				return;
+			},
+			listURLs: function() {
+				// console.log(event);
+				// console.log(detail);
+				// console.log(sender);
+				
+				// console.log(this.packages);
+				
+				var urlList = [];
+				for (var i in this.packages.data) {
+					var p = this.packages.data[i];
+					if (p.selected) {
+						if (!this.showObsolete && p.obsolete == "true") {
+							continue;
+						}
+						if (this.showLinux && p.linuxURL) {
+							urlList.push(p.linuxURL);
+						}
+						if (this.showOSX && p.macosxURL) {
+							urlList.push(p.macosxURL);
+						}
+						if (this.showWin && p.windowsURL) {
+							urlList.push(p.windowsURL);
+						}
+					}
+				}
+				
+				console.log(urlList);
+				this.urlList = urlList;
+				
+				return;
+			},
+			toggleFilterDisplay: function(event, detail, sender) {
+			 // console.log("toggle");
+				this.$.filterContainer.toggle();
+			},
+			toggleUrlDisplay: function(event, detail, sender) {
+				this.$.urlContainer.toggle();
+			},
+			syncPackage: function(groups, selectedGroup) {
+				if (groups.length) {
+					this.packageArray = groups[selectedGroup].packages;
+				}
+			},
+			obsolete: function(item) {
+				if (item.obsolete == "true") {
+					return true;
+				}
+				return false;
+			}
+		});
+	</script>
+</dom-module>
