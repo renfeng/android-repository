@@ -23,6 +23,15 @@
 		.vertical {
 			@apply(--layout-vertical);
 		}
+
+		iron-collapse {
+			background-color: #999;
+			color: white;
+		}
+
+		#filterContainer paper-checkbox {
+			--paper-checkbox-label-color: white;
+		}
 	</style>
 	<template>
 		<paper-drawer-panel>
@@ -38,7 +47,7 @@
 						<paper-item>{{item.name}}</paper-item>
 					</template>
 				</paper-menu>
-				<iron-collapse id="filterContainer" style="background-color: grey; color: white;" class="fit">
+				<iron-collapse id="filterContainer" class="fit">
 					<paper-checkbox style="padding-right: 1em;" checked="{{showObsolete}}" on-change="refresh">Obsolete</paper-checkbox>
 					<paper-checkbox style="padding-right: 1em;" checked="{{showLinux}}" on-change="refresh">Linux</paper-checkbox>
 					<paper-checkbox style="padding-right: 1em;" checked="{{showOSX}}" on-change="refresh">OS X</paper-checkbox>
