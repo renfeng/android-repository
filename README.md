@@ -39,7 +39,7 @@ TODO test xsltproc on osx
 
 ## SDK Web Manager
 
-packages.html
+index.html
 
 ## Who's using it
 

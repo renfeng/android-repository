@@ -1,5 +1,6 @@
 <link rel="import" href="../components/iron-flex-layout/iron-flex-layout.html"/>
 <link rel="import" href="../components/iron-icons/iron-icons.html"/>
+<link rel="import" href="../components/iron-icon/iron-icon.html"/>
 <link rel="import" href="../components/iron-collapse/iron-collapse.html"/>
 <link rel="import" href="../components/paper-checkbox/paper-checkbox.html"/>
 <link rel="import" href="../components/paper-drawer-panel/paper-drawer-panel.html"/>
@@ -14,6 +15,10 @@
 	<style is="custom-style">
 		.fit {
 			@apply(--layout-fit);
+		}
+
+		.flex {
+			@apply(--layout-flex);
 		}
 
 		.horizontal {
@@ -61,6 +66,10 @@
 					<div main-title>Android SDK Web Manager</div>
 					<paper-icon-button icon="shopping-cart" on-tap="toggleUrlDisplay"></paper-icon-button>
 					<span>{{urlList.length}}</span>
+					<span class="flex"></span>
+					<a href="/studio" title="Download Android Studio and SDK Manager">
+						<iron-icon icon="android" style="color: white;"/>
+					</a>
 				</paper-toolbar>
 				<div>
 					<div style="padding: 1em;">
@@ -75,7 +84,7 @@
 						</template>
 					</div>
 
-					<iron-collapse id="urlContainer" style="background-color: grey; color: white;" class="fit">
+					<iron-collapse id="urlContainer" class="fit">
 						<ul>
 							<template is="dom-repeat" items="{{urlList}}">
 								<!-- TODO allow removing -->
