@@ -4,8 +4,10 @@
 <link rel="import" href="../components/iron-collapse/iron-collapse.html"/>
 <link rel="import" href="../components/paper-checkbox/paper-checkbox.html"/>
 <link rel="import" href="../components/paper-drawer-panel/paper-drawer-panel.html"/>
+<link rel="import" href="../components/paper-fab/paper-fab.html"/>
 <link rel="import" href="../components/paper-header-panel/paper-header-panel.html"/>
 <link rel="import" href="../components/paper-icon-button/paper-icon-button.html"/>
+<link rel="import" href="../components/paper-input/paper-textarea.html"/>
 <link rel="import" href="../components/paper-item/paper-item.html"/>
 <link rel="import" href="../components/paper-menu/paper-menu.html"/>
 <link rel="import" href="../components/paper-toolbar/paper-toolbar.html"/>
@@ -37,6 +39,10 @@
 		#filterContainer paper-checkbox {
 			--paper-checkbox-label-color: white;
 		}
+
+		#urlContainer a, paper-toolbar a {
+			color: white;
+		}
 	</style>
 	<template>
 		<paper-drawer-panel>
@@ -53,10 +59,10 @@
 					</template>
 				</paper-menu>
 				<iron-collapse id="filterContainer" class="fit">
-					<paper-checkbox style="padding-right: 1em;" checked="{{showObsolete}}" on-change="refresh">Obsolete</paper-checkbox>
-					<paper-checkbox style="padding-right: 1em;" checked="{{showLinux}}" on-change="refresh">Linux</paper-checkbox>
-					<paper-checkbox style="padding-right: 1em;" checked="{{showOSX}}" on-change="refresh">OS X</paper-checkbox>
-					<paper-checkbox style="padding-right: 1em;" checked="{{showWin}}" on-change="refresh">Windows</paper-checkbox>
+					<paper-checkbox checked="{{showObsolete}}" on-change="refresh">Obsolete</paper-checkbox>
+					<paper-checkbox checked="{{showLinux}}" on-change="refresh">Linux</paper-checkbox>
+					<paper-checkbox checked="{{showOSX}}" on-change="refresh">OS X</paper-checkbox>
+					<paper-checkbox checked="{{showWin}}" on-change="refresh">Windows</paper-checkbox>
 					<detect-js os="{{os}}"></detect-js>
 				</iron-collapse>
 			</paper-header-panel>
@@ -68,35 +74,40 @@
 					<span>{{urlList.length}}</span>
 					<span class="flex"></span>
 					<a href="/studio" title="Download Android Studio and SDK Manager">
-						<iron-icon icon="android" style="color: white;"/>
+						<iron-icon icon="android"/>
 					</a>
 				</paper-toolbar>
 				<div>
-					<div style="padding: 1em;">
-						<template is="dom-repeat" items="{{packageArray}}">
-							<div>
-								<paper-checkbox checked="{{item.selected}}" on-tap="listURLs">
-									<b>{{item.name}}<template is="dom-if" if="{{obsolete(item)}}"> (Obsolete)</template></b>
-									<br/>
-									<span><template is="dom-if" if="{{item['api-level']}}">API {{item.apiLevel}}</template> Rev. {{item.revision}}</span>
-								</paper-checkbox>
-							</div>
-						</template>
-					</div>
+					<template is="dom-repeat" items="{{packageArray}}">
+						<div>
+							<paper-checkbox checked="{{item.selected}}" on-tap="listURLs">
+								<b>{{item.name}}<template is="dom-if" if="{{obsolete(item)}}"> (Obsolete)</template></b>
+								<br/>
+								<span><template is="dom-if" if="{{item['api-level']}}">API {{item.apiLevel}}</template> Rev. {{item.revision}}</span>
+							</paper-checkbox>
+						</div>
+					</template>
 
 					<iron-collapse id="urlContainer" class="fit">
+						<p style="padding: 0 1em;">Tip: select packages, copy the links to a web accelerator, and enjoy the speed up in downloading.</p>
 						<ul>
 							<template is="dom-repeat" items="{{urlList}}">
 								<!-- TODO allow removing -->
-								<li><a href="{{item}}" style="color: white;">{{item}}</a></li>
+								<li><a href="{{item}}">{{item}}</a></li>
 							</template>
 						</ul>
+						<paper-textarea id="urlList" label="url list" readonly value="{{join(urlList)}}"
+										style="position: absolute; left: -100%; top: -100%;"></paper-textarea>
+						<paper-fab class="copy" icon="content-copy" data-clipboard-target="#urlList #textarea"
+								   style="background-color: #90c653; position: absolute; right: 1em;"
+								   hidden$="{{hideCopy(urlList)}}" >Copy URLs</paper-fab>
 					</iron-collapse>
 				</div>
 			</paper-header-panel>
 		</paper-drawer-panel>
 
 	</template>
+	<script src="../components/clipboard/dist/clipboard.min.js"></script>
 	<script src="../js/papaparse.js"></script>
 	<script>
 		Polymer({
@@ -130,6 +141,8 @@
 				"syncPackage(groups, selectedGroup)"
 			],
 			ready: function() {
+
+				new Clipboard(".copy");
 
 				/*
 				 * javascript - What is the list of possible values for navigator.platform as of today? - Stack Overflow
@@ -299,6 +312,12 @@
 					return true;
 				}
 				return false;
+			},
+			join: function(urlList) {
+				return urlList.join("\n");
+			},
+			hideCopy: function(urlList) {
+				return urlList.length == 0;
 			}
 		});
 	</script>
