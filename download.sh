@@ -119,7 +119,7 @@ mkdir -p orig/studio
 wget http://developer.android.com/studio/index.html -O orig/studio/index.html.tmp
 
 # download android studio
-grep -o 'https://dl.google.com/dl/android/studio/[^"]*' orig/studio/index.html \
+grep -o 'https://dl.google.com/dl/android/studio/[^"]*' orig/studio/index.html.tmp \
             | grep -v [.]exe > dl/android/studio/download.sh.tmp
 cat dl/android/studio/download.sh.tmp \
   | sed -E 's/https:(\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+)/wget -N -P \2 -c http:\1/g' \
@@ -142,6 +142,10 @@ cat orig/studio/index.html.tmp \
   | sed -n '/<section id="downloads"/,$p' \
   | sed '/section>/q' \
   > orig/studio/index.html
+cat orig/studio/index.html.tmp \
+  | sed -n '/<section id="Requirements"/,$p' \
+  | sed '/section>/q' \
+  >> orig/studio/index.html
 rm orig/studio/index.html.tmp
 
 mkdir -p studio
