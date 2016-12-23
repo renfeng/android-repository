@@ -38,16 +38,18 @@ TODO test xsltproc on osx
 
 ## SDK Web Manager
 
-Copy the following to your web root directory. (Tip: index.html can be renamed.)
+In your web root directory, (Tip: backup index.html) run </path/to/android-repository/>setup-sdk-web-manager.sh
 
+It will do the following for you.
+
+Copy over three files and one directory.
  * index.html
  * .bowerrc
  * bower.json
  * elements/
 
-bower install -F -S
-
-See https://bower.io/ for how to install bower.
+Install bower (requires nodejs.) See https://nodejs.org/ for how to install nodejs.
+ * bower i -F -S
 
 ## Who's using it
 
