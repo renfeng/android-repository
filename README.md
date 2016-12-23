@@ -31,7 +31,6 @@ TODO test xsltproc on osx
 ## Cygwin
 
  * wget
-
  * xslt
 
  The two packages you must have are libxml2 and libxslt, both available under the Libs category.
@@ -39,7 +38,16 @@ TODO test xsltproc on osx
 
 ## SDK Web Manager
 
-index.html
+Copy the following to your web root directory. (Tip: index.html can be renamed.)
+
+ * index.html
+ * .bowerrc
+ * bower.json
+ * elements/
+
+bower install -F -S
+
+See https://bower.io/ for how to install bower.
 
 ## Who's using it
 
