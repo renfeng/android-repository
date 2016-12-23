@@ -116,7 +116,7 @@ grep -rn '<sdk:url>' * --include=*.xml --exclude-dir=orig \
     | grep http
 
 mkdir -p orig/studio
-wget http://developer.android.com/studio/index.html -O orig/studio/index.html.tmp
+wget --no-check-certificate http://developer.android.com/studio/index.html -O orig/studio/index.html.tmp
 
 # download android studio
 grep -o 'https://dl.google.com/dl/android/studio/[^"]*' orig/studio/index.html.tmp \
