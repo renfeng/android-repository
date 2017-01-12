@@ -6,7 +6,7 @@ It's ideal for a classroom, [Study Jams](http://developerstudyjams.com/), and [C
 
 Tested on 
 
-* Linux Mint Maya(13, Ubuntu 10.04)/Rebecca(17.1, Ubuntu 14.04),
+* Linux Mint Maya (13, Ubuntu 10.04)/Rebecca (17.1, Ubuntu 14.04),
 * ~~OS X Yosemite (10.10.4)~~
 * Cygwin on Windows 7 64bit
 
@@ -23,10 +23,11 @@ sudo apt-get install xsltproc
 ### OS X
 
 It's recommended to use homebrew to install wget.
-
 * http://brew.sh/
 * http://www.merenbach.com/software/wget/
-* http://wget.addictivecode.org/FrequentlyAskedQuestions?action=show&redirect=Faq#download
+
+Ref.
+* http://wget.addictivecode.org/Faq.html#download
 * http://www.gnu.org/software/wget/
 * http://google.com#q=wget
 
