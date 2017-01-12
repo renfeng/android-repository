@@ -7,7 +7,7 @@ It's ideal for a classroom, [Study Jams](http://developerstudyjams.com/), and [C
 Tested on 
 
 * Linux Mint Maya(13, Ubuntu 10.04)/Rebecca(17.1, Ubuntu 14.04),
-~~* OS X Yosemite (10.10.4)~~
+* ~~OS X Yosemite (10.10.4)~~
 * Cygwin on Windows 7 64bit
 
 ## Prerequisites
