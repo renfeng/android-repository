@@ -46,21 +46,18 @@ https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCD
 
 ## (optional) SDK Web Manager
 
-It's a single page app for exploring the packages downloaded. To make it work, read on.
+It's a single page app for exploring the packages downloaded. To make it work,
+ 1. In your web root directory, (backup your index.html, and) run
+ 
+ `</path/to/android-repository/>setup-sdk-web-manager.sh`
 
-In your web root directory, (Tip: backup index.html) run </path/to/android-repository/>setup-sdk-web-manager.sh
-
-It will do the following for you.
-
-Copy over three files and one directory.
- * index.html
- * .bowerrc
- * bower.json
- * elements/
-
-Install bower (requires nodejs, https://nodejs.org/), and run the following command line.
-
- * bower i -F -S
+ It will copy over three files and one directory.
+  * index.html
+  * .bowerrc
+  * bower.json
+  * elements/
+ 2. Install bower (requires nodejs, https://nodejs.org/), and run the following command line
+ 3. bower i -F -S
 
 ## Who's using it
 
