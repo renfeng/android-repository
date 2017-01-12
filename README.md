@@ -66,4 +66,4 @@ Install bower (requires nodejs, https://nodejs.org/), and run the following comm
 
 At StudyJams and other events hosted by [GDG Suzhou](https://plus.google.com/100160462017014431473)
 
-(To support this project, please let me know of your mirror. mailto:renfeng.cn@gmail.com?subject=a+mirror+built+with+android-repository. Thanks!)
+(To support this project, please [tell me about your mirror](mailto:renfeng.cn@gmail.com?subject=a+mirror+built+with+android-repository), and it'd be great if you wanted your mirror to be listed [here](https://github.com/renfeng/android-repository)!)
