@@ -7,7 +7,7 @@
 # https://dl-ssl.google.com/android/repository/extras/intel/addon.xml
 # https://dl-ssl.google.com/android/repository/addon-6.xml
 # https://dl-ssl.google.com/android/repository/sys-img/android-tv/sys-img.xml
-# https://dl-ssl.google.com/android/repository/repository-11.xml
+# https://dl-ssl.google.com/android/repository/repository-12.xml
 # https://dl-ssl.google.com/android/repository/sys-img/android-wear/sys-img.xml
 # https://dl-ssl.google.com/android/repository/addon.xml
 # https://dl-ssl.google.com/android/repository/sys-img/x86/addon-x86.xml
@@ -40,7 +40,7 @@ wget -N http://dl-ssl.google.com/android/repository/addon-6.xml \
                          -P orig/android/repository
 wget -N http://dl-ssl.google.com/android/repository/sys-img/android-tv/sys-img.xml \
                          -P orig/android/repository/sys-img/android-tv
-wget -N http://dl-ssl.google.com/android/repository/repository-11.xml \
+wget -N http://dl-ssl.google.com/android/repository/repository-12.xml \
                          -P orig/android/repository
 wget -N http://dl-ssl.google.com/android/repository/sys-img/android-wear/sys-img.xml \
                          -P orig/android/repository/sys-img/android-wear
