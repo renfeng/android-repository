@@ -1,22 +1,26 @@
 # android-repository
 
-This is a set of scripts for creating a mirror of Android Repository where SDK Manager downloads SDK packages.
+This is a set of scripts for creating a mirror of Android Repository for Standalone SDK Manager to download SDK packages from.
+
+It's ideal for a classroom, [Study Jams](http://developerstudyjams.com/), and [Code labs](https://codelabs.developers.google.com/?cat=Android).
 
 Tested on 
 
 * Linux Mint Maya(13, Ubuntu 10.04)/Rebecca(17.1, Ubuntu 14.04),
-* OS X Yosemite (10.10.4)
+~~* OS X Yosemite (10.10.4)~~
 * Cygwin on Windows 7 64bit
 
-You'll need at least 102GB free storage on your disk.
+## Prerequisites
 
-## Linux
+You'll need a lot of free storage on your disk, about 150GB as of 2017-01-12.
+
+### Linux
 
 sudo apt-get install xsltproc
 
 (TODO test) yum install xsltproc
 
-## OS X
+### OS X
 
 It's recommended to use homebrew to install wget.
 
@@ -28,7 +32,7 @@ It's recommended to use homebrew to install wget.
 
 TODO test xsltproc on osx
 
-## Cygwin
+### Cygwin
 
  * wget
  * xslt
@@ -36,7 +40,13 @@ TODO test xsltproc on osx
  The two packages you must have are libxml2 and libxslt, both available under the Libs category.
  Ref. http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
 
-## SDK Web Manager
+## Setup your mirror and Android Standalone SDK Manager
+
+https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
+
+## (optional) SDK Web Manager
+
+It's a single page app for exploring the packages downloaded. To make it work, read on.
 
 In your web root directory, (Tip: backup index.html) run </path/to/android-repository/>setup-sdk-web-manager.sh
 
@@ -48,25 +58,12 @@ Copy over three files and one directory.
  * bower.json
  * elements/
 
-Install bower (requires nodejs.) See https://nodejs.org/ for how to install nodejs.
+Install bower (requires nodejs, https://nodejs.org/), and run the following command line.
+
  * bower i -F -S
 
 ## Who's using it
 
-http://studyjams.dushu.hu, and also on LAN at events hosted by [GDG Suzhou](https://plus.google.com/100160462017014431473/)
+At StudyJams and other events hosted by [GDG Suzhou](https://plus.google.com/100160462017014431473)
 
-(You can add your mirror created with the scripts, here)
-
-## Why should you need this?
-
-It'll help you to distribute Android SDK packages in a classroom. Ideally, for [Android Fundamentals Study Jams](http://www.googledevelopersstudyjams.com/)
-
-For more information, please follow the link in the next section.
-
-## How to setup your mirror/server, and client, i.e. Android SDK Manager
-
-https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
-
-## This is GIT
-
-Don't forget this is git - you can do whatever to make it better!
+(To support this project, please let me know of your mirror. mailto:renfeng.cn@gmail.com?subject=a+mirror+built+with+android-repository. Thanks!)
