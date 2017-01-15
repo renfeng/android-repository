@@ -1,6 +1,6 @@
 # android-repository
 
-This is a set of scripts for creating a mirror of Android Repository for Standalone SDK Manager to download SDK packages from.
+This is a set of scripts for creating a mirror of Android Repository for Android SDK Manager (both standalone and Android Studio built-in) to download SDK packages from.
 
 It's ideal for a classroom, [Study Jams](http://developerstudyjams.com/), and [Code labs](https://codelabs.developers.google.com/?cat=Android).
 
@@ -44,6 +44,23 @@ TODO test xsltproc on osx
 ## Setup your mirror and Android Standalone SDK Manager
 
 https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
+
+## Setup your Android Studio Built-in SDK Manager
+
+Settings >> Appearance & Behavior >> System Settings >> HTTP Proxy
+ * Manual proxy configuration
+ * HTTP
+ * Host name: studyjams.dushu.hu
+ * Port number: 80
+ * Check connection
+
+Settings >> Appearance & Behavior >> System Settings >> Android SDK >> SDK Update Sites
+ * Add sites with http. See https://docs.google.com/spreadsheets/d/1dTX0mhnEOVoqMebWnGllWM-5AIjgJ-oLuFsjmDd0mh4/edit#gid=822947052
+ * Enable "Force https://... sources to be fetched using http://..."
+
+### Known problem
+
+[Missing SDK tools: CMake, LLDB, NDK](https://github.com/renfeng/android-repository/issues/9)
 
 ## (optional) SDK Web Manager
 
