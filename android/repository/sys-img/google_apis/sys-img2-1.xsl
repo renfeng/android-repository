@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-				xmlns:sdk="http://schemas.android.com/sdk/android/sys-img/3">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-	<!-- https://dl-ssl.google.com/android/repository/sys-img/google_apis/sys-img.xml -->
+	<!-- https://dl-ssl.google.com/android/repository/sys-img/google_apis/sys-img2-1.xml -->
 
 	<xsl:strip-space elements="*" />
 	<xsl:output indent="yes" method="text" />
 
-	<xsl:template match="/sdk:*">
-		<xsl:for-each select="sdk:*[not(sdk:obsolete)]/sdk:archives/sdk:archive/sdk:url">
+	<xsl:template match="/*">
+		<xsl:for-each select="*[not(@obsolete) or @obsolete!='true']/archives/archive/complete/url">
 
 			<xsl:variable name="url" select="text()"></xsl:variable>
 

@@ -1,38 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-				xmlns:sdk="http://schemas.android.com/sdk/android/sys-img/3">
+				xmlns:sdk="http://schemas.android.com/sdk/android/addon/7">
 
-	<!-- https://dl-ssl.google.com/android/repository/sys-img/android-wear/sys-img.xml -->
+	<!-- https://dl-ssl.google.com/android/repository/extra/intel/addon.xml -->
 
 	<xsl:strip-space elements="*" />
 	<xsl:output indent="yes" method="text" />
 
-	<xsl:template match="/sdk:sdk-sys-img">
+	<xsl:template match="/sdk:sdk-addon">
 		<!-- <xsl:text>name,version,api-level,revision,description,obsolete,windowsSize,windowsSHA1,windowsURL,macosxSize,macosxSHA1,macosxURL,linuxSize,linuxSHA1,linuxURL&#xa;</xsl:text> -->
-		<xsl:for-each select="sdk:system-image">
+		<xsl:for-each select="sdk:add-on">
 			<!-- name -->
-			<xsl:choose>
-				<xsl:when test="sdk:abi/text() = 'x86'">
-					<xsl:variable name="name"
-						select="'Android Wear Intel x86 Atom System Image'" />
+			<xsl:variable name="name" select="sdk:name-display/text()" />
 
-					<xsl:value-of select="$name" />
+			<xsl:value-of select="$name" />
 
-					<xsl:call-template name="package">
-						<xsl:with-param name="name" select="$name" />
-					</xsl:call-template>
-				</xsl:when>
-				<xsl:when test="sdk:abi/text() = 'armeabi-v7a'">
-					<xsl:variable name="name"
-						select="'Android Wear ARM EABI v7a System Image'" />
-
-					<xsl:value-of select="$name" />
-
-					<xsl:call-template name="package">
-						<xsl:with-param name="name" select="$name" />
-					</xsl:call-template>
-				</xsl:when>
-			</xsl:choose>
+			<xsl:call-template name="package">
+				<xsl:with-param name="name" select="$name" />
+			</xsl:call-template>
 
 			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->
 			<xsl:text>&#xa;</xsl:text>
@@ -52,11 +37,11 @@
 				<xsl:value-of select="concat(',', $url)" />
 			</xsl:when>
 			<xsl:when test="starts-with($url, '/')">
-				<xsl:value-of select="concat(',https://dl-ssl.google.com', $url)" />
+				<xsl:value-of select="concat(',https://dl.google.com', $url)" />
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of
-					select="concat(',https://dl-ssl.google.com/android/repository/sys-img/android-wear/', $url)" />
+					select="concat(',https://dl.google.com/glass/xe22/', $url)" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

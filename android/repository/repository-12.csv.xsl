@@ -1,17 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:sdk="http://schemas.android.com/sdk/android/addon/5">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+				xmlns:sdk="http://schemas.android.com/sdk/android/repository/12">
 
-	<!-- https://dl-ssl.google.com/android/repository/extra/intel/addon.xml -->
+	<!-- https://dl-ssl.google.com/android/repository/repository-12.xml -->
 
 	<xsl:strip-space elements="*" />
 	<xsl:output indent="yes" method="text" />
 
-	<xsl:template match="/sdk:sdk-addon">
+	<xsl:template match="/sdk:sdk-repository">
 		<!-- <xsl:text>name,version,api-level,revision,description,obsolete,windowsSize,windowsSHA1,windowsURL,macosxSize,macosxSHA1,macosxURL,linuxSize,linuxSHA1,linuxURL&#xa;</xsl:text> -->
-		<xsl:for-each select="sdk:add-on">
+		<xsl:for-each select="sdk:platform">
 			<!-- name -->
-			<xsl:variable name="name" select="sdk:name-display/text()" />
+			<xsl:variable name="name" select="'SDK Platform'" />
+
+			<xsl:value-of select="$name" />
+
+			<xsl:call-template name="package">
+				<xsl:with-param name="name" select="$name" />
+			</xsl:call-template>
+
+			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->
+			<xsl:text>&#xa;</xsl:text>
+
+		</xsl:for-each>
+		<xsl:for-each select="sdk:sample">
+			<!-- name -->
+			<xsl:variable name="name" select="'Samples for SDK'" />
+
+			<xsl:value-of select="$name" />
+
+			<xsl:call-template name="package">
+				<xsl:with-param name="name" select="$name" />
+			</xsl:call-template>
+
+			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->
+			<xsl:text>&#xa;</xsl:text>
+
+		</xsl:for-each>
+		<xsl:for-each select="sdk:platform-tool">
+			<!-- name -->
+			<xsl:text>Android SDK Platform-tools</xsl:text>
+
+			<xsl:call-template name="package">
+				<xsl:with-param name="name" select="'Platform Tools'" />
+			</xsl:call-template>
+
+			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->
+			<xsl:text>&#xa;</xsl:text>
+
+		</xsl:for-each>
+		<xsl:for-each select="sdk:build-tool">
+			<!-- name -->
+			<xsl:variable name="name" select="'Android SDK Build-tools'" />
+
+			<xsl:value-of select="$name" />
+
+			<xsl:call-template name="package">
+				<xsl:with-param name="name" select="$name" />
+			</xsl:call-template>
+
+			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->
+			<xsl:text>&#xa;</xsl:text>
+
+		</xsl:for-each>
+		<xsl:for-each select="sdk:tool">
+			<!-- name -->
+			<xsl:text>Android SDK Tools</xsl:text>
+
+			<xsl:call-template name="package">
+				<xsl:with-param name="name" select="'Tools'" />
+			</xsl:call-template>
+
+			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->
+			<xsl:text>&#xa;</xsl:text>
+
+		</xsl:for-each>
+		<xsl:for-each select="sdk:doc">
+			<!-- name -->
+			<xsl:variable name="name" select="'Documentation for Android SDK'" />
+
+			<xsl:value-of select="$name" />
+
+			<xsl:call-template name="package">
+				<xsl:with-param name="name" select="$name" />
+			</xsl:call-template>
+
+			<!-- http://stackoverflow.com/questions/723226/producing-a-new-line-in-xslt -->
+			<xsl:text>&#xa;</xsl:text>
+
+		</xsl:for-each>
+		<xsl:for-each select="sdk:source">
+			<!-- name -->
+			<xsl:variable name="name" select="'Sources for Android SDK'" />
 
 			<xsl:value-of select="$name" />
 
@@ -37,11 +117,11 @@
 				<xsl:value-of select="concat(',', $url)" />
 			</xsl:when>
 			<xsl:when test="starts-with($url, '/')">
-				<xsl:value-of select="concat(',https://dl.google.com', $url)" />
+				<xsl:value-of select="concat(',https://dl-ssl.google.com', $url)" />
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of
-					select="concat(',https://dl.google.com/glass/xe22/', $url)" />
+					select="concat(',https://dl-ssl.google.com/android/repository/', $url)" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

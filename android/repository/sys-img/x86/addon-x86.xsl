@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:sdk="http://schemas.android.com/sdk/android/addon/7">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+				xmlns:sdk="http://schemas.android.com/sdk/android/addon/7">
 
 	<!-- https://dl-ssl.google.com/android/repository/sys-img/x86/addon-x86.xml -->
 
@@ -13,30 +13,19 @@
 			<xsl:variable name="url" select="text()"></xsl:variable>
 
 			<xsl:choose>
-				<xsl:when
-					test="starts-with($url, 'https://dl-ssl.google.com/android/repository/sys-img/x86/')">
-					<xsl:value-of select="$url" />
+				<xsl:when test="starts-with($url, 'https://dl-ssl.google.com/android/repository/sys-img/x86/')">
+					<xsl:value-of select="$url"/>
 				</xsl:when>
-				<xsl:when
-					test="starts-with($url, 'https://')">
-					<!-- ignores -->
-				</xsl:when>
-				<xsl:when
-					test="starts-with($url, 'http://')">
-					<!-- ignores -->
-				</xsl:when>
-				<xsl:when
-					test="starts-with($url, '/android/repository/sys-img/x86/')">
+				<xsl:when test="starts-with($url, 'https://')"><!-- ignores --></xsl:when>
+				<xsl:when test="starts-with($url, 'http://')"><!-- ignores --></xsl:when>
+				<xsl:when test="starts-with($url, '/android/repository/sys-img/x86/')">
 					<xsl:text>https://dl-ssl.google.com</xsl:text>
-					<xsl:value-of select="$url" />
+					<xsl:value-of select="$url"/>
 				</xsl:when>
-				<xsl:when
-					test="starts-with($url, '/')">
-					<!-- ignores -->
-				</xsl:when>
+				<xsl:when test="starts-with($url, '/')"><!-- ignores --></xsl:when>
 				<xsl:otherwise>
 					<xsl:text>https://dl-ssl.google.com/android/repository/sys-img/x86/</xsl:text>
-					<xsl:value-of select="$url" />
+					<xsl:value-of select="$url"/>
 				</xsl:otherwise>
 			</xsl:choose>
 

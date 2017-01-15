@@ -1,109 +1,73 @@
 #!/bin/bash
 
-# the following script downloads 16GB as of Feb 8, 2016
-
-# automate the update of studio version, i.e. 1.0.1 at the moment
-# TODO clean obsolete sdk manager and studio
-
 # no need to mirror gradle, https://services.gradle.org/distributions/gradle-2.1-bin.zip
 # it doesn't download when internet is unavailable, and android studio works just fine
 
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
 
-${BASEDIR}/sync-index.sh
+# The list of xml files was extracted from Android SDK Manager log (sample: sdk-mgr.log)
 
+# The following two are the meta indices most up to date, and supported, as of 2017-01-15
+# http://dl.google.com/android/repository/addons_list-2.xml
+# http://dl.google.com/android/repository/repository-11.xml
+
+# Everything else that follows
+# http://dl.google.com/android/repository/addon-6.xml
+# http://dl.google.com/android/repository/addon.xml
+# http://dl.google.com/android/repository/extras/intel/addon.xml
+# http://dl.google.com/android/repository/glass/addon.xml
+# http://dl.google.com/android/repository/sys-img/android-tv/sys-img.xml
+# http://dl.google.com/android/repository/sys-img/android-wear/sys-img.xml
+# http://dl.google.com/android/repository/sys-img/android/sys-img.xml
+# http://dl.google.com/android/repository/sys-img/google_apis/sys-img.xml
+# http://dl.google.com/android/repository/sys-img/x86/addon-x86.xml
+
+# The list will be saved by Android SDK Manager, and retrievable with the following command line
+# http://www.gnu.org/savannah-checkouts/gnu/grep/manual/grep.html
+#grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cfg | sed 's/\\//g'
+
+sites=(
+    "android/repository/repository-11"
+    "android/repository/addon-6"
+    "android/repository/addon"
+    "android/repository/extras/intel/addon"
+    "android/repository/glass/addon"
+    "android/repository/sys-img/android-tv/sys-img"
+    "android/repository/sys-img/android-wear/sys-img"
+    "android/repository/sys-img/android/sys-img"
+    "android/repository/sys-img/google_apis/sys-img"
+    "android/repository/sys-img/x86/addon-x86"
+)
+
+echo synchronizing indices
+# http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
+# http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
+for site in ${sites[@]}; do
+    wget -N http://dl.google.com/${site}.xml -P orig/${site%/*}
+done
+
+echo downloading packages
 # http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
-xsltproc ${BASEDIR}/android/repository/extras/intel/addon.xsl \
-               orig/android/repository/extras/intel/addon.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository/extras/intel -c -i -
-xsltproc ${BASEDIR}/android/repository/addon-6.xsl \
-               orig/android/repository/addon-6.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository -c -i -
-xsltproc ${BASEDIR}/android/repository/sys-img/android-tv/sys-img.xsl \
-               orig/android/repository/sys-img/android-tv/sys-img.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository/sys-img/android-tv -c -i -
-xsltproc ${BASEDIR}/android/repository/repository-11.xsl \
-               orig/android/repository/repository-11.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository -c -i -
-xsltproc ${BASEDIR}/android/repository/sys-img/android-wear/sys-img.xsl \
-               orig/android/repository/sys-img/android-wear/sys-img.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository/sys-img/android-wear -c -i -
-xsltproc ${BASEDIR}/android/repository/addon.xsl \
-               orig/android/repository/addon.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository -c -i -
-xsltproc ${BASEDIR}/android/repository/addon.admob.xsl \
-               orig/android/repository/addon.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P googleadmobadssdk -c -i -
-xsltproc ${BASEDIR}/android/repository/addon.analytics.xsl \
-               orig/android/repository/addon.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P gaformobileapps -c -i -
-xsltproc ${BASEDIR}/android/repository/sys-img/x86/addon-x86.xsl \
-               orig/android/repository/sys-img/x86/addon-x86.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository/sys-img/x86 -c -i -
-xsltproc ${BASEDIR}/android/repository/sys-img/google_apis/sys-img.xsl \
-               orig/android/repository/sys-img/google_apis/sys-img.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository/sys-img/google_apis -c -i -
-xsltproc ${BASEDIR}/android/repository/sys-img/android/sys-img.xsl \
-               orig/android/repository/sys-img/android/sys-img.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P android/repository/sys-img/android -c -i -
-xsltproc ${BASEDIR}/glass/gdk/addon.xe22.xsl \
-               orig/glass/gdk/addon.xml \
-       | sed 's/https:/http:/g' \
-       | wget -N -P glass/xe22 -c -i -
+for site in ${sites[@]}; do
+    xsltproc ${BASEDIR}/${site}.xsl orig/${site}.xml | sed 's/https:/http:/g' | wget -N -P ${site%/*} -c -i -
+done
 
-# make urls relative and local
-cat orig/android/repository/addons_list-2.xml \
-       | sed 's/https:\/\/dl-ssl.google.com/http:\/\/studyjams.dushu.hu/g' \
-       > android/repository/addons_list-2.xml
-cat orig/android/repository/extras/intel/addon.xml \
-       | sed 's/https:\/\/dl.google.com//g' \
-       > android/repository/extras/intel/addon.xml
-cat orig/android/repository/addon-6.xml \
-       | sed 's/https:\/\/dl.google.com//g' \
-       > android/repository/addon-6.xml
-cat orig/android/repository/sys-img/android-tv/sys-img.xml \
-       | sed 's/https:\/\/dl.google.com//g' \
-       > android/repository/sys-img/android-tv/sys-img.xml
-cat orig/android/repository/repository-11.xml \
-       | sed 's/https:\/\/dl.google.com/http:\/\/studyjams.dushu.hu/g' \
-       > android/repository/repository-11.xml
-cat orig/android/repository/sys-img/android-wear/sys-img.xml \
-       | sed 's/https:\/\/dl.google.com//g' \
-       > android/repository/sys-img/android-wear/sys-img.xml
-cat orig/android/repository/addon.xml \
-       | sed 's/https:\/\/dl.google.com/http:\/\/studyjams.dushu.hu/g' \
-       | sed 's/https:\/\/dl.google.com/http:\/\/studyjams.dushu.hu/g' \
-       > android/repository/addon.xml
-cat orig/android/repository/sys-img/x86/addon-x86.xml \
-       | sed 's/https:\/\/dl.google.com//g' \
-       > android/repository/sys-img/x86/addon-x86.xml
-cat orig/android/repository/sys-img/google_apis/sys-img.xml \
-       | sed 's/https:\/\/dl.google.com//g' \
-       > android/repository/sys-img/google_apis/sys-img.xml
-cat orig/android/repository/sys-img/android/sys-img.xml \
-       | sed 's/https:\/\/dl.google.com/http:\/\/studyjams.dushu.hu/g' \
-       > android/repository/sys-img/android/sys-img.xml
-# glass should be treated as a root path
-cat orig/glass/gdk/addon.xml \
-       | sed 's/https:\/\/dl.google.com/http:\/\/studyjams.dushu.hu/g' \
-       > glass/gdk/addon.xml
+echo localizing indices
+for site in ${sites[@]}; do
+    mkdir -p ${site%/*}
+    cat orig/${site}.xml | sed 's/https:\/\/dl.google.com//g' > ${site}.xml
+done
 
-# sdk web manager (generates packages.csv)
-${BASEDIR}/manage.sh
+echo generating sdk web manager data
+echo "name,version,api-level,revision,description,obsolete,windowsSize,windowsSHA1,windowsURL,macosxSize,macosxSHA1,macosxURL,linuxSize,linuxSHA1,linuxURL" \
+    > packages.csv.tmp
+for site in ${sites[@]}; do
+    xsltproc ${BASEDIR}/${site}.csv.xsl orig/${site}.xml >> packages.csv.tmp
+done
+mv packages.csv.tmp packages.csv
 
-# clean obsolete sdk packages (requires packages.csv)
+echo removing obsolete sdk packages
 # TODO grep -P is not supported by OS X
 grep true packages.csv \
     | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+' \
@@ -111,60 +75,13 @@ grep true packages.csv \
     > clean-obsolete.sh
 sh clean-obsolete.sh
 
-# verify (list urls not localized)
-grep -rn '<sdk:url>' * --include=*.xml --exclude-dir=orig \
-    | grep http
+echo verifying
+grep -rn '<sdk:url>' * --include=*.xml --exclude-dir=orig | grep http
 
-mkdir -p orig/studio
-wget --no-check-certificate http://developer.android.com/studio/index.html -O orig/studio/index.html.tmp
+echo studio and sdk tools
+sh ${BASEDIR}/studio.sh
 
-# download android studio
-grep -o 'https://dl.google.com/dl/android/studio/[^"]*' orig/studio/index.html.tmp \
-            | grep -v [.]exe > dl/android/studio/download.sh.tmp
-cat dl/android/studio/download.sh.tmp \
-  | sed -E 's/https:(\/\/dl.google.com\/(dl\/android\/studio\/[^\/]+\/[^\/]+)\/.+)/wget -N -P \2 -c http:\1/g' \
-  > dl/android/studio/download.sh
-rm dl/android/studio/download.sh.tmp
-sh dl/android/studio/download.sh
-
-# download sdk manager
-grep -o '//dl.google.com/android/[^"]*' orig/studio/index.html \
-    | sed -E 's/(.*)/https:\1/g' \
-    | grep -v [.]exe \
-    | wget -N -P android -c -i -
-
-# generate download page
-# sed remove lines until
-# http://www.linuxquestions.org/questions/linux-newbie-8/how-to-use-sed-to-delete-all-lines-before-the-first-match-of-a-pattern-802069/
-# sed remove lines after
-# http://stackoverflow.com/questions/5227295/how-do-i-delete-all-lines-in-a-file-starting-from-after-a-matching-line
-cat orig/studio/index.html.tmp \
-  | sed -n '/<section id="downloads"/,$p' \
-  | sed '/section>/q' \
-  > orig/studio/index.html
-cat orig/studio/index.html.tmp \
-  | sed -n '/<section id="Requirements"/,$p' \
-  | sed '/section>/q' \
-  >> orig/studio/index.html
-rm orig/studio/index.html.tmp
-
-mkdir -p studio
-cat ${BASEDIR}/studio/template.html \
-             | sed '/<!-- insert -->/q' \
-             > studio/index.html
-cat orig/studio/index.html \
-      | sed 's/https:\/\/dl.google.com//g' \
-      | sed 's/http:\/\/dl.google.com//g' \
-      | sed 's/onclick="return onDownload(this)"/target="_blank"/g' \
-      >> studio/index.html
-cat ${BASEDIR}/studio/template.html \
-            | sed -n '/<!-- insert -->/,$p' \
-            >> studio/index.html
-sed -i 's/\/\/dl.google.com//g' studio/index.html
-mkdir -p css
-cp ${BASEDIR}/css/default.css css/
-
-# httpd conf
+echo httpd conf
 cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > and-repo.apache2.conf
 echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
 cat and-repo.apache2.conf
