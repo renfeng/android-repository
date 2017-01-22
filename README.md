@@ -45,7 +45,9 @@ TODO test xsltproc on osx
 
 https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
 
-## Setup your Android Studio Built-in SDK Manager
+## Setup your mirror and Android Studio Built-in SDK Manager
+
+Follow the same steps for Standalone SDK Manager, but run download2.sh, instead of download.sh.
 
 Settings >> Appearance & Behavior >> System Settings >> HTTP Proxy
  * Manual proxy configuration
