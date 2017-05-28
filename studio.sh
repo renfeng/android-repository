@@ -23,10 +23,10 @@ rm dl/android/studio/download.sh.tmp
 sh dl/android/studio/download.sh
 
 # download sdk manager
-grep -o '//dl.google.com/android/[^"]*' orig/studio/index.html \
+grep -o '//dl.google.com/android/[^"]*' orig/studio/index.html.tmp \
     | sed -E 's/(.*)/https:\1/g' \
     | grep -v [.]exe \
-    | wget -N -P android -c -i -
+    | wget -N -P android/repository -c -i -
 
 # generate download page
 # sed remove lines until
