@@ -28,51 +28,52 @@ BASEDIR=$(dirname $0)
 #grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cfg | sed 's/\\//g'
 
 sites=(
-    "android/repository/repository-11"
-    "android/repository/addon-6"
-    "android/repository/addon"
-    "android/repository/extras/intel/addon"
-    "android/repository/glass/addon"
-    "android/repository/sys-img/android-tv/sys-img"
-    "android/repository/sys-img/android-wear/sys-img"
-    "android/repository/sys-img/android/sys-img"
-    "android/repository/sys-img/google_apis/sys-img"
-    "android/repository/sys-img/x86/addon-x86"
+	"android/repository/repository-11"
+	"android/repository/addon-6"
+	"android/repository/addon"
+	"android/repository/extras/intel/addon"
+	"android/repository/glass/addon"
+	"android/repository/sys-img/android-tv/sys-img"
+	"android/repository/sys-img/android-wear/sys-img"
+	"android/repository/sys-img/android/sys-img"
+	"android/repository/sys-img/google_apis/sys-img"
+	"android/repository/sys-img/x86/addon-x86"
 )
 
 echo synchronizing indices
 # http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
 # http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
 for site in ${sites[@]}; do
-    wget -N http://dl.google.com/${site}.xml -P orig/${site%/*}
+	wget -N http://dl.google.com/${site}.xml -P orig/${site%/*}
 done
 
 echo downloading packages
 # http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
 for site in ${sites[@]}; do
-    xsltproc ${BASEDIR}/${site}.xsl orig/${site}.xml | sed 's/https:/http:/g' | wget -N -P ${site%/*} -c -i -
+	echo ${site}
+	xsltproc ${BASEDIR}/${site}.xsl orig/${site}.xml | sed 's/https:/http:/g' | wget -N -P ${site%/*} -c -i -
 done
 
 echo localizing indices
 for site in ${sites[@]}; do
-    mkdir -p ${site%/*}
-    cat orig/${site}.xml | sed 's/https:\/\/dl.google.com//g' > ${site}.xml
+	mkdir -p ${site%/*}
+	cat orig/${site}.xml | sed 's/https:\/\/dl.google.com//g' > ${site}.xml
 done
 
 echo generating sdk web manager data
 echo "name,version,api-level,revision,description,obsolete,windowsSize,windowsSHA1,windowsURL,macosxSize,macosxSHA1,macosxURL,linuxSize,linuxSHA1,linuxURL" \
-    > packages.csv.tmp
+	> packages.csv.tmp
 for site in ${sites[@]}; do
-    xsltproc ${BASEDIR}/${site}.csv.xsl orig/${site}.xml >> packages.csv.tmp
+	xsltproc ${BASEDIR}/${site}.csv.xsl orig/${site}.xml >> packages.csv.tmp
 done
 mv packages.csv.tmp packages.csv
 
 echo removing obsolete sdk packages
 # TODO grep -P is not supported by OS X
 grep true packages.csv \
-    | grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+' \
-    | sed -E 's/^(.*)$/rm -f \1/g' \
-    > clean-obsolete.sh
+	| grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+' \
+	| sed -E 's/^(.*)$/rm -f \1/g' \
+	> clean-obsolete.sh
 sh clean-obsolete.sh
 
 echo verifying

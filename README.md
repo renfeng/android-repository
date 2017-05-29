@@ -18,7 +18,7 @@ You'll need a lot of free storage on your disk, about 150GB as of 2017-01-12.
 
 sudo apt-get install xsltproc
 
-(TODO test) yum install xsltproc
+TODO test yum install xsltproc
 
 ### OS X
 
@@ -36,18 +36,32 @@ TODO test xsltproc on osx
 ### Cygwin
 
  * wget
- * xslt
+ * xslt - The two packages you must have are libxml2 and libxslt, both available under the Libs category.
+Ref. http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
 
- The two packages you must have are libxml2 and libxslt, both available under the Libs category.
- Ref. http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
+## For Standalone SDK Manager
 
-## Setup your mirror and Android Standalone SDK Manager
+(obsolete) https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
 
-https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
+## For Android Studio Built-in SDK Manager
 
-## Setup your mirror and Android Studio Built-in SDK Manager
+N.B. files will be downloaded to your working directory. ANDROID_REPOSITORY_HOME is the directory holding the files of the project.
 
-Follow the same steps for Standalone SDK Manager, but run download2.sh, instead of download.sh.
+```
+${ANDROID_REPOSITORY_HOME}/download.sh
+```
+
+Assuming your mirror will be hosted on studyjams.dushu.hu
+
+```
+#REPO_OS_OVERRIDE=windows
+#REPO_OS_OVERRIDE=macosx
+REPO_OS_OVERRIDE=linux
+wget http://studyjams.dushu.hu/`wget http://studyjams.dushu.hu/studio/ -O - | grep -Po "android/repository/sdk-tools-${REPO_OS_OVERRIDE}-\d+.zip"`
+unzip android/repository/sdk-tools-${REPO_OS_OVERRIDE}-*.zip
+tools/bin/sdkmanager --no_https --proxy=http --proxy_host=studyjams.dushu.hu --proxy_port=80 'patcher;v4' 'extras;android;m2repository' 'extras;google;m2repository' emulator 'build-tools;25.0.3' 'platforms;android-25' platform-tools tools 'sources;android-25'
+${android-repository-home}/download2.sh
+```
 
 Settings >> Appearance & Behavior >> System Settings >> HTTP Proxy
  * Manual proxy configuration

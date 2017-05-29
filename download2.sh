@@ -23,6 +23,7 @@ sites=(
 	"android/repository/sys-img/android-wear/sys-img2-1"
 	"android/repository/glass/addon2-1"
 	"android/repository/sys-img/google_apis/sys-img2-1"
+	"android/repository/sys-img/google_apis_playstore/sys-img2-1"
 	"android/repository/addon2-1"
 	"android/repository/extras/intel/addon2-1"
 )
@@ -31,20 +32,20 @@ echo synchronizing indices
 # http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
 # http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
 for site in ${sites[@]}; do
-    wget -N http://dl.google.com/${site}.xml -P orig/${site%/*}
+	wget -N http://dl.google.com/${site}.xml -P orig/${site%/*}
 done
 
 echo downloading packages
 # http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
 for site in ${sites[@]}; do
-    echo ${site}
-    xsltproc ${BASEDIR}/${site}.xsl orig/${site}.xml | sed 's/https:/http:/g' | wget -N -P ${site%/*} -c -i -
+	echo ${site}
+	xsltproc ${BASEDIR}/${site}.xsl orig/${site}.xml | sed 's/https:/http:/g' | wget -N -P ${site%/*} -c -i -
 done
 
 echo localizing indices
 for site in ${sites[@]}; do
-    mkdir -p ${site%/*}
-    cat orig/${site}.xml | sed 's/https:\/\/dl.google.com//g' > ${site}.xml
+	mkdir -p ${site%/*}
+	cat orig/${site}.xml | sed 's/https:\/\/dl.google.com//g' > ${site}.xml
 done
 
 echo verifying
