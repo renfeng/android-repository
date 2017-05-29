@@ -50,19 +50,17 @@ N.B. files will be downloaded to your working directory. ANDROID_REPOSITORY_HOME
 
 ```
 ${ANDROID_REPOSITORY_HOME}/download.sh
-```
-
-Assuming your mirror will be hosted on studyjams.dushu.hu
-
-```
-#REPO_OS_OVERRIDE=windows
-#REPO_OS_OVERRIDE=macosx
-REPO_OS_OVERRIDE=linux
-MIRROR_HOST=studyjams.dushu.hu
-wget http://${MIRROR_HOST}/`wget http://${MIRROR_HOST}/studio/ -O - | grep -Po "android/repository/sdk-tools-${REPO_OS_OVERRIDE}-\d+.zip"`
-unzip android/repository/sdk-tools-${REPO_OS_OVERRIDE}-*.zip
-tools/bin/sdkmanager --no_https --proxy=http --proxy_host=${MIRROR_HOST} --proxy_port=80 'patcher;v4' 'extras;android;m2repository' 'extras;google;m2repository' emulator 'build-tools;25.0.3' 'platforms;android-25' platform-tools tools 'sources;android-25'
 ${ANDROID_REPOSITORY_HOME}/download2.sh
+```
+
+Assuming your mirror will be hosted on studyjams.dushu.hu, the following will setup a client. Note. Java 8 is required.
+```
+MIRROR_HOST=studyjams.dushu.hu
+#wget http://${MIRROR_HOST}/`wget http://${MIRROR_HOST}/studio/ -O - | grep -Po "android/repository/sdk-tools-linux-\d+.zip"`
+wget http://${MIRROR_HOST}/`wget http://${MIRROR_HOST}/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-darwin-\d+.zip}"`
+#wget http://${MIRROR_HOST}/`wget http://${MIRROR_HOST}/studio/ -O - | grep -Po "android/repository/sdk-tools-windows-\d+.zip"`
+unzip sdk-tools-*.zip
+tools/bin/sdkmanager --no_https --proxy=http --proxy_host=${MIRROR_HOST} --proxy_port=80 'patcher;v4' 'extras;android;m2repository' 'extras;google;m2repository' emulator 'build-tools;25.0.3' 'platforms;android-25' platform-tools tools 'sources;android-25'
 ```
 
 Settings >> Appearance & Behavior >> System Settings >> Android SDK >> SDK Update Sites
