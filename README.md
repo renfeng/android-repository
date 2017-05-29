@@ -7,8 +7,9 @@ It's ideal for a classroom, [Study Jams](http://developerstudyjams.com/), and [C
 Tested on 
 
 * Linux Mint Maya (13, Ubuntu 10.04)/Rebecca (17.1, Ubuntu 14.04),
-* ~~OS X Yosemite (10.10.4)~~
 * Cygwin on Windows 7 64bit
+
+TODO test on OS X Yosemite (10.10.4)
 
 ## Prerequisites
 
@@ -18,7 +19,7 @@ You'll need a lot of free storage on your disk, about 40GB as of 2017-05-29.
 
 sudo apt-get install xsltproc
 
-TODO test yum install xsltproc
+TODO test on redhat, yum install xsltproc
 
 ### OS X
 
@@ -31,7 +32,7 @@ Ref.
 * http://www.gnu.org/software/wget/
 * http://google.com#q=wget
 
-TODO test xsltproc on osx
+TODO test xsltproc on macosx
 
 ### Cygwin
 
