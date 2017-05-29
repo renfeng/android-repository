@@ -61,9 +61,9 @@ MIRROR_HOST=studyjams.dushu.hu
 wget http://${MIRROR_HOST}/`wget http://${MIRROR_HOST}/studio/ -O - | grep -Po "android/repository/sdk-tools-${REPO_OS_OVERRIDE}-\d+.zip"`
 unzip android/repository/sdk-tools-${REPO_OS_OVERRIDE}-*.zip
 tools/bin/sdkmanager --no_https --proxy=http --proxy_host=${MIRROR_HOST} --proxy_port=80 'patcher;v4' 'extras;android;m2repository' 'extras;google;m2repository' emulator 'build-tools;25.0.3' 'platforms;android-25' platform-tools tools 'sources;android-25'
-${android-repository-home}/download2.sh
+${ANDROID_REPOSITORY_HOME}/download2.sh
 mkdir -p ~/.android
-cp ${android-repository-home}/repositories.cfg ~/.android
+cp ${ANDROID_REPOSITORY_HOME}/repositories.cfg ~/.android
 ```
 
 Settings >> Appearance & Behavior >> System Settings >> HTTP Proxy
