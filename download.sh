@@ -69,9 +69,10 @@ done
 mv packages.csv.tmp packages.csv
 
 echo removing obsolete sdk packages
-# TODO grep -P is not supported by OS X
+# grep -P is not supported by OS X
+# https://stackoverflow.com/questions/16658333/grep-p-no-longer-works-how-can-i-rewrite-my-searches
 grep true packages.csv \
-	| grep -Po '(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+' \
+	| perl -nle 'print $& if m{(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+}' \
 	| sed -E 's/^(.*)$/rm -f \1/g' \
 	> clean-obsolete.sh
 sh clean-obsolete.sh
