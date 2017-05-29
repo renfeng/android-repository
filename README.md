@@ -12,7 +12,7 @@ Tested on
 
 ## Prerequisites
 
-You'll need a lot of free storage on your disk, about 150GB as of 2017-01-12.
+You'll need a lot of free storage on your disk, about 40GB as of 2017-05-29.
 
 ### Linux
 
@@ -57,10 +57,13 @@ Assuming your mirror will be hosted on studyjams.dushu.hu
 #REPO_OS_OVERRIDE=windows
 #REPO_OS_OVERRIDE=macosx
 REPO_OS_OVERRIDE=linux
-wget http://studyjams.dushu.hu/`wget http://studyjams.dushu.hu/studio/ -O - | grep -Po "android/repository/sdk-tools-${REPO_OS_OVERRIDE}-\d+.zip"`
+MIRROR_HOST=studyjams.dushu.hu
+wget http://${MIRROR_HOST}/`wget http://${MIRROR_HOST}/studio/ -O - | grep -Po "android/repository/sdk-tools-${REPO_OS_OVERRIDE}-\d+.zip"`
 unzip android/repository/sdk-tools-${REPO_OS_OVERRIDE}-*.zip
-tools/bin/sdkmanager --no_https --proxy=http --proxy_host=studyjams.dushu.hu --proxy_port=80 'patcher;v4' 'extras;android;m2repository' 'extras;google;m2repository' emulator 'build-tools;25.0.3' 'platforms;android-25' platform-tools tools 'sources;android-25'
+tools/bin/sdkmanager --no_https --proxy=http --proxy_host=${MIRROR_HOST} --proxy_port=80 'patcher;v4' 'extras;android;m2repository' 'extras;google;m2repository' emulator 'build-tools;25.0.3' 'platforms;android-25' platform-tools tools 'sources;android-25'
 ${android-repository-home}/download2.sh
+mkdir -p ~/.android
+cp ${android-repository-home}/repositories.cfg ~/.android
 ```
 
 Settings >> Appearance & Behavior >> System Settings >> HTTP Proxy
@@ -73,6 +76,33 @@ Settings >> Appearance & Behavior >> System Settings >> HTTP Proxy
 Settings >> Appearance & Behavior >> System Settings >> Android SDK >> SDK Update Sites
  * Add sites with http. See https://docs.google.com/spreadsheets/d/1dTX0mhnEOVoqMebWnGllWM-5AIjgJ-oLuFsjmDd0mh4/edit#gid=822947052
  * Enable "Force https://... sources to be fetched using http://..."
+
+Tips: The settings are saved to (assuming 2.3 is the version of your Android Studio)
+
+```
+~/.AndroidStudio2.3/config/options/proxy.settings.xml
+~/.AndroidStudio2.3/config/options/remotesdk.xml
+```
+
+Sample proxy.settings.xml (the line for PROXY_PORT is omitted for the default http port, 80)
+```
+<application>
+  <component name="HttpConfigurable">
+    <option name="USE_HTTP_PROXY" value="true" />
+    <option name="PROXY_HOST" value="studyjams.dushu.hu" />
+    <option name="PROXY_PORT" value="80" />
+  </component>
+</application>
+```
+
+Sample remotesdk.xml
+```
+<application>
+  <component name="StudioSettingsController">
+    <option name="myForceHttp" value="true" />
+  </component>
+</application>
+```
 
 ### Known problem
 
