@@ -92,12 +92,16 @@ Set environment variable before launching Android Studio.
 export SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
 ```
 
+Ref. https://android.googlesource.com/platform/sdk/+/tools_r14
+
 ## (optional) SDK Web Manager
 
 It's a single page app for exploring the packages downloaded. To make it work,
  1. In your web root directory, (backup your index.html, and) run
  
- `</path/to/android-repository/>setup-sdk-web-manager.sh`
+```
+${ANDROID_REPOSITORY_HOME}/setup-sdk-web-manager.sh
+```
 
  It will copy over three files and one directory.
   * index.html
