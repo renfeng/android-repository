@@ -17,6 +17,7 @@ BASEDIR=$(dirname $0)
 # https://dl.google.com/android/repository/extras/intel/addon2-1.xml
 
 sites=(
+	"android/repository/addons_list-3"
 	"android/repository/repository2-1"
 	"android/repository/sys-img/android/sys-img2-1"
 	"android/repository/sys-img/android-tv/sys-img2-1"
