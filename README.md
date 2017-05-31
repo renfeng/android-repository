@@ -72,6 +72,23 @@ Sample [repositories.cfg](repositories.cfg)
 
 The command line version of standalone SDK manager replaces the GUI version, https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
 
+### (Optional) SDK web manager setup
+
+It's a single page app for exploring the packages downloaded. To make it work,
+ 1. In your web root directory, (backup your index.html, and) run
+
+```
+${ANDROID_REPOSITORY_HOME}/setup-sdk-web-manager.sh
+```
+
+ It will copy over three files and one directory.
+  * index.html
+  * .bowerrc
+  * bower.json
+  * elements/
+ 2. Install bower (requires nodejs, https://nodejs.org/), and run the following command line
+ 3. bower i -F -S
+
 ## For Android Studio Built-in SDK Manager
 
 ### Server (Repository) setup
@@ -93,23 +110,6 @@ export SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
 ```
 
 Ref. https://android.googlesource.com/platform/sdk/+/tools_r14
-
-## (optional) SDK Web Manager
-
-It's a single page app for exploring the packages downloaded. To make it work,
- 1. In your web root directory, (backup your index.html, and) run
- 
-```
-${ANDROID_REPOSITORY_HOME}/setup-sdk-web-manager.sh
-```
-
- It will copy over three files and one directory.
-  * index.html
-  * .bowerrc
-  * bower.json
-  * elements/
- 2. Install bower (requires nodejs, https://nodejs.org/), and run the following command line
- 3. bower i -F -S
 
 ## Who's using it
 

@@ -12,8 +12,7 @@
 			<xsl:variable name="url" select="text()"></xsl:variable>
 
 			<xsl:choose>
-				<xsl:when
-						test="starts-with($url, 'https://dl-ssl.google.com/android/repository/sys-img/android-wear/')">
+				<xsl:when test="starts-with($url, 'https://dl-ssl.google.com/android/repository/sys-img/android-wear/')">
 					<xsl:value-of select="$url"/>
 				</xsl:when>
 				<xsl:when test="starts-with($url, 'https://')"><!-- ignores --></xsl:when>
