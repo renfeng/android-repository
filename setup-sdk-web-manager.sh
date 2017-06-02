@@ -16,4 +16,4 @@ if [ `expr index "$PATH" "~/.npm-global/bin"` -eq 0 ]; then
 fi
 
 npm install -b bower
-bower i -S -F
+bower i

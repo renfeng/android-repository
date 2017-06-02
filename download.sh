@@ -6,6 +6,10 @@
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
 BASEDIR=$(dirname $0)
 
+DL_HOST=${DL_HOST:-https://dl.google.com}
+DL_PATH=${DL_PATH:-android/repository}
+
+echo synchronizing indices
 # The list of xml files was extracted from Android SDK Manager log (sample: sdk-mgr.log)
 
 # The following two are the meta indices most up to date, and supported, as of 2017-01-15
@@ -28,57 +32,50 @@ BASEDIR=$(dirname $0)
 #grep -Po '(?<=@name@).*/android/repository/.*(?==)' ~/.android/sites-settings.cfg | sed 's/\\//g'
 
 sites=(
-	"android/repository/repository-11"
-	"android/repository/addon-6"
-	"android/repository/addon"
-	"android/repository/extras/intel/addon"
-	"android/repository/glass/addon"
-	"android/repository/sys-img/android-tv/sys-img"
-	"android/repository/sys-img/android-wear/sys-img"
-	"android/repository/sys-img/android/sys-img"
-	"android/repository/sys-img/google_apis/sys-img"
-	"android/repository/sys-img/x86/addon-x86"
+	"repository-11"
+	"addon-6"
+	"addon"
+	"extras/intel/addon"
+	"glass/addon"
+	"sys-img/android-tv/sys-img"
+	"sys-img/android-wear/sys-img"
+	"sys-img/android/sys-img"
+	"sys-img/google_apis/sys-img"
+	"sys-img/x86/addon-x86"
 )
 
-echo synchronizing indices
-# http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
-# http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
 for site in ${sites[@]}; do
-	wget -N http://dl.google.com/${site}.xml -P orig/${site%/*}
+	SUB_PATH=`expr match ${site} '\(.*/\)'`
+	# http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
+	# http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
+	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P orig/${DL_PATH}/${SUB_PATH}
 done
 
 echo downloading packages
-# http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
+# TODO filter obsolete
 for site in ${sites[@]}; do
 	echo ${site}
-	xsltproc ${BASEDIR}/${site}.xsl orig/${site}.xml | sed 's/https:/http:/g' | wget -N -P ${site%/*} -c -i -
-done
-
-echo localizing indices
-for site in ${sites[@]}; do
-	mkdir -p ${site%/*}
-	cat orig/${site}.xml | sed 's/https:\/\/dl.google.com//g' > ${site}.xml
+	SUB_PATH=`expr match ${site} '\(.*/\)'`
+	cat orig/${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<sdk:url>).*(?=</sdk:url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
 done
 
 echo generating sdk web manager data
 echo "name,version,api-level,revision,description,obsolete,windowsSize,windowsSHA1,windowsURL,macosxSize,macosxSHA1,macosxURL,linuxSize,linuxSHA1,linuxURL" \
 	> packages.csv.tmp
 for site in ${sites[@]}; do
-	xsltproc ${BASEDIR}/${site}.csv.xsl orig/${site}.xml >> packages.csv.tmp
+	# http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
+	xsltproc ${BASEDIR}/${DL_PATH}/${site}.csv.xsl orig/${DL_PATH}/${site}.xml >> packages.csv.tmp
 done
 mv packages.csv.tmp packages.csv
 
-echo removing obsolete sdk packages
-# grep -P is not supported by OS X
-# https://stackoverflow.com/questions/16658333/grep-p-no-longer-works-how-can-i-rewrite-my-searches
-grep true packages.csv \
-	| perl -nle 'print $& if m{(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+}' \
-	| sed -E 's/^(.*)$/rm -f \1/g' \
-	> clean-obsolete.sh
-sh clean-obsolete.sh
-
-echo verifying
-grep -rn '<sdk:url>' * --include=*.xml --exclude-dir=orig | grep http
+#echo removing obsolete sdk packages
+## grep -P is not supported by OS X
+## https://stackoverflow.com/questions/16658333/grep-p-no-longer-works-how-can-i-rewrite-my-searches
+#grep true packages.csv \
+#	| perl -nle 'print $& if m{(?<=https://dl-ssl[.]google[.]com/)[^,]+|(?<=https://dl[.]google[.]com/)[^,]+}' \
+#	| sed -E 's/^(.*)$/rm -f \1/g' \
+#	> clean-obsolete.sh
+#sh clean-obsolete.sh
 
 echo studio and sdk tools
 sh ${BASEDIR}/studio.sh

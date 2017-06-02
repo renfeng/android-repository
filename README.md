@@ -70,7 +70,9 @@ Tips: The settings are saved to
 
 Sample [repositories.cfg](repositories.cfg)
 
-The command line version of standalone SDK manager replaces the GUI version, https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
+The command line version of standalone SDK manager replaces the GUI version, since [SDK Tools, Revision 25.2.3 (November 2016)](https://developer.android.com/studio/releases/sdk-tools.html)
+
+Now these slides serves as an archive of how the project originated, https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
 
 ### (Optional) SDK web manager setup
 
