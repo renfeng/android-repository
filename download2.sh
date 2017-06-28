@@ -18,26 +18,26 @@ sites=()
 site=repository2-1
 # http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
 # http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
-wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P orig/${DL_PATH}
+wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}
 sites+=(${site})
 
 # TODO auto increment
 site=addons_list-3
-wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P orig/${DL_PATH}
+wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}
 sites+=(${site})
 
 while read -r site; do
 	SUB_PATH=`expr match ${site} '\(.*/\)'`
-	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P orig/${DL_PATH}/${SUB_PATH}
+	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}/${SUB_PATH}
 	sites+=(${site})
-done <<< "`cat orig/${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed s/.xml//g`"
+done <<< "`cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed s/.xml//g`"
 
 echo downloading packages
 # TODO filter obsolete
 for site in ${sites[@]}; do
 	echo ${site}
 	SUB_PATH=`expr match ${site} '\(.*/\)'`
-	cat orig/${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
+	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
 done
 
 echo studio and sdk tools
