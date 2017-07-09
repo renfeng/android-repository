@@ -12,7 +12,7 @@ Tested on
 
 ## Prerequisites
 
-You'll need a lot of free storage on your disk, about 40GB as of 2017-05-29.
+You'll need a lot of free storage on your disk, about 48GB as of 2017-07-09.
 
 ### Linux
 
@@ -36,6 +36,28 @@ Ref.
  * wget
  * xslt - The two packages you must have are libxml2 and libxslt, both available under the Libs category.
 Ref. http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
+
+## For Android Studio Built-in SDK Manager
+
+### Server (Repository) setup
+
+Note
+* Files will be downloaded to your working directory.
+* ANDROID_REPOSITORY_HOME is the directory holding the files of the project.
+* A sample httpd vhost config will be printed on download complete
+
+```
+${ANDROID_REPOSITORY_HOME}/download2.sh
+```
+
+### Client (Android Studio) setup
+
+Set environment variable before launching Android Studio.
+```
+export SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
+```
+
+Ref. https://android.googlesource.com/platform/sdk/+/tools_r14
 
 ## For Standalone SDK Manager
 
@@ -90,28 +112,6 @@ ${ANDROID_REPOSITORY_HOME}/setup-sdk-web-manager.sh
   * elements/
  2. Install bower (requires nodejs, https://nodejs.org/), and run the following command line
  3. bower i -F -S
-
-## For Android Studio Built-in SDK Manager
-
-### Server (Repository) setup
-
-Note
-* Files will be downloaded to your working directory.
-* ANDROID_REPOSITORY_HOME is the directory holding the files of the project.
-* A sample httpd vhost config will be printed on download complete
-
-```
-${ANDROID_REPOSITORY_HOME}/download2.sh
-```
-
-### Client (Android Studio) setup
-
-Set environment variable before launching Android Studio.
-```
-export SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
-```
-
-Ref. https://android.googlesource.com/platform/sdk/+/tools_r14
 
 ## Who's using it
 
