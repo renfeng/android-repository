@@ -78,7 +78,7 @@ mv packages.csv.tmp packages.csv
 #sh clean-obsolete.sh
 
 echo studio and sdk tools
-sh ${BASEDIR}/studio.sh
+${BASEDIR}/studio.sh
 
 echo httpd conf
 cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > and-repo.apache2.conf
