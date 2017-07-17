@@ -53,8 +53,26 @@ ${ANDROID_REPOSITORY_HOME}/download2.sh
 ### Client (Android Studio) setup
 
 Set environment variable before launching Android Studio.
+
+Linux
+
 ```
 export SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
+android-studio/bin/studio.sh
+```
+
+macOS
+
+```
+export SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
+open -a 'Android Studio'
+```
+
+Windows
+
+```
+set SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
+android-studio-windows/bin/studio64.exe
 ```
 
 Ref. https://android.googlesource.com/platform/sdk/+/tools_r14
