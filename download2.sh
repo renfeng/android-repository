@@ -27,7 +27,7 @@ wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}
 sites+=(${site})
 
 while read -r site; do
-	SUB_PATH=`expr match ${site} '\(.*/\)'`
+	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
 	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}/${SUB_PATH}
 	sites+=(${site})
 done <<< "`cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed s/.xml//g`"
@@ -36,7 +36,7 @@ echo downloading packages
 # TODO filter obsolete
 for site in ${sites[@]}; do
 	echo ${site}
-	SUB_PATH=`expr match ${site} '\(.*/\)'`
+	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
 	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
 done
 
@@ -52,7 +52,8 @@ cat and-repo.apache2.conf
 echo android/repository/repository2-1.xml >> ${DL_PATH}/valid
 echo android/repository/addons_list-3.xml >> ${DL_PATH}/valid
 for site in ${sites[@]}; do
-	SUB_PATH=`expr match ${site} '\(.*/\)'`
+	echo ${site}
+	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
 	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_PATH}/${SUB_PATH}~g" >> ${DL_PATH}/valid
 done
 valid="`cat ${DL_PATH}/valid`"

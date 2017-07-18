@@ -45,17 +45,18 @@ cat studio/index.html.sections \
 cat ${BASEDIR}/studio/template.html \
             | sed -n '/<!-- insert -->/,$p' \
             >> studio/index.html
-sed -i 's~//dl.google.com~~g' studio/index.html
 mkdir -p css
 cp ${BASEDIR}/css/default.css css/
 
 # clean obsolete studio
-valid=`grep -o ${DL_HOST}/dl/android/studio'/[^"]*' studio/index.html.orig | grep -v [.]exe | sed -E 's~'${DL_HOST}'/(dl/android/studio/.+)~\1~g'`
-while read -r file; do
-	if ! echo "${valid}" | grep -q ${file}; then
-		rm ${file}
-	fi
-done <<< "`find dl/android/studio -type f`"
+if [ -d dl/android/studio ]; then
+	valid=`grep -o ${DL_HOST}/dl/android/studio'/[^"]*' studio/index.html.orig | grep -v [.]exe | sed -E 's~'${DL_HOST}'/(dl/android/studio/.+)~\1~g'`
+	while read -r file; do
+		if ! echo "${valid}" | grep -q ${file}; then
+			rm ${file}
+		fi
+	done <<< "`find dl/android/studio -type f`"
+fi
 
 # clean sdk manager
 grep -o ${DL_HOST}/${DL_PATH}/'[^"]*' studio/index.html.orig | grep -v [.]exe | sed -E 's~'${DL_HOST}'/~~g' >> ${DL_PATH}/valid

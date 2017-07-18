@@ -45,7 +45,7 @@ sites=(
 )
 
 for site in ${sites[@]}; do
-	SUB_PATH=`expr match ${site} '\(.*/\)'`
+	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
 	# http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
 	# http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
 	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}/${SUB_PATH}
@@ -55,7 +55,7 @@ echo downloading packages
 # TODO filter obsolete
 for site in ${sites[@]}; do
 	echo ${site}
-	SUB_PATH=`expr match ${site} '\(.*/\)'`
+	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
 	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<sdk:url>).*(?=</sdk:url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
 done
 
