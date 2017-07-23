@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
-		<title>Android SDK Web Manager</title>
-
 		<meta charset="utf-8"/>
+		<meta name="generator" content="Polymer Starter Kit">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" />
+		<title>Android SDK Web Manager</title>
+		<meta name="description" content="Android SDK Web Manager">
 
-		<!--
-		Chrome 35 has old :host behavior before :host-context addition.
-		Since Chrome 35 does not have HTMLImports, we can use this as a decent signal
-		to force the ShadowDOM Polyfill.
-		-->
-		<script>
-			if (!('import' in document.createElement('link'))) {
-				var Platform = {flags: {shadow: true}};
+		<!-- Load and register pre-caching Service Worker -->
+		<!--<script>
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', function() {
+					navigator.serviceWorker.register('/service-worker.js');
+				});
 			}
-		</script>
+		</script>-->
 
-		<!-- 1. Load platform support before any code that touches the DOM. -->
-		<script src="components/webcomponentsjs/webcomponents.min.js"></script>
+		<!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+		<script src="components/webcomponentsjs/webcomponents-loader.js"></script>
 
-		<!-- 2. Load the component using an HTML Import -->
-		<link rel="import" href="components/poly-compatibility/poly-compatibility.html"/>
+		<!-- Load your application shell -->
+		<!--<link rel="import" href="components/poly-compatibility/poly-compatibility.html"/>-->
 		<link rel="import" href="elements/android-sdk-manager.html" />
 		<link rel="import" href="components/font-roboto/roboto.html" />
 		
@@ -32,6 +30,7 @@
 				height: 100%;
 				margin: 0;
 				font-family: 'RobotoDraft', sans-serif;
+				background-color: #f5f5f5;
 			}
 			paper-header-panel {
 				height: 100%;
@@ -53,7 +52,7 @@
 	</head>
 	<body>
 
-		<poly-compatibility path-To-Test="js/modernizrtest.js" style="font-size: small; margin: auto; width: 40em; display: block; text-align: center;">
+		<!--<poly-compatibility path-To-Test="js/modernizrtest.js" style="font-size: small; margin: auto; width: 40em; display: block; text-align: center;">
 			<table style="height: 100%;">
 				<tr>
 					<td valign="middle">
@@ -62,7 +61,7 @@
 					</td>
 				</tr>
 			</table>
-		</poly-compatibility>
+		</poly-compatibility>-->
 
 		<!-- 3. Declare the element by its tag. -->
 		<android-sdk-manager></android-sdk-manager>

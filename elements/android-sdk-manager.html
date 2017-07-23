@@ -1,91 +1,136 @@
-<link rel="import" href="../components/iron-flex-layout/iron-flex-layout.html"/>
-<link rel="import" href="../components/iron-icons/iron-icons.html"/>
-<link rel="import" href="../components/iron-icon/iron-icon.html"/>
+<link rel="import" href="../components/app-layout/app-layout.html">
 <link rel="import" href="../components/iron-collapse/iron-collapse.html"/>
+<link rel="import" href="../components/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="../components/iron-icon/iron-icon.html"/>
+<link rel="import" href="../components/iron-icons/iron-icons.html"/>
 <link rel="import" href="../components/paper-checkbox/paper-checkbox.html"/>
-<link rel="import" href="../components/paper-drawer-panel/paper-drawer-panel.html"/>
 <link rel="import" href="../components/paper-fab/paper-fab.html"/>
 <link rel="import" href="../components/paper-header-panel/paper-header-panel.html"/>
 <link rel="import" href="../components/paper-icon-button/paper-icon-button.html"/>
 <link rel="import" href="../components/paper-input/paper-textarea.html"/>
 <link rel="import" href="../components/paper-item/paper-item.html"/>
-<link rel="import" href="../components/paper-menu/paper-menu.html"/>
+<link rel="import" href="../components/paper-listbox/paper-listbox.html"/>
 <link rel="import" href="../components/paper-toolbar/paper-toolbar.html"/>
-<link rel="import" href="../components/polymer-detect-js/detect-js.html"/>
+<link rel="import" href="../components/polymer/lib/utils/debounce.html">
+<link rel="import" href="../components/polymer/polymer-element.html">
 
 <dom-module id="android-sdk-manager">
-	<style is="custom-style">
-		.fit {
-			@apply(--layout-fit);
-		}
-
-		.flex {
-			@apply(--layout-flex);
-		}
-
-		.horizontal {
-			@apply(--layout-horizontal);
-		}
-
-		.vertical {
-			@apply(--layout-vertical);
-		}
-
-		iron-collapse {
-			background-color: #999;
-			color: white;
-		}
-
-		#filterContainer paper-checkbox {
-			--paper-checkbox-label-color: white;
-		}
-
-		#urlContainer a, paper-toolbar a {
-			color: white;
-		}
-	</style>
 	<template>
-		<paper-drawer-panel>
-			<paper-header-panel drawer>
-				<paper-toolbar id="navheader">
-					<span>Filters</span>
-					<div relative>
-						<paper-icon-button id="sdkFilter" icon="filter-list" label="List URLs" on-tap="toggleFilterDisplay"></paper-icon-button>
-					</div>
-				</paper-toolbar>
-				<paper-menu selected="{{selectedGroup}}">
-					<template id="groups" is="dom-repeat" items="{{groups}}">
-						<paper-item>{{item.name}}</paper-item>
-					</template>
-				</paper-menu>
-				<iron-collapse id="filterContainer" class="fit">
-					<paper-checkbox checked="{{showObsolete}}" on-change="refresh">Obsolete</paper-checkbox>
-					<paper-checkbox checked="{{showLinux}}" on-change="refresh">Linux</paper-checkbox>
-					<paper-checkbox checked="{{showOSX}}" on-change="refresh">OS X</paper-checkbox>
-					<paper-checkbox checked="{{showWin}}" on-change="refresh">Windows</paper-checkbox>
-					<detect-js os="{{os}}"></detect-js>
-				</iron-collapse>
-			</paper-header-panel>
-			<paper-header-panel main>
-				<paper-toolbar>
-					<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-					<div main-title>Android SDK Web Manager</div>
-					<paper-icon-button icon="shopping-cart" on-tap="toggleUrlDisplay"></paper-icon-button>
-					<span>{{urlList.length}}</span>
-					<span class="flex"></span>
-					<a href="/studio" title="Download Android Studio and SDK Manager">
-						<iron-icon icon="android"/>
-					</a>
-				</paper-toolbar>
+		<style is="custom-style">
+			.fit {
+				@apply(--layout-fit);
+			}
+
+			.flex {
+				@apply(--layout-flex);
+			}
+
+			.horizontal {
+				@apply(--layout-horizontal);
+			}
+
+			.vertical {
+				@apply(--layout-vertical);
+			}
+
+			iron-collapse {
+				background-color: #999;
+				color: white;
+			}
+
+			#urlContainer a, paper-toolbar a {
+				color: white;
+			}
+
+			:host {
+				--app-primary-color: #4285f4;
+				--app-secondary-color: black;
+
+				display: block;
+			}
+
+			app-drawer-layout:not([narrow]) [drawer-toggle] {
+				display: none;
+			}
+
+			app-header {
+				color: #fff;
+				background-color: var(--app-primary-color);
+			}
+
+			app-header paper-icon-button {
+				--paper-icon-button-ink-color: white;
+			}
+
+			.drawer-list {
+				margin: 0 20px;
+			}
+
+			.drawer-list a {
+				display: block;
+				padding: 0 16px;
+				text-decoration: none;
+				color: var(--app-secondary-color);
+				line-height: 40px;
+			}
+
+			.drawer-list a.iron-selected {
+				color: black;
+				font-weight: bold;
+			}
+
+			paper-tags-input {
+				--app-drawer-content-container: {
+				};
+			}
+
+			paper-checkbox {
+				display: block;
+				padding: 1em;
+			}
+		</style>
+		<app-drawer-layout fullbleed>
+			<app-drawer slot="drawer">
+				<div style="height: 100%; overflow: auto;">
+					<app-toolbar id="navheader">
+						<span>Filters</span>
+						<div relative>
+							<iron-icon icon="filter-list" label="List URLs"></iron-icon>
+						</div>
+					</app-toolbar>
+					<section>
+						<paper-checkbox checked="{{showObsolete}}" on-change="refresh">Obsolete</paper-checkbox>
+						<paper-checkbox checked="{{showLinux}}" on-change="refresh">Linux</paper-checkbox>
+						<paper-checkbox checked="{{showOSX}}" on-change="refresh">OS X</paper-checkbox>
+						<paper-checkbox checked="{{showWin}}" on-change="refresh">Windows</paper-checkbox>
+					</section>
+					<paper-listbox selected="{{selectedGroup}}">
+						<template id="groups" is="dom-repeat" items="{{groups}}">
+							<paper-item>{{item.name}}</paper-item>
+						</template>
+					</paper-listbox>
+				</div>
+			</app-drawer>
+			<app-header-layout has-scrolling-region>
+				<app-header slot="header" fixed effects="waterfall">
+					<app-toolbar>
+						<paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+						<div main-title style="white-space: nowrap;">Android SDK Web Manager</div>
+						<paper-icon-button icon="shopping-cart" on-tap="toggleUrlDisplay"></paper-icon-button>
+						<span>{{urlList.length}}</span>
+						<span class="flex"></span>
+						<a href="/studio" title="Download Android Studio and SDK Manager" style="color: white;">
+							<iron-icon icon="android"/>
+						</a>
+					</app-toolbar>
+				</app-header>
 				<div>
 					<template is="dom-repeat" items="{{packageArray}}">
-						<div>
-							<paper-checkbox checked="{{item.selected}}" on-tap="listURLs">
-								<b>{{item.name}}<template is="dom-if" if="{{obsolete(item)}}"> (Obsolete)</template></b>
-								<br/>
-								<span><template is="dom-if" if="{{item['api-level']}}">API {{item.apiLevel}}</template> Rev. {{item.revision}}</span>
-							</paper-checkbox>
-						</div>
+						<paper-checkbox checked="{{item.selected}}" on-tap="listURLs">
+							<b>{{item.name}}<template is="dom-if" if="{{obsolete(item)}}"> (Obsolete)</template></b>
+							<br/>
+							<span><template is="dom-if" if="{{item['api-level']}}">API {{item.apiLevel}}</template> Rev. {{item.revision}}</span>
+						</paper-checkbox>
 					</template>
 
 					<iron-collapse id="urlContainer" class="fit">
@@ -103,8 +148,8 @@
 								   hidden$="{{hideCopy(urlList)}}" >Copy URLs</paper-fab>
 					</iron-collapse>
 				</div>
-			</paper-header-panel>
-		</paper-drawer-panel>
+			</app-header-layout>
+		</app-drawer-layout>
 
 	</template>
 	<script src="../components/clipboard/dist/clipboard.min.js"></script>
@@ -135,7 +180,6 @@
 				showLinux: Boolean,
 				showOSX: Boolean,
 				showWin: Boolean,
-				os: String
 			},
 			observers: [
 				"syncPackage(groups, selectedGroup)"
@@ -258,7 +302,7 @@
 
 				console.log("2");
 				console.log(this.groups);
-				console.log(this.groups[0].name);
+				//console.log(this.groups[0].name);
 
 				this.listURLs();
 						
@@ -271,39 +315,40 @@
 				
 				// console.log(this.packages);
 				
-				var urlList = [];
-				for (var i in this.packages.data) {
-					var p = this.packages.data[i];
-					if (p.selected) {
-						if (!this.showObsolete && p.obsolete == "true") {
-							continue;
+				this._debouncer = Polymer.Debouncer.debounce(this._debouncer,
+					Polymer.Async.timeOut.after(0),
+					() => {
+						var urlList = [];
+						for (var i in this.packages.data) {
+							var p = this.packages.data[i];
+							if (p.selected) {
+								if (!this.showObsolete && p.obsolete == "true") {
+									continue;
+								}
+								if (this.showLinux && p.linuxURL) {
+									urlList.push(p.linuxURL);
+								}
+								if (this.showOSX && p.macosxURL) {
+									urlList.push(p.macosxURL);
+								}
+								if (this.showWin && p.windowsURL) {
+									urlList.push(p.windowsURL);
+								}
+							}
 						}
-						if (this.showLinux && p.linuxURL) {
-							urlList.push(p.linuxURL);
-						}
-						if (this.showOSX && p.macosxURL) {
-							urlList.push(p.macosxURL);
-						}
-						if (this.showWin && p.windowsURL) {
-							urlList.push(p.windowsURL);
-						}
+
+						console.log(urlList);
+						this.urlList = urlList;
 					}
-				}
-				
-				console.log(urlList);
-				this.urlList = urlList;
-				
+				);
+
 				return;
-			},
-			toggleFilterDisplay: function(event, detail, sender) {
-			 // console.log("toggle");
-				this.$.filterContainer.toggle();
 			},
 			toggleUrlDisplay: function(event, detail, sender) {
 				this.$.urlContainer.toggle();
 			},
 			syncPackage: function(groups, selectedGroup) {
-				if (groups.length) {
+				if (groups.length > 0 && selectedGroup >= 0) {
 					this.packageArray = groups[selectedGroup].packages;
 				}
 			},

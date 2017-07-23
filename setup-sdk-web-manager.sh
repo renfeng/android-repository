@@ -4,7 +4,8 @@ BASEDIR=$(dirname $0)
 cp -r ${BASEDIR}/.bowerrc \
       ${BASEDIR}/bower.json \
       ${BASEDIR}/elements \
-      ${BASEDIR}/index.html .
+      ${BASEDIR}/index.html \
+      ${BASEDIR}/js .
 
 ## https://docs.npmjs.com/getting-started/fixing-npm-permissions#option-2-change-npms-default-directory-to-another-directory
 #if [ ! -d ~/.npm-global ]; then
