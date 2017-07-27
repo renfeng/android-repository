@@ -1,4 +1,4 @@
-# android-repository
+# android/repository
 
 This is a set of scripts for creating a mirror of Android Repository for Android SDK Manager (both standalone and Android Studio built-in) to download SDK packages from.
 

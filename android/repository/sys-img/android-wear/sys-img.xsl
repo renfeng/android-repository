@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 				xmlns:sdk="http://schemas.android.com/sdk/android/sys-img/3">
 
-	<!-- https://dl-ssl.google.com/android/repository/sys-img/android-wear/sys-img.xml -->
+	<!-- https://dl.google.com/android/repository/sys-img/android-wear/sys-img.xml -->
 
 	<xsl:strip-space elements="*" />
 	<xsl:output indent="yes" method="text" />
@@ -14,18 +14,18 @@
 
 			<xsl:choose>
 				<xsl:when
-						test="starts-with($url, 'https://dl-ssl.google.com/android/repository/sys-img/android-wear/')">
+						test="starts-with($url, 'https://dl.google.com/android/repository/sys-img/android-wear/')">
 					<xsl:value-of select="$url"/>
 				</xsl:when>
 				<xsl:when test="starts-with($url, 'https://')"><!-- ignores --></xsl:when>
 				<xsl:when test="starts-with($url, 'http://')"><!-- ignores --></xsl:when>
 				<xsl:when test="starts-with($url, '/android/repository/sys-img/android-wear/')">
-					<xsl:text>https://dl-ssl.google.com</xsl:text>
+					<xsl:text>https://dl.google.com</xsl:text>
 					<xsl:value-of select="$url"/>
 				</xsl:when>
 				<xsl:when test="starts-with($url, '/')"><!-- ignores --></xsl:when>
 				<xsl:otherwise>
-					<xsl:text>https://dl-ssl.google.com/android/repository/sys-img/android-wear/</xsl:text>
+					<xsl:text>https://dl.google.com/android/repository/sys-img/android-wear/</xsl:text>
 					<xsl:value-of select="$url"/>
 				</xsl:otherwise>
 			</xsl:choose>

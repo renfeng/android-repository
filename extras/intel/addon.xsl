@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 				xmlns:sdk="http://schemas.android.com/sdk/android/addon/7">
 
-	<!-- https://dl-ssl.google.com/android/repository/addon.xml -->
+	<!-- https://dl.google.com/android/repository/addon.xml -->
 
 	<xsl:strip-space elements="*" />
 	<xsl:output indent="yes" method="text" />
@@ -13,8 +13,8 @@
 			<xsl:variable name="url" select="text()"></xsl:variable>
 
 			<xsl:choose>
-				<xsl:when test="not(starts-with($url, 'https://dl-ssl.google.com/android/repository/extras/intel/'))">
-					<xsl:text>https://dl-ssl.google.com/android/repository/extras/intel/</xsl:text>
+				<xsl:when test="not(starts-with($url, 'https://dl.google.com/android/repository/extras/intel/'))">
+					<xsl:text>https://dl.google.com/android/repository/extras/intel/</xsl:text>
 				</xsl:when>
 			</xsl:choose>
 

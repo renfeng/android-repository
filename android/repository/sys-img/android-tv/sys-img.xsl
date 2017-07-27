@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 				xmlns:sdk="http://schemas.android.com/sdk/android/sys-img/3">
 
-	<!-- https://dl-ssl.google.com/android/repository/sys-img/android-tv/sys-img.xml -->
+	<!-- https://dl.google.com/android/repository/sys-img/android-tv/sys-img.xml -->
 
 	<xsl:strip-space elements="*"/>
 	<xsl:output indent="yes" method="text"/>
@@ -15,9 +15,9 @@
 			<xsl:variable name="url" select="text()"></xsl:variable>
 
 			<xsl:choose>
-				<xsl:when test="starts-with($url, concat('https://dl-ssl.google.com/', $site))">
+				<xsl:when test="starts-with($url, concat('https://dl.google.com/', $site))">
 					<xsl:text>https://dl.google.com/</xsl:text>
-					<xsl:value-of select="substring-after($url, 'https://dl-ssl.google.com/')"/>
+					<xsl:value-of select="substring-after($url, 'https://dl.google.com/')"/>
 				</xsl:when>
 				<xsl:when test="starts-with($url, 'https://')"><!-- ignores --></xsl:when>
 				<xsl:when test="starts-with($url, 'http://')"><!-- ignores --></xsl:when>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-	<!-- https://dl-ssl.google.com/glass/gdk/addon2-1.xml -->
+	<!-- https://dl.google.com/glass/gdk/addon2-1.xml -->
 
 	<xsl:strip-space elements="*" />
 	<xsl:output indent="yes" method="text" />

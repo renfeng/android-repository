@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 				xmlns:sdk="http://schemas.android.com/sdk/android/sys-img/3">
 
-	<!-- https://dl-ssl.google.com/android/repository/sys-img/android/sys-img.xml -->
+	<!-- https://dl.google.com/android/repository/sys-img/android/sys-img.xml -->
 
 	<xsl:strip-space elements="*" />
 	<xsl:output indent="yes" method="text" />
@@ -72,11 +72,11 @@
 				<xsl:value-of select="concat(',', $url)" />
 			</xsl:when>
 			<xsl:when test="starts-with($url, '/')">
-				<xsl:value-of select="concat(',https://dl-ssl.google.com', $url)" />
+				<xsl:value-of select="concat(',https://dl.google.com', $url)" />
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of
-					select="concat(',https://dl-ssl.google.com/android/repository/sys-img/android/', $url)" />
+					select="concat(',https://dl.google.com/android/repository/sys-img/android/', $url)" />
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
