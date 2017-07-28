@@ -6,57 +6,83 @@
 BASEDIR=$(dirname $0)
 
 DL_HOST=${DL_HOST:-https://dl.google.com}
-DL_PATH=${DL_PATH:-android/repository}
+DL_PATH=android/studio
 
-mkdir -p studio
-wget --no-check-certificate https://developer.android.com/studio/index.html -O studio/index.html.orig
+# available options for language (as of 2017-07-28)
+# id - Bahasa Indonesia
+# de - Deutsch
+# en - English
+# es - español
+# es-419 - Español (América Latina)
+# fr - français
+# pt-br - Português Brasileiro
+# vi - Tiếng Việt
+# tr - Türkçe
+# ru - Русский
+# th - ภาษาไทย
+# ja - 日本語
+# zh-cn - 简体中文
+# zh-tw - 繁體中文
+# ko - 한국어
+DL_LANG=${DL_LANG:-en}
+
+mkdir -p ${DL_PATH}
+
+# android_developer_pref_lang is ignored
+# TODO the column header of checksum is incorrent for Chinese: SHA-1 checksum (should be SHA-256 checksum)
+# https://www.gnu.org/software/wget/manual/html_node/HTTP-Options.html
+wget --header "Cookie: django_language=${DL_LANG}" --no-check-certificate https://developer.android.com/studio/index.html -O ${DL_PATH}/index.html.orig
 
 # download android studio
-grep -o ${DL_HOST}/dl/android/studio'/[^"]*' studio/index.html.orig | grep -v [.]exe \
-  | sed -E 's~('${DL_HOST}'/('dl/android/studio'/[^/]+/[^/]+)/.+)~wget -N -P \2 -c \1~g' \
-  > studio/download.sh
-chmod +x studio/download.sh
-studio/download.sh
+grep -o ${DL_HOST}/dl/${DL_PATH}'/[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe \
+  | sed -E 's~('${DL_HOST}'/dl/('${DL_PATH}'/[^/]+/[^/]+)/.+)~wget -N -c \1 -P \2~g' \
+  > ${DL_PATH}/download.sh
+chmod +x ${DL_PATH}/download.sh
+${DL_PATH}/download.sh
 
-# download sdk manager
-grep -o ${DL_HOST}/${DL_PATH}/'[^"]*' studio/index.html.orig | grep -v [.]exe | wget -N -P ${DL_PATH} -c -i -
+# download sdk tools
+grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | wget -N -P android/repository -c -i -
 
 # generate download page
 # sed remove lines until
 # http://www.linuxquestions.org/questions/linux-newbie-8/how-to-use-sed-to-delete-all-lines-before-the-first-match-of-a-pattern-802069/
 # sed remove lines after
 # http://stackoverflow.com/questions/5227295/how-do-i-delete-all-lines-in-a-file-starting-from-after-a-matching-line
-cat studio/index.html.orig \
+cat ${DL_PATH}/index.html.orig \
   | sed -n '/<section id="downloads"/,$p' \
   | sed '/section>/q' \
-  > studio/index.html.sections
-cat studio/index.html.orig \
+  > ${DL_PATH}/index.html.sections
+cat ${DL_PATH}/index.html.orig \
   | sed -n '/<section id="Requirements"/,$p' \
   | sed '/section>/q' \
-  >> studio/index.html.sections
+  >> ${DL_PATH}/index.html.sections
 
-cat ${BASEDIR}/studio/template.html \
+cat ${BASEDIR}/${DL_PATH}/template.html \
              | sed '/<!-- insert -->/q' \
-             > studio/index.html
-cat studio/index.html.sections \
-      | sed "s~${DL_HOST}~~g" \
+             > ${DL_PATH}/index.html
+cat ${DL_PATH}/index.html.sections \
+      | sed -E "s~${DL_HOST}(/dl)?~~g" \
       | sed 's~onclick="return onDownload(this)"~target="_blank"~g' \
-      >> studio/index.html
-cat ${BASEDIR}/studio/template.html \
+      >> ${DL_PATH}/index.html
+cat ${BASEDIR}/${DL_PATH}/template.html \
             | sed -n '/<!-- insert -->/,$p' \
-            >> studio/index.html
-mkdir -p css
-cp ${BASEDIR}/css/default.css css/
-
-# clean obsolete studio
-if [ -d dl/android/studio ]; then
-	valid=`grep -o ${DL_HOST}/dl/android/studio'/[^"]*' studio/index.html.orig | grep -v [.]exe | sed -E 's~'${DL_HOST}'/(dl/android/studio/.+)~\1~g'`
-	while read -r file; do
-		if ! echo "${valid}" | grep -q ${file}; then
-			rm ${file}
-		fi
-	done <<< "`find dl/android/studio -type f`"
-fi
+            >> ${DL_PATH}/index.html
 
 # clean sdk manager
-grep -o ${DL_HOST}/${DL_PATH}/'[^"]*' studio/index.html.orig | grep -v [.]exe | sed -E 's~'${DL_HOST}'/~~g' >> ${DL_PATH}/valid
+grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe | sed -E 's~'${DL_HOST}'/~~g' >> android/repository/valid
+
+# clean obsolete studio
+echo ${DL_PATH}/index.html >> ${DL_PATH}/valid
+cat ${DL_PATH}/index.html.orig | perl -nle 'print $& if m{'${DL_HOST}'/dl/'${DL_PATH}'/[^"]*}' | grep -v [.]exe | sed -E 's~'${DL_HOST}'/dl/('${DL_PATH}'/.+)~\1~g' >> ${DL_PATH}/valid
+valid="`cat ${DL_PATH}/valid`"
+while read -r file; do
+	if ! echo "${valid}" | grep -q ${file}; then
+		rm ${file}
+	fi
+done <<< "`find ${DL_PATH} -type f`"
+
+# https://superuser.com/questions/61611/how-to-copy-with-cp-to-include-hidden-files-and-hidden-directories-and-their-con/367303#367303
+cp -r ${BASEDIR}/docs/. android
+pushd android
+bower i
+popd

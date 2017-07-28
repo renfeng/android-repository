@@ -9,7 +9,7 @@ BASEDIR=$(dirname $0)
 # https://android.googlesource.com/platform/sdk/+/tools_r14
 # The URL ends with a /, allowing easy concatenation.
 DL_HOST=${DL_HOST:-https://dl.google.com}
-DL_PATH=${DL_PATH:-android/repository}
+DL_PATH=android/repository
 
 echo synchronizing indices
 sites=()
@@ -49,8 +49,8 @@ echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file in
 cat and-repo.apache2.conf
 
 # clean obsolete
-echo android/repository/repository2-1.xml >> ${DL_PATH}/valid
-echo android/repository/addons_list-3.xml >> ${DL_PATH}/valid
+echo ${DL_PATH}/repository2-1.xml >> ${DL_PATH}/valid
+echo ${DL_PATH}/addons_list-3.xml >> ${DL_PATH}/valid
 for site in ${sites[@]}; do
 	echo ${site}
 	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`

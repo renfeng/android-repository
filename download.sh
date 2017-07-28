@@ -7,7 +7,7 @@
 BASEDIR=$(dirname $0)
 
 DL_HOST=${DL_HOST:-https://dl.google.com}
-DL_PATH=${DL_PATH:-android/repository}
+DL_PATH=android/repository
 
 echo synchronizing indices
 # The list of xml files was extracted from Android SDK Manager log (sample: sdk-mgr.log)
@@ -61,12 +61,12 @@ done
 
 echo generating sdk web manager data
 echo "name,version,api-level,revision,description,obsolete,windowsSize,windowsSHA1,windowsURL,macosxSize,macosxSHA1,macosxURL,linuxSize,linuxSHA1,linuxURL" \
-	> packages.csv.tmp
+	> android/packages.csv.tmp
 for site in ${sites[@]}; do
 	# http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
-	xsltproc ${BASEDIR}/${DL_PATH}/${site}.csv.xsl ${DL_PATH}/${site}.xml >> packages.csv.tmp
+	xsltproc ${BASEDIR}/${DL_PATH}/${site}.csv.xsl ${DL_PATH}/${site}.xml >> android/packages.csv.tmp
 done
-mv packages.csv.tmp packages.csv
+mv android/packages.csv.tmp android/packages.csv
 
 #echo removing obsolete sdk packages
 ## grep -P is not supported by OS X
@@ -80,7 +80,7 @@ mv packages.csv.tmp packages.csv
 echo studio and sdk tools
 ${BASEDIR}/studio.sh
 
-echo httpd conf
-cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > and-repo.apache2.conf
-echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
-cat and-repo.apache2.conf
+#echo httpd conf
+#cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > android/and-repo.apache2.conf
+#echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
+#cat android/and-repo.apache2.conf

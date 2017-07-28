@@ -101,7 +101,7 @@
 					<section>
 						<paper-checkbox checked="{{showObsolete}}" on-change="refresh">Obsolete</paper-checkbox>
 						<paper-checkbox checked="{{showLinux}}" on-change="refresh">Linux</paper-checkbox>
-						<paper-checkbox checked="{{showOSX}}" on-change="refresh">OS X</paper-checkbox>
+						<paper-checkbox checked="{{showMacOSX}}" on-change="refresh">OS X</paper-checkbox>
 						<paper-checkbox checked="{{showWin}}" on-change="refresh">Windows</paper-checkbox>
 					</section>
 					<paper-listbox selected="{{selectedGroup}}">
@@ -112,14 +112,14 @@
 				</div>
 			</app-drawer>
 			<app-header-layout has-scrolling-region>
-				<app-header slot="header" fixed effects="waterfall">
+				<app-header slot="header" fixed>
 					<app-toolbar>
 						<paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
 						<div main-title style="white-space: nowrap;">Android SDK Web Manager</div>
 						<paper-icon-button icon="shopping-cart" on-tap="toggleUrlDisplay"></paper-icon-button>
 						<span>{{urlList.length}}</span>
 						<span class="flex"></span>
-						<a href="/studio" title="Download Android Studio and SDK Manager" style="color: white;">
+						<a href="/android/studio/" title="Download Android Studio and SDK Manager" style="color: white;">
 							<iron-icon icon="android"/>
 						</a>
 					</app-toolbar>
@@ -178,7 +178,7 @@
 				},
 				showObsolete: Boolean,
 				showLinux: Boolean,
-				showOSX: Boolean,
+				showMacOSX: Boolean,
 				showWin: Boolean,
 			},
 			observers: [
@@ -197,7 +197,7 @@
 				 * http://stackoverflow.com/a/11219680
 				 */
 				this.showLinux = navigator.platform.indexOf("Linux") != -1;
-				this.showOSX = navigator.platform.indexOf("Mac") != -1;
+				this.showMacOSX = navigator.platform.indexOf("Mac") != -1;
 				this.showWin = navigator.platform.indexOf("Win") != -1;
 
 				var myElement = this;
@@ -236,7 +236,7 @@
 						continue;
 					}
 					if (!(this.showLinux && p.linuxURL) &&
-							!(this.showOSX && p.macosxURL) &&
+							!(this.showMacOSX && p.macosxURL) &&
 							!(this.showWin && p.windowsURL)) {
 						continue;
 					}
@@ -328,7 +328,7 @@
 								if (this.showLinux && p.linuxURL) {
 									urlList.push(p.linuxURL);
 								}
-								if (this.showOSX && p.macosxURL) {
+								if (this.showMacOSX && p.macosxURL) {
 									urlList.push(p.macosxURL);
 								}
 								if (this.showWin && p.windowsURL) {

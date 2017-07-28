@@ -18,13 +18,13 @@
 		</script>-->
 
 		<!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-		<script src="components/webcomponentsjs/webcomponents-loader.js"></script>
+		<script src="/android/components/webcomponentsjs/webcomponents-loader.js"></script>
 
 		<!-- Load your application shell -->
 		<!--<link rel="import" href="components/poly-compatibility/poly-compatibility.html"/>-->
-		<link rel="import" href="elements/android-sdk-manager.html" />
-		<link rel="import" href="components/font-roboto/roboto.html" />
-		
+		<link rel="import" href="/android/elements/android-sdk-manager.html" />
+		<link rel="import" href="/android/components/font-roboto/roboto.html" />
+
 		<style shim-shadowdom>
 			html,body {
 				height: 100%;
@@ -74,6 +74,14 @@
 		
 			ga('create', 'UA-549131-13', 'auto');
 			ga('send', 'pageview');
+		</script>
+
+		<script>
+			function xxx() {
+				chrome.runtime.sendMessage("dojobmndeaedfgemhclaeghnalikcjgi", {linkurl:"https://dl.google.com/android/repository/platform-tools_r26.0.0-darwin.zip", pageurl:"https://github.com/renfeng/android-repository", cookie:"", filename:"", websitekey:"https://github.com/renfeng/android-repository", cpagetitle:"android/repository"}, function(response) { if (!response) { console.log(chrome.runtime.lastError) } });
+			}
+
+			//chrome.runtime.sendMessage("dojobmndeaedfgemhclaeghnalikcjgi", {linkurl:"https://dl.google.com/android/repository/platform-tools_r26.0.0-darwin.zip"}, function(response) { if (!response) { console.log(chrome.runtime.lastError) } });
 		</script>
 
 	</body>

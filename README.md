@@ -12,34 +12,18 @@ Tested on
 
 ## Prerequisites
 
-You'll need a lot of free storage on your disk, about 48GB as of 2017-07-09.
+* 51 GB storage on your disk, as of 2017-07-29
+* bower, https://bower.io/#install-bower
+* wget
+  * macOS, http://brew.sh/
+  * Windows, install wget with [Cygwin](https://cygwin.com/install.html)
+* xsltproc
+  * Linux Mint/Ubuntu/Debian, ```sudo apt-get install xsltproc```
+  * Windows, install libxml2 and libxslt with Cygwin, see http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
 
-### Linux
+## Server setup
 
-sudo apt-get install xsltproc
-
-TODO test on redhat, yum install xsltproc
-
-### OS X
-
-It's recommended to use homebrew to install wget.
-* http://brew.sh/
-* http://www.merenbach.com/software/wget/
-
-Ref.
-* http://wget.addictivecode.org/Faq.html#download
-* http://www.gnu.org/software/wget/
-* http://google.com#q=wget
-
-### Cygwin
-
- * wget
- * xslt - The two packages you must have are libxml2 and libxslt, both available under the Libs category.
-Ref. http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
-
-## For Android Studio Built-in SDK Manager
-
-### Server (Repository) setup
+### For Android Studio Built-in SDK Manager
 
 Note
 * Files will be downloaded to your working directory.
@@ -50,36 +34,7 @@ Note
 ${ANDROID_REPOSITORY_HOME}/download2.sh
 ```
 
-### Client (Android Studio) setup
-
-Set environment variable before launching Android Studio.
-
-Linux
-
-```
-export SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
-android-studio/bin/studio.sh
-```
-
-macOS
-
-```
-export SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
-open -a 'Android Studio'
-```
-
-Windows
-
-```
-set SDK_TEST_BASE_URL=http://studyjams.dushu.hu/android/repository/
-android-studio-windows/bin/studio64.exe
-```
-
-Ref. https://android.googlesource.com/platform/sdk/+/tools_r14
-
-## For Standalone SDK Manager
-
-### Server (Repository) setup
+### For Standalone SDK Manager
 
 Note
 * Files will be downloaded to your working directory.
@@ -90,46 +45,9 @@ Note
 ${ANDROID_REPOSITORY_HOME}/download.sh
 ```
 
-### Client (SDK Manager) setup
+## Client setup
 
-Assuming your mirror will be hosted on studyjams.dushu.hu, the following will setup a client. Note. Java 8 is required.
-```
-MIRROR_HOST=studyjams.dushu.hu
-OS=linux
-#OS=darwin
-#OS=windows
-wget http://${MIRROR_HOST}/`wget http://${MIRROR_HOST}/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-${OS}-\d+.zip}"`
-unzip sdk-tools-*.zip
-tools/bin/sdkmanager --no_https --proxy=http --proxy_host=${MIRROR_HOST} --proxy_port=80 "patcher;v4" "extras;android;m2repository" "extras;google;m2repository" emulator "build-tools;25.0.3" "platforms;android-25" platform-tools tools "sources;android-25"
-```
-
-Tips: The settings are saved to
-```
-~/.android/repositories.cfg
-```
-
-Sample [repositories.cfg](repositories.cfg)
-
-The command line version of standalone SDK manager replaces the GUI version, since [SDK Tools, Revision 25.2.3 (November 2016)](https://developer.android.com/studio/releases/sdk-tools.html)
-
-Now these slides serves as an archive of how the project originated, https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub
-
-### (Optional) SDK web manager setup
-
-It's a single page app for exploring the packages downloaded. To make it work,
- 1. In your web root directory, (backup your index.html, and) run
-
-```
-${ANDROID_REPOSITORY_HOME}/setup-sdk-web-manager.sh
-```
-
- It will copy over three files and one directory.
-  * index.html
-  * .bowerrc
-  * bower.json
-  * elements/
- 2. Install bower (requires nodejs, https://nodejs.org/), and run the following command line
- 3. bower i -F -S
+After your server setup is complete, navigate to, ```http://<your.server>/android/studio/```, and find further instructions.
 
 ## Who's using it
 
