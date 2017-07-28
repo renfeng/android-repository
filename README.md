@@ -1,14 +1,15 @@
 # android/repository
 
-This is a set of scripts for creating a mirror of Android Repository for Android SDK Manager (both standalone and Android Studio built-in) to download SDK packages from.
-
-It's ideal for a classroom, [Study Jams](http://developerstudyjams.com/), and [Code labs](https://codelabs.developers.google.com/?cat=Android).
+It mirrors Android SDKs, which both Android Studio built-in and
+standalone SDK Manager can download from. Ideal for a crowded place,
+e.g. classroom, [Study Jams](http://developerstudyjams.com/),
+and [Code labs](https://codelabs.developers.google.com/?cat=Android).
 
 Tested on 
 
-* Linux Mint Maya (13, Ubuntu 10.04)/Rebecca (17.1, Ubuntu 14.04),
-* Cygwin on Windows 7 64bit
-* OS X Mavericks (10.9.5)
+* Linux Mint Rebecca (17.1, Ubuntu 14.04),
+* Windows 7 64bit
+* macOS Sierra (10.12.6)
 
 ## Prerequisites
 
@@ -23,27 +24,27 @@ Tested on
 
 ## Server setup
 
-### For Android Studio Built-in SDK Manager
+* Files will be downloaded to your working directory, which can be different than
+* The directory the project is cloned into, referred as ${ANDROID_REPOSITORY_HOME}.
+* The mirror can be hosted with an HTTP server. A sample Apache HTTPd vhost config will be printed on download complete.
 
-Note
-* Files will be downloaded to your working directory.
-* ANDROID_REPOSITORY_HOME is the directory holding the files of the project.
-* A sample httpd vhost config will be printed on download complete
-
+For Android Studio Built-in SDK Manager
 ```
 ${ANDROID_REPOSITORY_HOME}/download2.sh
 ```
 
-### For Standalone SDK Manager
-
-Note
-* Files will be downloaded to your working directory.
-* ANDROID_REPOSITORY_HOME is the directory holding the files of the project.
-* A sample httpd vhost config will be printed on download complete
-
+For Standalone SDK Manager
 ```
 ${ANDROID_REPOSITORY_HOME}/download.sh
 ```
+
+By default, it downloads from https://dl.google.com. To download from elsewhere, set environment variable, ```DL_HOST```.
+
+```
+export DL_HOST=https://dl-ssl.google.com
+```
+
+See also [Known Mirrors](https://github.com/renfeng/android-repository/wiki/Known-Mirrors).
 
 ## Client setup
 
