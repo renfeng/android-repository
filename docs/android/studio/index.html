@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+
+  <script src="/android/components/webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="/android/components/polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="/android/components/polymer/lib/elements/dom-if.html">
+
+  <!-- http://developer.android.com/assets/css/default.css?v=5 -->
+  <link rel="stylesheet" href="/android/css/default.css" />
+
+  <style>
+    #win-bundle, #win-bundle-notools, #win-tools,
+    #win-bundle ~ *, #win-bundle-notools ~ *, #win-tools ~ * {
+      /*display: none;*/
+    }
+    .download:first-of-type tr:nth-of-type(2) td:not(:first-of-type) {
+      visibility: hidden;
+    }
+    .download:first-of-type tr:nth-of-type(3) td {
+      visibility: hidden;
+    }
+  </style>
+
+</head>
+<body>
+<section>
+  <div class="wrap">
+    <h1 class="dac-hero-title">Download Android Studio and SDK Tools</h1>
+
+    <p>SDK browser, <a href="/android/repository/">android/repository</a></p>
+
+    <h2 class="norule">Client setup</h2>
+    <p>Verify the integrity of the files downloaded, e.g.</p>
+    <pre>$ openssl sha -sha256 android-studio-ide-162.4069837-windows.zip
+SHA256(android-studio-ide-162.4069837-windows.zip)= b61d6f08758b5b2e6dad604d8a8d61acf549f746b07dbb0c2265daad01a7d2b7</pre>
+
+    <dom-bind>
+      <template>
+        <template is="dom-if" if="[[showLinux]]">
+            <h3>Linux</h3>
+            <p>
+                Android Studio - Set environment variable before launching Android Studio.
+                Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
+            </p>
+            <pre>export SDK_TEST_BASE_URL=[[origin]]/android/repository/
+android-studio/bin/studio.sh</pre>
+
+            <p>Standalone - Java 8 is required</p>
+            <pre>wget [[origin]]/`wget [[origin]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-linux-\d+.zip}"`
+unzip sdk-tools-*.zip
+tools/bin/sdkmanager --no_https --proxy=http --proxy_host=[[hostname]] --proxy_port=80 "patcher;v4" "extras;android;m2repository" "extras;google;m2repository" emulator "build-tools;25.0.3" "platforms;android-25" platform-tools tools "sources;android-25"</pre>
+        </template>
+        <template is="dom-if" if="[[showMacOSX]]">
+            <h3>macOS</h3>
+            <p>
+                Android Studio - Set environment variable before launching Android Studio.
+                Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
+            </p>
+
+            <pre>export SDK_TEST_BASE_URL=[[origin]]/android/repository/
+open -a 'Android Studio'</pre>
+
+            <p>Standalone - Java 8 is required</p>
+            <pre>wget [[origin]]/`wget [[origin]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-darwin-\d+.zip}"`
+unzip sdk-tools-*.zip
+tools/bin/sdkmanager --no_https --proxy=http --proxy_host=[[hostname]] --proxy_port=80 "patcher;v4" "extras;android;m2repository" "extras;google;m2repository" emulator "build-tools;25.0.3" "platforms;android-25" platform-tools tools "sources;android-25"</pre>
+        </template>
+        <template is="dom-if" if="[[showWin]]">
+            <h3>Windows</h3>
+            <p>
+                Android Studio - Set environment variable before launching Android Studio.
+                Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
+            </p>
+
+            <pre>set SDK_TEST_BASE_URL=[[origin]]/android/repository/
+android-studio-windows/bin/studio64.exe</pre>
+
+            <p>Standalone - Java 8 is required</p>
+            <pre>wget [[origin]]/`wget [[origin]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-windows-\d+.zip}"`
+unzip sdk-tools-*.zip
+tools/bin/sdkmanager --no_https --proxy=http --proxy_host=[[hostname]] --proxy_port=80 "patcher;v4" "extras;android;m2repository" "extras;google;m2repository" emulator "build-tools;25.0.3" "platforms;android-25" platform-tools tools "sources;android-25"</pre>
+        </template>
+
+        <p>The settings are saved to</p>
+        <pre>~/.android/repositories.cfg</pre>
+
+        <p>Sample <a href="/android/repositories.cfg">repositories.cfg</a></p>
+
+        <p>
+            The command line version of standalone SDK manager replaces the GUI version, since
+            <a href="https://developer.android.com/studio/releases/sdk-tools.html">SDK Tools, Revision 25.2.3 (November 2016)</a>.
+            Now these slides serves as an archive of how the project originated,
+            <a href="https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub">Make a LAN mirror for developing Android apps - Google Slides</a>.
+        </p>
+
+      </template>
+    </dom-bind>
+    <script>
+      var scope = document.querySelector('dom-bind');
+      scope.origin = location.origin;
+      scope.hostname = location.hostname;
+      scope.port = location.port || "80";
+
+      scope.showLinux = navigator.platform.indexOf("Linux") != -1;
+      scope.showMacOSX = navigator.platform.indexOf("Mac") != -1;
+      scope.showWin = navigator.platform.indexOf("Win") != -1;
+
+      if (!scope.showLinux && !scope.showMacOSX && !scope.showWin) {
+        scope.showLinux = true;
+        scope.showMacOSX = true;
+        scope.showWin = true;
+      }
+    </script>
+  </div>
+</section>
+<!-- insert -->
+<section id="downloads" class="dac-section dac-small">
+<div class="wrap">
+
+<h2 class="norule">Start using Android Studio today</h2>
+
+<p>Android Studio includes all the tools you need to build apps for Android.</p>
+
+<div class="landing-button-wrap system-supported">
+<p>
+  <a class="landing-button green download-bundle-button"
+    data-modal-toggle="studio_tos">Download <span translate="no">Android Studio</span><br>
+  <span class="small"><span class="version">2.3</span>
+  </span></a>
+</p>
+</div>
+
+<div style="float:left;width:auto;margin-bottom:40px">
+<ul class="nolist" style="text-transform: uppercase;margin:8px 0">
+<li>Version: 2.3.3.0</li>
+<li>Release date: June 8, 2017</li>
+</ul>
+</div>
+
+
+
+
+<h4 style="clear:left;margin-top:40px">Select a different platform</h4>
+
+  <table class="download">
+    <tr>
+      <th>Platform</th>
+      <th>Android Studio package</th>
+      <th>Size</th>
+      <th>SHA-256 checksum</th>
+  </tr>
+  <tr>
+    <td rowspan="3">Windows<br>(64-bit)</td>
+    <td>
+  <a onclick="return onDownload(this,false,true)" id="win-bundle" data-modal-toggle="studio_tos"
+    href="/android/studio/install/2.3.3.0/android-studio-bundle-162.4069837-windows.exe"
+    >android-studio-bundle-162.4069837-windows.exe</a><br>
+    Includes Android SDK <b>(recommended)</b>
+    </td>
+    <td id="win-bundle-size" data-size="2020009280"></td>
+    <td>dc23bc968d381a5ca7fdd12bc7799b95ec0d11f1e4007387cb0de55c78b475ba</td>
+  </tr>
+  <tr>
+    <!-- blank TD from Windows rowspan -->
+    <td>
+  <a onclick="return onDownload(this,false,true)" id="win-bundle-notools" data-modal-toggle="studio_tos"
+    href="/android/studio/install/2.3.3.0/android-studio-ide-162.4069837-windows.exe"
+    >android-studio-ide-162.4069837-windows.exe</a><br>
+    No Android SDK
+    </td>
+    <td data-size="473299352"></td>
+    <td>f0b72473cb94ba4bcbc80eeb84f4b53364da097efa255f7cab71bcb10a28775a</td>
+  </tr>
+  <tr>
+    <!-- blank TD from Windows rowspan -->
+    <td>
+  <a onclick="return onDownload(this,false,true)" id="win-bundle-zip" data-modal-toggle="studio_tos"
+    href="/android/studio/ide-zips/2.3.3.0/android-studio-ide-162.4069837-windows.zip"
+    >android-studio-ide-162.4069837-windows.zip</a><br>
+    No Android SDK, no installer
+    </td>
+    <td data-size="490882918"></td>
+    <td>b61d6f08758b5b2e6dad604d8a8d61acf549f746b07dbb0c2265daad01a7d2b7</td>
+  </tr>
+  <tr>
+    <td>Windows<br>(32-bit)</td>
+    <td>
+  <a onclick="return onDownload(this,false,true)" id="win32-bundle-zip" data-modal-toggle="studio_tos"
+    href="/android/studio/ide-zips/2.3.3.0/android-studio-ide-162.4069837-windows32.zip"
+    >android-studio-ide-162.4069837-windows32.zip</a><br>
+    No Android SDK, no installer
+    </td>
+    <td data-size="490323833"></td>
+    <td>db7526187d492287b6e2979249d27a67f1dd62d6e095cca7508e05edce74e272</td>
+  </tr>
+  <tr>
+    <td><nobr>Mac</nobr></td>
+    <td>
+  <a onclick="return onDownload(this,false,true)" id="mac-bundle" data-modal-toggle="studio_tos"
+    href="/android/studio/install/2.3.3.0/android-studio-ide-162.4069837-mac.dmg"
+    >android-studio-ide-162.4069837-mac.dmg</a>
+    </td>
+    <td id="mac-bundle-size" data-size="486148957"></td>
+    <td>da0d39221b8cb7b4b5cbe483dd4174dd1f7dc688e74f7de7c47cc8ffb6296715</td>
+  </tr>
+  <tr>
+    <td>Linux</td>
+    <td>
+  <a onclick="return onDownload(this,false,true)" id="linux-bundle" data-modal-toggle="studio_tos"
+    href="/android/studio/ide-zips/2.3.3.0/android-studio-ide-162.4069837-linux.zip"
+    >android-studio-ide-162.4069837-linux.zip</a>
+    </td>
+    <td id="linux-bundle-size" data-size="490782431"></td>
+    <td>1383cfd47441e5f820b6257a1bdd683e0e980bc76c7f2027ef84dc2e6ad2f17f</td>
+  </tr>
+  </table>
+  <p>See the <a href="https://developer.android.com/studio/releases/index.html">Android Studio
+release notes</a>.</p>
+
+
+
+<h4 class="norule" style="margin-top:40px" id="command-tools">Get just the command line tools</h4>
+
+<p>If you do not need Android Studio, you can download the basic Android
+command line tools below. You can use the included <a
+href="https://developer.android.com/studio/command-line/sdkmanager.html"><code>sdkmanager</code></a>
+to download other SDK packages.</p>
+
+<p>These tools are included in Android Studio.</p>
+
+  <table class="download">
+    <tr>
+      <th>Platform</th>
+      <th>SDK tools package</th>
+      <th>Size</th>
+      <th>SHA-256 checksum</th>
+  </tr>
+  <tr>
+    <td>Windows</td>
+    <td>
+  <a target="_blank" id="win-tools" data-modal-toggle="studio_tos"
+    href="/android/repository/sdk-tools-windows-3859397.zip">sdk-tools-windows-3859397.zip</a><br>
+    </td>
+    <td data-size="138449982"></td>
+    <td>7f6037d3a7d6789b4fdc06ee7af041e071e9860c51f66f7a4eb5913df9871fd2</td>
+  </tr>
+  <tr>
+    <td><nobr>Mac</nobr></td>
+    <td>
+  <a target="_blank" id="mac-tools" data-modal-toggle="studio_tos"
+    href="/android/repository/sdk-tools-darwin-3859397.zip">sdk-tools-darwin-3859397.zip</a>
+    </td>
+    <td data-size="86182133"></td>
+    <td>4a81754a760fce88cba74d69c364b05b31c53d57b26f9f82355c61d5fe4b9df9</td>
+  </tr>
+  <tr>
+    <td>Linux</td>
+    <td>
+  <a target="_blank" id="linux-tools" data-modal-toggle="studio_tos"
+    href="/android/repository/sdk-tools-linux-3859397.zip">sdk-tools-linux-3859397.zip</a>
+    </td>
+    <td data-size="136964098"></td>
+    <td>444e22ce8ca0f67353bda4b85175ed3731cae3ffa695ca18119cbacef1c1bea0</td>
+  </tr>
+  </table>
+  <p>See the <a href="https://developer.android.com/studio/releases/sdk-tools.html">SDK
+tools release notes</a>.</p>
+
+  </div><!-- end wrap -->
+  </section>
+<section id="Requirements" class="dac-section dac-light dac-small">
+<div class="wrap">
+
+<h2 class="norule">System Requirements</h2>
+
+<div class="cols">
+
+<div class="col-2of6">
+<h4>Windows</h4>
+<ul>
+<li>Microsoft&reg;  Windows&reg;  7/8/10 (32- or 64-bit)</li>
+<li>3 GB RAM minimum, 8 GB RAM recommended; plus 1 GB for the Android Emulator
+</li>
+<li>2 GB of available disk space minimum,<br>4 GB Recommended
+(500 MB for IDE + 1.5 GB for
+Android SDK and emulator system image)</li>
+<li>1280 x 800  minimum screen resolution</li>
+<li>For accelerated emulator: Intel® processor with support for Intel®
+VT-x, Intel® EM64T (Intel® 64), and Execute Disable (XD) Bit functionality</li>
+</ul>
+</div>
+
+<div class="col-2of6">
+<h4>Mac</h4>
+<ul>
+<li>Mac&reg;  OS X&reg;  10.10 (Yosemite) or higher, up to 10.12 (macOS Sierra)</li>
+<li>3 GB RAM minimum, 8 GB RAM recommended; plus 1 GB for the Android Emulator
+</li>
+<li>2 GB of available disk space minimum,<br>4 GB Recommended
+(500 MB for IDE + 1.5 GB for
+Android SDK and emulator system image)</li>
+<li>1280 x 800 minimum screen resolution</li>
+</ul>
+</div>
+
+<div class="col-2of6">
+<h4>Linux</h4>
+<ul>
+<li>GNOME or KDE desktop
+<p><i>Tested on Ubuntu® 14.04 LTS, Trusty Tahr (64-bit distribution capable of
+running 32-bit applications)</i></li>
+<li>64-bit distribution capable of running 32-bit applications</li>
+<li>GNU C Library (glibc) 2.19 or later</li>
+<li>3 GB RAM minimum, 8 GB RAM recommended; plus 1 GB for the Android Emulator
+</li>
+<li>2 GB of available disk space minimum,<br>4 GB Recommended
+(500 MB for IDE + 1.5 GB for
+Android SDK and emulator system image)</li>
+<li>1280 x 800 minimum screen resolution</li>
+<li>For accelerated emulator: Intel® processor with support for Intel®
+VT-x, Intel® EM64T (Intel® 64), and Execute Disable (XD) Bit functionality,
+or AMD processor with support for AMD Virtualization™ (AMD-V™)</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+</section>
+<!-- insert -->
+</body>
+</html>

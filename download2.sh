@@ -40,13 +40,7 @@ for site in ${sites[@]}; do
 	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
 done
 
-echo studio and sdk tools
-${BASEDIR}/studio.sh
-
-echo httpd conf
-cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > and-repo.apache2.conf
-echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
-cat and-repo.apache2.conf
+# TODO generating sdk web manager data
 
 # clean obsolete
 echo ${DL_PATH}/repository2-1.xml >> ${DL_PATH}/valid
@@ -62,3 +56,11 @@ while read -r file; do
 		rm ${file}
 	fi
 done <<< "`find ${DL_PATH} -type f`"
+
+echo studio and sdk tools
+${BASEDIR}/studio.sh
+
+echo httpd conf
+cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > and-repo.apache2.conf
+echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
+cat and-repo.apache2.conf

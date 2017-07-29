@@ -59,21 +59,22 @@ cat ${DL_PATH}/index.html.orig \
 
 cat ${BASEDIR}/${DL_PATH}/template.html \
              | sed '/<!-- insert -->/q' \
-             > ${DL_PATH}/index.html
+             > ${BASEDIR}/docs/${DL_PATH}/index.html
 cat ${DL_PATH}/index.html.sections \
       | sed -E "s~${DL_HOST}(/dl)?~~g" \
       | sed 's~onclick="return onDownload(this)"~target="_blank"~g' \
-      >> ${DL_PATH}/index.html
+      >> ${BASEDIR}/docs/${DL_PATH}/index.html
 cat ${BASEDIR}/${DL_PATH}/template.html \
             | sed -n '/<!-- insert -->/,$p' \
-            >> ${DL_PATH}/index.html
+            >> ${BASEDIR}/docs/${DL_PATH}/index.html
 
 # clean sdk manager
-grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe | sed -E 's~'${DL_HOST}'/~~g' >> android/repository/valid
+grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe \
+  | sed -E 's~'${DL_HOST}'/~~g' >> android/repository/valid
 
 # clean obsolete studio
-echo ${DL_PATH}/index.html >> ${DL_PATH}/valid
-cat ${DL_PATH}/index.html.orig | perl -nle 'print $& if m{'${DL_HOST}'/dl/'${DL_PATH}'/[^"]*}' | grep -v [.]exe | sed -E 's~'${DL_HOST}'/dl/('${DL_PATH}'/.+)~\1~g' >> ${DL_PATH}/valid
+grep -o ${DL_HOST}/dl/${DL_PATH}'/[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe \
+  | sed -E 's~'${DL_HOST}'/dl/('${DL_PATH}'/.+)~\1~g' >> ${DL_PATH}/valid
 valid="`cat ${DL_PATH}/valid`"
 while read -r file; do
 	if ! echo "${valid}" | grep -q ${file}; then
@@ -81,8 +82,9 @@ while read -r file; do
 	fi
 done <<< "`find ${DL_PATH} -type f`"
 
-# https://superuser.com/questions/61611/how-to-copy-with-cp-to-include-hidden-files-and-hidden-directories-and-their-con/367303#367303
-cp -r ${BASEDIR}/docs/. android
-pushd android
+pushd ${BASEDIR}/docs/android
+# bower, https://bower.io/#install-bower
 bower i
 popd
+# https://superuser.com/questions/61611/how-to-copy-with-cp-to-include-hidden-files-and-hidden-directories-and-their-con/367303#367303
+cp -r ${BASEDIR}/docs/. .

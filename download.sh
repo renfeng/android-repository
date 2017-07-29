@@ -48,7 +48,7 @@ for site in ${sites[@]}; do
 	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
 	# http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
 	# http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
-	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}/${SUB_PATH}
+	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${BASEDIR}/docs/${DL_PATH}/${SUB_PATH}
 done
 
 echo downloading packages
@@ -56,17 +56,17 @@ echo downloading packages
 for site in ${sites[@]}; do
 	echo ${site}
 	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
-	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<sdk:url>).*(?=</sdk:url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
+	cat ${BASEDIR}/docs/${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<sdk:url>).*(?=</sdk:url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
 done
 
 echo generating sdk web manager data
 echo "name,version,api-level,revision,description,obsolete,windowsSize,windowsSHA1,windowsURL,macosxSize,macosxSHA1,macosxURL,linuxSize,linuxSHA1,linuxURL" \
-	> android/packages.csv.tmp
+	> ${BASEDIR}/docs/${DL_PATH}/packages.csv.tmp
 for site in ${sites[@]}; do
 	# http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
-	xsltproc ${BASEDIR}/${DL_PATH}/${site}.csv.xsl ${DL_PATH}/${site}.xml >> android/packages.csv.tmp
+	xsltproc ${BASEDIR}/${DL_PATH}/${site}.csv.xsl ${BASEDIR}/docs/${DL_PATH}/${site}.xml >> ${BASEDIR}/docs/${DL_PATH}/packages.csv.tmp
 done
-mv android/packages.csv.tmp android/packages.csv
+mv ${BASEDIR}/docs/${DL_PATH}/packages.csv.tmp ${BASEDIR}/docs/${DL_PATH}/packages.csv
 
 #echo removing obsolete sdk packages
 ## grep -P is not supported by OS X
