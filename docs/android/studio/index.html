@@ -44,46 +44,46 @@ SHA256(android-studio-ide-162.4069837-windows.zip)= b61d6f08758b5b2e6dad604d8a8d
     <dom-bind>
       <template>
         <template is="dom-if" if="[[showLinux]]">
-            <h3>Linux</h3>
-            <p>
-                Android Studio - Set environment variable before launching Android Studio.
-                Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
-            </p>
-            <pre>export SDK_TEST_BASE_URL=[[origin]]/android/repository/
+          <h3>Linux</h3>
+          <p>
+            Android Studio - Set environment variable before launching Android Studio.
+            Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
+          </p>
+          <pre>export SDK_TEST_BASE_URL=[[base]]/android/repository/
 android-studio/bin/studio.sh</pre>
 
-            <p>Standalone - Java 8 is required</p>
-            <pre>wget [[origin]]/`wget [[origin]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-linux-\d+.zip}"`
+          <p>Standalone - Java 8 is required</p>
+          <pre>wget [[base]]/`wget [[base]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-linux-\d+.zip}"`
 unzip sdk-tools-*.zip
 tools/bin/sdkmanager --no_https --proxy=http --proxy_host=[[hostname]] --proxy_port=80 "patcher;v4" "extras;android;m2repository" "extras;google;m2repository" emulator "build-tools;25.0.3" "platforms;android-25" platform-tools tools "sources;android-25"</pre>
         </template>
         <template is="dom-if" if="[[showMacOSX]]">
-            <h3>macOS</h3>
-            <p>
-                Android Studio - Set environment variable before launching Android Studio.
-                Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
-            </p>
+          <h3>macOS</h3>
+          <p>
+            Android Studio - Set environment variable before launching Android Studio.
+            Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
+          </p>
 
-            <pre>export SDK_TEST_BASE_URL=[[origin]]/android/repository/
+          <pre>export SDK_TEST_BASE_URL=[[base]]/android/repository/
 open -a 'Android Studio'</pre>
 
-            <p>Standalone - Java 8 is required</p>
-            <pre>wget [[origin]]/`wget [[origin]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-darwin-\d+.zip}"`
+          <p>Standalone - Java 8 is required</p>
+          <pre>wget [[base]]/`wget [[base]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-darwin-\d+.zip}"`
 unzip sdk-tools-*.zip
 tools/bin/sdkmanager --no_https --proxy=http --proxy_host=[[hostname]] --proxy_port=80 "patcher;v4" "extras;android;m2repository" "extras;google;m2repository" emulator "build-tools;25.0.3" "platforms;android-25" platform-tools tools "sources;android-25"</pre>
         </template>
         <template is="dom-if" if="[[showWin]]">
-            <h3>Windows</h3>
-            <p>
-                Android Studio - Set environment variable before launching Android Studio.
-                Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
-            </p>
+          <h3>Windows</h3>
+          <p>
+            Android Studio - Set environment variable before launching Android Studio.
+            Ref. <a href="https://android.googlesource.com/platform/sdk/+/tools_r14">tools_r14 - platform/sdk - Git at Google</a>
+          </p>
 
-            <pre>set SDK_TEST_BASE_URL=[[origin]]/android/repository/
+          <pre>set SDK_TEST_BASE_URL=[[base]]/android/repository/
 android-studio-windows/bin/studio64.exe</pre>
 
-            <p>Standalone - Java 8 is required</p>
-            <pre>wget [[origin]]/`wget [[origin]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-windows-\d+.zip}"`
+          <p>Standalone - Java 8 is required</p>
+          <pre>wget [[base]]/`wget [[base]]/android/studio/ -O - | perl -nle "print $& if m{android/repository/sdk-tools-windows-\d+.zip}"`
 unzip sdk-tools-*.zip
 tools/bin/sdkmanager --no_https --proxy=http --proxy_host=[[hostname]] --proxy_port=80 "patcher;v4" "extras;android;m2repository" "extras;google;m2repository" emulator "build-tools;25.0.3" "platforms;android-25" platform-tools tools "sources;android-25"</pre>
         </template>
@@ -94,17 +94,17 @@ tools/bin/sdkmanager --no_https --proxy=http --proxy_host=[[hostname]] --proxy_p
         <p>Sample <a href="../repositories.cfg">repositories.cfg</a></p>
 
         <p>
-            The command line version of standalone SDK manager replaces the GUI version, since
-            <a href="https://developer.android.com/studio/releases/sdk-tools.html">SDK Tools, Revision 25.2.3 (November 2016)</a>.
-            Now these slides serves as an archive of how the project originated,
-            <a href="https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub">Make a LAN mirror for developing Android apps - Google Slides</a>.
+          The command line version of standalone SDK manager replaces the GUI version, since
+          <a href="https://developer.android.com/studio/releases/sdk-tools.html">SDK Tools, Revision 25.2.3 (November 2016)</a>.
+          Now these slides serves as an archive of how the project originated,
+          <a href="https://docs.google.com/presentation/d/1JnGpK3YJrMY-f3M0pq6RkyAu2p-wct6DCwCOacCDGO8/pub">Make a LAN mirror for developing Android apps - Google Slides</a>.
         </p>
 
       </template>
     </dom-bind>
     <script>
       var scope = document.querySelector('dom-bind');
-      scope.origin = location.origin;
+      scope.base = location.href.substring(0, location.href.indexOf("/android/studio"));
       scope.hostname = location.hostname;
       scope.port = location.port || "80";
 
