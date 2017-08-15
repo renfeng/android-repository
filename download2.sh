@@ -61,6 +61,6 @@ echo studio and sdk tools
 ${BASEDIR}/studio.sh
 
 echo httpd conf
-cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > and-repo.apache2.conf
+cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > ${DL_PATH}/and-repo.apache2.conf
 echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
-cat and-repo.apache2.conf
+cat ${DL_PATH}/and-repo.apache2.conf
