@@ -24,7 +24,7 @@ Tested on
 ## Server setup
 
 * Files will be downloaded to your working directory, which can be different than
-* The directory the project is cloned into, referred as ```${ANDROID_REPOSITORY_HOME}``.
+* The directory the project is cloned into, referred as ```${ANDROID_REPOSITORY_HOME}```.
 * The mirror can be hosted with an HTTP server. A sample Apache HTTPd vhost config will be printed on download complete.
 
 For Android Studio Built-in SDK Manager
