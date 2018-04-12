@@ -75,7 +75,7 @@ grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | grep 
 # clean obsolete studio
 grep -o ${DL_HOST}/dl/${DL_PATH}'/[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe \
   | sed -E 's~'${DL_HOST}'/dl/('${DL_PATH}'/.+)~\1~g' >> ${DL_PATH}/valid
-valid="`cat ${DL_PATH}/valid`"
+valid=`cat ${DL_PATH}/valid`
 while read -r file; do
 	if ! echo "${valid}" | grep -q ${file}; then
 		rm ${file}

@@ -50,7 +50,7 @@ for site in ${sites[@]}; do
 	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
 	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_PATH}/${SUB_PATH}~g" >> ${DL_PATH}/valid
 done
-valid="`cat ${DL_PATH}/valid`"
+valid=`cat ${DL_PATH}/valid`
 while read -r file; do
 	if ! echo "${valid}" | grep -q ${file}; then
 		rm ${file}
