@@ -33,6 +33,16 @@ ${ANDROID_REPOSITORY_HOME}/download2.sh
 ```
 
 For Standalone SDK Manager
+
+Install bower:
+
+```bash
+sudo apt-get install npm
+npm install -g bower
+```
+
+Run the script:
+
 ```
 ${ANDROID_REPOSITORY_HOME}/download.sh
 ```
