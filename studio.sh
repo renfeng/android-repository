@@ -43,30 +43,30 @@ ${DL_PATH}/download.sh
 # download sdk tools
 grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | wget -N -P android/repository -c -i -
 
-# generate download page
-# sed remove lines until
-# http://www.linuxquestions.org/questions/linux-newbie-8/how-to-use-sed-to-delete-all-lines-before-the-first-match-of-a-pattern-802069/
-# sed remove lines after
-# http://stackoverflow.com/questions/5227295/how-do-i-delete-all-lines-in-a-file-starting-from-after-a-matching-line
-cat ${DL_PATH}/index.html.orig \
-  | sed -n '/<section id="downloads"/,$p' \
-  | sed '/section>/q' \
-  > ${DL_PATH}/index.html.sections
-cat ${DL_PATH}/index.html.orig \
-  | sed -n '/<section id="Requirements"/,$p' \
-  | sed '/section>/q' \
-  >> ${DL_PATH}/index.html.sections
-
-cat ${BASEDIR}/${DL_PATH}/template.html \
-             | sed '/<!-- insert -->/q' \
-             > ${BASEDIR}/docs/${DL_PATH}/index.html
-cat ${DL_PATH}/index.html.sections \
-      | sed -E "s~${DL_HOST}(/dl)?~~g" \
-      | sed 's~onclick="return onDownload(this)"~target="_blank"~g' \
-      >> ${BASEDIR}/docs/${DL_PATH}/index.html
-cat ${BASEDIR}/${DL_PATH}/template.html \
-            | sed -n '/<!-- insert -->/,$p' \
-            >> ${BASEDIR}/docs/${DL_PATH}/index.html
+## generate download page
+## sed remove lines until
+## http://www.linuxquestions.org/questions/linux-newbie-8/how-to-use-sed-to-delete-all-lines-before-the-first-match-of-a-pattern-802069/
+## sed remove lines after
+## http://stackoverflow.com/questions/5227295/how-do-i-delete-all-lines-in-a-file-starting-from-after-a-matching-line
+#cat ${DL_PATH}/index.html.orig \
+#  | sed -n '/<section id="downloads"/,$p' \
+#  | sed '/section>/q' \
+#  > ${DL_PATH}/index.html.sections
+#cat ${DL_PATH}/index.html.orig \
+#  | sed -n '/<section id="Requirements"/,$p' \
+#  | sed '/section>/q' \
+#  >> ${DL_PATH}/index.html.sections
+#
+#cat ${BASEDIR}/${DL_PATH}/template.html \
+#             | sed '/<!-- insert -->/q' \
+#             > ${BASEDIR}/docs/${DL_PATH}/index.html
+#cat ${DL_PATH}/index.html.sections \
+#      | sed -E "s~${DL_HOST}(/dl)?~~g" \
+#      | sed 's~onclick="return onDownload(this)"~target="_blank"~g' \
+#      >> ${BASEDIR}/docs/${DL_PATH}/index.html
+#cat ${BASEDIR}/${DL_PATH}/template.html \
+#            | sed -n '/<!-- insert -->/,$p' \
+#            >> ${BASEDIR}/docs/${DL_PATH}/index.html
 
 # clean sdk manager
 grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe \
@@ -83,8 +83,7 @@ while read -r file; do
 done <<< "`find ${DL_PATH} -type f`"
 
 pushd ${BASEDIR}/docs/android
-# bower, https://bower.io/#install-bower
-bower i
+
 popd
 # https://superuser.com/questions/61611/how-to-copy-with-cp-to-include-hidden-files-and-hidden-directories-and-their-con/367303#367303
 cp -r ${BASEDIR}/docs/. .
