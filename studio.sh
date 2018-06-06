@@ -82,8 +82,5 @@ while read -r file; do
 	fi
 done <<< "`find ${DL_PATH} -type f`"
 
-pushd ${BASEDIR}/docs/android
-
-popd
 # https://superuser.com/questions/61611/how-to-copy-with-cp-to-include-hidden-files-and-hidden-directories-and-their-con/367303#367303
 cp -r ${BASEDIR}/docs/. .
