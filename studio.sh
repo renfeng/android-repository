@@ -40,9 +40,6 @@ grep -o ${DL_HOST}/dl/${DL_PATH}'/[^"]*' ${DL_PATH}/index.html.orig | grep -v [.
 chmod +x ${DL_PATH}/download.sh
 ${DL_PATH}/download.sh
 
-# download sdk tools
-grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | wget -N -P android/repository -c -i -
-
 ## generate download page
 ## sed remove lines until
 ## http://www.linuxquestions.org/questions/linux-newbie-8/how-to-use-sed-to-delete-all-lines-before-the-first-match-of-a-pattern-802069/
@@ -67,10 +64,6 @@ grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | wget 
 #cat ${BASEDIR}/${DL_PATH}/template.html \
 #            | sed -n '/<!-- insert -->/,$p' \
 #            >> ${BASEDIR}/docs/${DL_PATH}/index.html
-
-# clean sdk manager
-grep -o ${DL_HOST}/android/repository/'[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe \
-  | sed -E 's~'${DL_HOST}'/~~g' >> android/repository/valid
 
 # clean obsolete studio
 grep -o ${DL_HOST}/dl/${DL_PATH}'/[^"]*' ${DL_PATH}/index.html.orig | grep -v [.]exe \

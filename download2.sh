@@ -43,22 +43,21 @@ done
 # TODO generating sdk web manager data
 
 # clean obsolete
+echo removing obsolete/temporary files
 echo ${DL_PATH}/repository2-1.xml >> ${DL_PATH}/valid
 echo ${DL_PATH}/addons_list-3.xml >> ${DL_PATH}/valid
 for site in ${sites[@]}; do
-	echo ${site}
+	#echo ${site}
 	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
 	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_PATH}/${SUB_PATH}~g" >> ${DL_PATH}/valid
 done
 valid=`cat ${DL_PATH}/valid`
 while read -r file; do
 	if ! echo "${valid}" | grep -q ${file}; then
+		echo ${file}
 		rm ${file}
 	fi
 done <<< "`find ${DL_PATH} -type f`"
-
-echo studio and sdk tools
-${BASEDIR}/studio.sh
 
 echo httpd conf
 cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > ${DL_PATH}/and-repo.apache2.conf
