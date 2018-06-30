@@ -13,7 +13,7 @@ Tested on
 
 ## Prerequisites
 
-* 51 GB storage on your disk, as of 2017-07-29
+* 68 GB storage on your disk, as of 2018-08-25 (running both `download.sh` and `download2.sh`)
 * wget
   * macOS, http://brew.sh/
   * Windows, install wget with [Cygwin](https://cygwin.com/install.html)
