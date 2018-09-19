@@ -4,62 +4,58 @@
 # it doesn't download when internet is unavailable, and android studio works just fine
 
 # http://stackoverflow.com/questions/242538/unix-shell-script-find-out-which-directory-the-script-file-resides
-BASEDIR=$(dirname $0)
+basedir=$(dirname $0)
 
-# https://android.googlesource.com/platform/sdk/+/tools_r14
-# The URL ends with a /, allowing easy concatenation.
 DL_HOST=${DL_HOST:-https://dl.google.com}
 DL_PATH=android/repository
 
-echo synchronizing indices
-sites=()
+# TODO auto increment 2-1 and 3
+GENERAL_SITE=repository2-1
+ADDON_SITE_INDEX=addons_list-3
 
-# TODO auto increment
-site=repository2-1
+echo synchronizing indices
+
 # http://stackoverflow.com/questions/4944295/wget-skip-if-files-exist/16840827#16840827
 # http://stackoverflow.com/questions/16153446/bash-last-index-of/16153529#16153529
-wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}
-sites+=(${site})
+wget -N ${DL_HOST}/${DL_PATH}/${ADDON_SITE_INDEX}.xml -P ${DL_PATH}
 
-# TODO auto increment
-site=addons_list-3
-wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}
-sites+=(${site})
+sites=(${GENERAL_SITE})
+while read -r addon_site; do
+	sites+=(${addon_site})
+done <<< "`cat ${DL_PATH}/${ADDON_SITE_INDEX}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed s/.xml//g`"
 
-while read -r site; do
-	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
-	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}/${SUB_PATH}
-	sites+=(${site})
-done <<< "`cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed s/.xml//g`"
+for site in ${sites[@]}; do
+	sub_path=`echo ${site} | perl -nle 'print $& if m{.*/|}'`
+	wget -N ${DL_HOST}/${DL_PATH}/${site}.xml -P ${DL_PATH}/${sub_path}
+done
 
 echo downloading packages
-# TODO filter obsolete
+
 for site in ${sites[@]}; do
 	echo ${site}
-	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
-	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${SUB_PATH}~g" | wget -N -P ${DL_PATH}/${SUB_PATH} -c -i -
+	sub_path=`echo ${site} | perl -nle 'print $& if m{.*/|}'`
+	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_HOST}/${DL_PATH}/${sub_path}~g" | wget -N -P ${DL_PATH}/${sub_path} -c -i -
 done
 
 # TODO generating sdk web manager data
 
-# clean obsolete
-echo removing obsolete/temporary files
-echo ${DL_PATH}/repository2-1.xml >> ${DL_PATH}/valid
-echo ${DL_PATH}/addons_list-3.xml >> ${DL_PATH}/valid
+echo removing obsolete files
+rm ${DL_PATH}/downloaded
+echo ${DL_PATH}/${ADDON_SITE_INDEX}.xml >> ${DL_PATH}/downloaded
 for site in ${sites[@]}; do
-	#echo ${site}
-	SUB_PATH=`echo ${site} | perl -nle 'print $& if m{.*/}'`
-	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_PATH}/${SUB_PATH}~g" >> ${DL_PATH}/valid
+	sub_path=`echo ${site} | perl -nle 'print $& if m{.*/|}'`
+	echo ${DL_PATH}/${site}.xml >> ${DL_PATH}/downloaded
+	cat ${DL_PATH}/${site}.xml | perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' | sed "s~^~${DL_PATH}/${sub_path}~g" >> ${DL_PATH}/downloaded
 done
-valid=`cat ${DL_PATH}/valid`
+downloaded=`cat ${DL_PATH}/downloaded`
 while read -r file; do
-	if ! echo "${valid}" | grep -q ${file}; then
+	if ! echo "${downloaded}" | grep -q ${file}; then
 		echo ${file}
 		rm ${file}
 	fi
-done <<< "`find ${DL_PATH} -type f`"
+done <<< "`find ${DL_PATH} -type f -not -path android/repository/downloaded`"
 
+echo
 echo httpd conf
-cat ${BASEDIR}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g" > ${DL_PATH}/and-repo.apache2.conf
-echo 'include and-repo.apache2.conf in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
-cat ${DL_PATH}/and-repo.apache2.conf
+echo 'include the following lines in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
+cat ${basedir}/apache2.conf | sed "s/hu.dushu.studyjams/`pwd | sed 's/\\//\\\\\\//g'`/g"
