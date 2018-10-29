@@ -40,8 +40,7 @@ done
 # TODO generating sdk web manager data
 
 echo removing obsolete files
-rm ${DL_PATH}/downloaded
-echo ${DL_PATH}/${ADDON_SITE_INDEX}.xml >> ${DL_PATH}/downloaded
+echo ${DL_PATH}/${ADDON_SITE_INDEX}.xml > ${DL_PATH}/downloaded
 for site in ${sites[@]}; do
 	sub_path=`echo ${site} | perl -nle 'print $& if m{.*/|}'`
 	echo ${DL_PATH}/${site}.xml >> ${DL_PATH}/downloaded
