@@ -17,9 +17,6 @@ Tested on
 * wget
   * macOS, http://brew.sh/
   * Windows, install wget with [Cygwin](https://cygwin.com/install.html)
-* xsltproc
-  * Linux Mint/Ubuntu/Debian, ```sudo apt-get install xsltproc```
-  * Windows, install libxml2 and libxslt with Cygwin, see http://www.sagehill.net/docbookxsl/InstallingAProcessor.html#cygwin
 
 ## Server setup
 
@@ -30,11 +27,6 @@ Tested on
 For Android Studio Built-in SDK Manager
 ```
 ${ANDROID_REPOSITORY_HOME}/download2.sh
-```
-
-For Standalone SDK Manager
-```
-${ANDROID_REPOSITORY_HOME}/download.sh
 ```
 
 By default, it downloads from https://dl.google.com. To download from elsewhere,
@@ -49,9 +41,3 @@ See also [Known Mirrors](https://github.com/renfeng/android-repository/wiki/Know
 ## Client setup
 
 After your server setup is complete, navigate to, ```http://<your.server>/android/studio/```, and find further instructions.
-
-## Who's using it
-
-At StudyJams and other events hosted by [GDG Suzhou](https://plus.google.com/100160462017014431473)
-
-[Please let me know](mailto:renfeng.cn@gmail.com?subject=a+mirror+built+with+android-repository) if you'd like to publish your mirror [here](https://github.com/renfeng/android-repository).
