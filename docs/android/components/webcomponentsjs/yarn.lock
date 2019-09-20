@@ -468,8 +468,8 @@ archy@^1.0.0:
   resolved "http://35.185.235.147/archy/-/archy-1.0.0.tgz#f9c8c13757cc1dd7bc379ac77b2c62a5c2868c40"
 
 argparse@^1.0.7:
-  version "1.0.9"
-  resolved "http://35.185.235.147/argparse/-/argparse-1.0.9.tgz#73d83bc263f86e97f8cc4f6bae1b0e90a7d22c86"
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
   dependencies:
     sprintf-js "~1.0.2"
 
@@ -1977,8 +1977,8 @@ esprima@^2.7.1:
   resolved "http://35.185.235.147/esprima/-/esprima-2.7.3.tgz#96e3b70d5779f6ad49cd032673d1c312767ba581"
 
 esprima@^4.0.0:
-  version "4.0.0"
-  resolved "http://35.185.235.147/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
 
 esquery@^1.0.0:
   version "1.0.0"
@@ -3070,8 +3070,8 @@ js-tokens@^3.0.0:
   resolved "http://35.185.235.147/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
 js-yaml@^3.5.1:
-  version "3.9.0"
-  resolved "http://35.185.235.147/js-yaml/-/js-yaml-3.9.0.tgz#4ffbbf25c2ac963b8299dc74da7e3740de1c18ce"
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -4819,7 +4819,7 @@ sprintf-js@^1.0.3:
 
 sprintf-js@~1.0.2:
   version "1.0.3"
-  resolved "http://35.185.235.147/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
 sshpk@^1.7.0:
   version "1.13.1"
@@ -5028,9 +5028,10 @@ temp@^0.8.1:
     os-tmpdir "^1.0.0"
     rimraf "~2.2.6"
 
-"test-fixture@github:polymerelements/test-fixture":
-  version "3.0.0-rc.1"
-  resolved "https://codeload.github.com/polymerelements/test-fixture/tar.gz/26118ef0467501c33c02316e7016a2837baba10f"
+test-fixture@PolymerElements/test-fixture:
+  version "4.0.2"
+  uid d4e8eedf895cf718e6cfcc8c9340e1b5e72706ee
+  resolved "https://codeload.github.com/PolymerElements/test-fixture/tar.gz/d4e8eedf895cf718e6cfcc8c9340e1b5e72706ee"
 
 test-value@^2.1.0:
   version "2.1.0"
