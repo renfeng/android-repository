@@ -369,8 +369,8 @@ acorn@^5.0.1, acorn@^5.0.3:
   resolved "http://35.185.235.147/acorn/-/acorn-5.1.1.tgz#53fe161111f912ab999ee887a90a0bc52822fd75"
 
 adm-zip@~0.4.3:
-  version "0.4.7"
-  resolved "http://35.185.235.147/adm-zip/-/adm-zip-0.4.7.tgz#8606c2cbf1c426ce8c8ec00174447fd49b6eafc1"
+  version "0.4.13"
+  resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.13.tgz#597e2f8cc3672151e1307d3e95cddbc75672314a"
 
 after@0.8.2:
   version "0.8.2"
@@ -5028,9 +5028,10 @@ temp@^0.8.1:
     os-tmpdir "^1.0.0"
     rimraf "~2.2.6"
 
-"test-fixture@github:polymerelements/test-fixture":
-  version "3.0.0-rc.1"
-  resolved "https://codeload.github.com/polymerelements/test-fixture/tar.gz/26118ef0467501c33c02316e7016a2837baba10f"
+test-fixture@PolymerElements/test-fixture:
+  version "4.0.2"
+  uid d4e8eedf895cf718e6cfcc8c9340e1b5e72706ee
+  resolved "https://codeload.github.com/PolymerElements/test-fixture/tar.gz/d4e8eedf895cf718e6cfcc8c9340e1b5e72706ee"
 
 test-value@^2.1.0:
   version "2.1.0"
