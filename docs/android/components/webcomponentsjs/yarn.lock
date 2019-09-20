@@ -2281,8 +2281,8 @@ formatio@1.1.1:
     samsam "~1.1"
 
 forwarded@~0.1.0:
-  version "0.1.0"
-  resolved "http://35.185.235.147/forwarded/-/forwarded-0.1.0.tgz#19ef9874c4ae1c297bcf078fde63a09b66a84363"
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
 
 freeport@^1.0.4:
   version "1.0.5"
@@ -5028,9 +5028,10 @@ temp@^0.8.1:
     os-tmpdir "^1.0.0"
     rimraf "~2.2.6"
 
-"test-fixture@github:polymerelements/test-fixture":
-  version "3.0.0-rc.1"
-  resolved "https://codeload.github.com/polymerelements/test-fixture/tar.gz/26118ef0467501c33c02316e7016a2837baba10f"
+test-fixture@PolymerElements/test-fixture:
+  version "4.0.2"
+  uid d4e8eedf895cf718e6cfcc8c9340e1b5e72706ee
+  resolved "https://codeload.github.com/PolymerElements/test-fixture/tar.gz/d4e8eedf895cf718e6cfcc8c9340e1b5e72706ee"
 
 test-value@^2.1.0:
   version "2.1.0"
