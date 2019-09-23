@@ -48,6 +48,11 @@ while read -r file; do
 done <<< "$(find ${DL_PATH} -type f -not -path android/repository/downloaded)"
 
 echo
-echo httpd conf
+echo Apache httpd
 echo 'include the following lines in your apache httpd.conf file (or a file included by it, e.g. httpd-vhosts.conf)'
-sed "s/ROOT/$(pwd | sed 's/\\//\\\\\\//g')/g" "${basedir}/apache2.conf"
+sed -e "s~\${dir}~'$(pwd)'~g" "${basedir}/apache2.conf"
+
+echo
+echo nginx
+echo 'include the following lines in your nginx.conf file'
+sed -e "s~\${dir}~'$(pwd)'~g" "${basedir}/nginx.conf"
