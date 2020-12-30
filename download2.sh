@@ -56,3 +56,8 @@ echo
 echo nginx
 echo 'include the following lines in your nginx.conf file'
 sed -e "s~\${dir}~'$(pwd)'~g" "${basedir}/nginx.conf"
+
+echo
+echo How to setup client to use your mirror?
+echo "export SDK_TEST_BASE_URL=http://your-mirror/${DL_PATH}/"
+echo "open -a 'Android Studio'"
