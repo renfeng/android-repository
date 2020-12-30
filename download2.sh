@@ -20,7 +20,7 @@ while read -r addon_site; do
 done <<< "$(perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' ${DL_PATH}/${ADDON_SITE_INDEX}.xml | sed s/.xml//g)"
 
 for site in "${sites[@]}"; do
-	sub_path=$(perl -nle 'print $& if m{.*/|}' "${site}")
+	sub_path=$(echo "${site}" | perl -nle 'print $& if m{.*/|}')
 	wget -N "${DL_HOST}/${DL_PATH}/${site}.xml" -P "${DL_PATH}/${sub_path}"
 done
 
