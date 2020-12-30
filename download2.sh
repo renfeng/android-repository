@@ -45,7 +45,7 @@ while read -r file; do
 		echo "${file}"
 		rm "${file}"
 	fi
-done <<< "$(find ${DL_PATH} -type f -not -path android/repository/downloaded)"
+done <<< "$(find ${DL_PATH} -type f -not -path ${DL_PATH}/downloaded)"
 
 echo
 echo Apache httpd
