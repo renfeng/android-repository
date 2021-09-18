@@ -15,6 +15,10 @@ echo synchronizing indices
 wget -N "${DL_HOST}/${DL_PATH}/${ADDON_SITE_INDEX}.xml" -P ${DL_PATH}
 
 sites=("${GENERAL_SITE}")
+
+sites+=("repository2-2")
+sites+=("repository2-3")
+
 while read -r addon_site; do
 	sites+=("${addon_site}")
 done <<< "$(perl -nle 'print $& if m{(?<=<url>).*(?=</url>)}' ${DL_PATH}/${ADDON_SITE_INDEX}.xml | sed s/.xml//g)"
